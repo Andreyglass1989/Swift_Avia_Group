@@ -1,0 +1,17 @@
+{% extends 'base_for_LK.html' %}
+{% load static %}
+
+<title>{% block head_title %}Изменение данных пользователя{% endblock head_title %}</title>
+
+{% block content %}
+
+
+<h3>Изменить данные</h3>
+<form method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
+    <fieldset class="module aligned">
+    <div class="form-group">{{ form.as_p }}</div>
+    </fieldset>
+    <div class="small-5 large-5"><input style="float:right" type="submit" value="Изменить" /><br></div>
+
+</form>
+{% endblock content%}

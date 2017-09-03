@@ -1,0 +1,11 @@
+local_settings.py
+*.log
+*.pyc
+*.pyo
+.idea/
+__pycache__
+venv
+/swift_avia_group/settings.py
+/swift_avia_group/wsgi.py
+/ЛК Газпром
+db12818242-avia.sql

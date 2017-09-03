@@ -1,0 +1,26 @@
+{% extends 'base_for_LK.html' %}
+{% load static %}
+
+<title>{% block head_title %}Изменение данных груза{% endblock head_title %}</title>
+
+{% block content %}
+
+
+<h3>Изменить данные груза:</h3>
+<form method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
+
+    <!--<div class="form-group">{{ form.as_p }}</div>-->
+    <p>{{ form.name }} *Наименование товара</p>
+    <p>{{ form.quantity }} *Количество</p>
+    <p>{{ form.price }} *Цена</p>
+    <p>{{ form.url }} Ссылка</p>
+    <p>{{ form.post_delivery }} Служба доставки</p>
+    <p>{{ form.treck }} *Трек номер</p>
+    <p>{{ form.comment }} Комментарий</p>
+    <p style="visibility: hidden;">{{ form.customer }} Код клиента</p>
+
+
+    <div class="small-5 large-5"><input style="float:right" type="submit" value="Изменить" /><br></div>
+
+</form>
+{% endblock content%}

@@ -1,0 +1,35 @@
+{% extends 'base_for_LK.html' %}
+
+{% block title %}Add {{ title }}{% endblock title %}
+
+{% block content%}
+
+{% if form.errors %}
+<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"> ЗАПОЛНЯТЬ ЛАТИНСКИМИ</span></div>
+        <ul class="messages">
+        {% for message in messages %}
+        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+    </ul>
+{% endif %}
+<h1>Добавить получателя:<h3 style="color:red">Заполнять латиницей</h3>
+<form method="post" action="">{% csrf_token %}
+   <!-- <div class="small-5 large-5" style="margin-left:10px;">{{ form.as_p }}</div> -->
+    <p>{{ form.name }} *Имя</p>
+    <p>{{ form.lastname }} *Фамилия</p>
+    <p>{{ form.phone }} *Телефон</p>
+    <p>{{ form.city }} *Город</p>
+    <p>{{ form.street }} *Улица</p>
+    <p>{{ form.home }} *Дом</p>
+    <p>{{ form.room }} Квартира</p>
+    <p style="visibility: hidden;">{{ form.customer }} Код клиента</p>
+    <p style="visibility: hidden;">{{ form.country }} Страна</p>
+    <p>{{ form.email }} email</p>
+  <!--       {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %} -->
+        <div class="col-sm-9" style="float:right; margin-bottom:20px"><input class="btn btn-success" type="submit" value="Добавить" /><br/></div>
+
+
+</form>
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'base_for_LK.html' %}
+
+{% block active_consolidation %}class="active"{% endblock active_consolidation %}
+
+{% block content %}
+
+
+<div style="margin:0px 0px; padding:5px 0px; width: 1000px;" class="container">
+  <h3>Иформация о грузе на нашем склад:</h3>
+    <div class="col-xs-12">
+        <div class="col-xs-2">№ посылки</div>
+        <div class="col-xs-4">дата добавления</div>
+        <div class="col-xs-2">статус</div>
+        <div class="col-xs-2">вес, кг</div>
+
+    </div>
+    <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-12">
+    {% if cargo_ne_obrabotan %}
+     <h5>Еще не обработан складом:</h5>
+        {% for car in cargo_ne_obrabotan %}
+                <div class="col-xs-12">
+                 <div class="col-xs-2"><a href="/LK/detail/{{ car.pack_number }}/">{{ car.pack_number }}</a></div>
+                 <div class="col-xs-4">{{ car.date_added|date:"d F Y" }}</div>
+                 <div class="col-xs-2">{{ car.pack_status }}</div>
+                 <div class="col-xs-2">{{ car.weight }}</div>
+                </div>
+        {% endfor %}
+    <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-12">
+
+    {% endif %}
+
+
+    {% if cargo_consolidation %}
+        <h5>Обработан складом: </h5>
+        {% for car in cargo_consolidation %}
+            <div class="col-xs-10">
+                <div class="col-xs-2"><a href="/LK/detail/{{ car.pack_number }}/">{{ car.pack_number }}</a></div>
+                <div class="col-xs-3">{{ car.date_added|date:"d F Y" }}</div>
+                <div class="col-xs-2">{{ car.pack_status }}</div>
+                <div class="col-xs-2">{{ car.weight }}</div>
+            </div>
+        {% endfor %}
+    <hr class="col-xs-10">
+    {% endif %}
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'base_for_LK.html' %}
+
+
+{% block active_about_user %}class="active"{% endblock active_about_user %}
+{% block CSS %}
+
+
+{% endblock CSS%}
+
+{% block content %}
+
+    <h3>Иформация о пользователе:</h3>
+
+    <table width="20%" cellspacing="0" cellpadding="5">
+        <tr>
+            <td >Имя:</td><td>{{ username.first_name }}</td>
+        </tr>
+        <tr>
+            <td >Фамилия:</td><td>{{ username.last_name }}</td>
+        </tr>
+        <tr>
+            <td >Код клиента:</td><td>{{ user.code_clienta }}</td>
+        </tr>
+        <tr>
+            <td >Почта:</td><td>{{ username.email }}</td>
+        </tr>
+    </table>
+
+
+    <div class="col-sm-9" style="float:right">
+        <a href="/LK/edit_user/{{ username.id }}/"><button style="border-radius:10px; padding: 5px; font-size:15px" class="btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true">Изменить</button></span></a>
+    </div>
+
+{% endblock content %}

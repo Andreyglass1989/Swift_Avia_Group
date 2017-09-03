@@ -1,0 +1,90 @@
+{% extends 'index.html' %}
+
+
+{% load static %}
+
+
+{% block CSS %}
+
+    <style>
+        .container,h1,h2,h3,h4,h5,h6{
+        color:#fff;
+        }
+    </style>
+
+{% endblock CSS%}
+
+
+{% block CSS0 %}{% endblock CSS0 %}
+
+
+<title>{% block head_title %}Contacts{% endblock head_title %}</title>
+
+{% block karta %}
+
+<div style="margin-top:50px" class="small-12">
+<iframe src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d916.1174750311872!2d113.2558219!3d23.2987038!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3402e4c3be5926bb%3A0xf0a8300a7080505b!2z6aG65bu26JqM54mp5Yqg5rK556uZ5pyJ6ZmQ5YWs5Y-4INCa0LjRgtCw0LksIEd1YW5nZG9uZyBTaGVuZywgR3Vhbmd6aG91IFNoaSwgQmFpeXVuIFF1LCDkurrlkozplYfopb_muZbmnZEg6YKu5pS_57yW56CBOiA1MTA0NTA!3m2!1d23.298600999999998!2d113.25556999999999!5e0!3m2!1sru!2sru!4v1504084598222" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
+{% endblock karta %}
+
+
+{% block content %}
+
+<h1 style="text-align:center; margin-top:20px ">Адрес склада / Warehouse address / 仓库地址</h1>
+<div style="margin-bottom:50px" class="col-xs-12">
+<h3 class="col-xs-4">中国: 广州市白云区人和镇西湖村西湖西街自编888-3仓库(展骥国际物流)
+    <br>
+   <!-- <button id="showHideContent_ch" type="button" class="btn btn-default">Подробнее</button>-->
+ <div id="content_ch" style="display: none;">
+     高速：<ol style="margin-left:-15px">
+         <li>平沙出口往花都方向，过了江村大桥第二个红绿灯右转人和镇</li>
+         <li>G15沈海高速蚌湖出口-高翔路-267省道-西湖西街 </li></ol>
+
+         国道：广花一级公路-267省道-西湖西街 直入200米展骥仓（左边）
+ </div>
+</h3>
+<h3 class="col-xs-4">English:  Guangzhou, Baiyun district, RenHeZhen West, HuCun West,Zhanji international logistics market, 888-3 warehouse
+
+    <br>
+ <!-- <button id="showHideContent_en" type="button" class="btn btn-default">Подробнее</button>-->
+
+ <div id="content_en" style="display: none;">
+  From highway: <ol style="margin-left:-15px">
+    <li>At Pinsha exit head towards Huadu district, cross the Jiangcun bridge and turn right to Ren He Zhen on the second traffic lights</li>
+   <li>G15 Shenhai Expressway's Benghu exit – Gaoxiang str.- 267 Province Highway – Xihu West str.</li></ol>
+    State road:<br>
+     Guanzhou-Huadu First Class Highway– 267 Province Highway – Xihu West str. then 200m to Zhanji warehouses (on the left)</div>
+
+</h3>
+<h3 class="col-xs-4">Русский: Гуанчжоу, р-н Байюнь, Жен Хэ Дженг Си, Сиху западная ул., рынок международной логистики Джандзи, склад 888-3
+    <br>
+
+ <div id="content_ru" style="display: none;">
+     Со скоростной: <ol>
+ <li>На выходе Пинша направляйтесь в сторону р-г Хуаду, проезжайте мост Дзянгчун и на втором светофоре поворачивайте направо на ул. Женхэ</li>
+ <li>С Шенхай G15 съезд Бэнгху - ул. Гаосиянг - 267-ое шоссе - Сиху Западная ул.</li></ol>
+ Автобан:
+Гуанчжоу-Хуанду - 267-ое шоссе - Сиху Западная ул. потом 200м внутрь Джандзи рынка (слева)
+ </div>
+    <button id="showHideContent_ru" type="button" class="btn btn-default">Подробнее</button>
+</h3>
+</div>
+
+<hr style="color:#fff;">
+
+<br>
+
+<h3 style="margin-top:100px">Получатель / Recipient / 收货人: Slava 13711555952; Evgen 13042078364 </h3>
+<br>
+<h3>Время работы / Working time /  时间 时间 : 09:00-18:00</h3>
+<br>
+
+
+    <hr style="color:#fff;">
+
+<h2 style="margin:20px 0px; text-align:center">Свяжитесь с нами:</h2>
+<h3>Вы можете задать нам любой вопрос по телефону: +38 (067) 654-23-81. (с 10:00 до 18:00).</h3>
+
+
+{% endblock content %}

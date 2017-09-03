@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+
+
+{% load static %}
+
+
+{% block CSS %}
+
+<style>
+    p{
+        color:#fff;
+        font-size:20px;
+    }
+    div>ul>li{
+        color:#fff;
+        font-size:20px;
+    }
+</style>
+{% endblock CSS%}
+
+
+{% block head_title %}About us{% endblock head_title %}
+
+
+{% block content %}
+
+<h1 style="text-align:center; color:#fff;">О нас</h1>
+<br/>
+<div style="margin-bottom:50px" class="container" >
+    <div  class="col-xs-5">
+        <img style="width:365px; height:225px" src="{% static '/images/nadezhnii.jpeg' %}"/>
+    </div>
+    <div class="col-xs-7">
+        <p>SWIFT AVIA GROUP - ваш надежный партнер! Наши менеджеры всегда готовы уделить Вам необходимое время. Они внимательны и аккуратны при проверке всех параметров и условий заказа!</p>
+    </div>
+</div>
+<br/>
+
+<div style="margin-bottom:50px" class="container" >
+    <div class="col-xs-7">
+        <p>Каждый  менеджер  по работе с клиентами компании SWIFT AVIA GROUP  прошел интенсивный тренинг и имеет практический опыт, поэтому все они точно знают, что нужно делать для организации авиаперевозки  от начала и до конца.</p>
+    </div>
+        <div class="col-xs-5">
+        <img style="width:355px;height:215px; float:right" src="{% static '/images/CallCenter-manager.jpg' %}"/>
+    </div>
+</div>
+<br/>
+
+<div style="margin-bottom:50px" class="container" >
+    <div class="col-xs-5">
+        <img style="width:365px;height:225px;" src="{% static '/images/advokat.jpg' %}"/>
+    </div>
+    <div class="col-xs-7">
+        <p>Специалисты компании SWIFT AVIA GROUP готовы взять на себя решение всех организационных, технических и юридических задач, связанных с авиадоставкой. Вы всегда сможете уточнить статус отправления, местонахождение груза и другие рабочие моменты у персонального менеджера компании!</p>
+    </div>
+</div>
+<br/>
+
+<div style="margin-bottom:50px" class="container" >
+    <div class="col-xs-7">
+        <p>SWIFT AVIA GROUP - это:</p>
+        <ul>
+            <li>самый быстрый и удобный способ перевозки, обеспечивающий сохранность транспортируемых товаров!</li>
+            <li>доставка  авиагрузов из Китая и гарантия, что Ваш товар своевременно вылетит и будет доставлен в Украину в указанные сроки и по самому оптимальному тарифу.</li>
+            <li>доставка  авиагрузов из Китая и гарантия, что Ваш товар своевременно вылетит и будет доставлен в Украину в указанные сроки и по самому оптимальному тарифу.</li>
+            <li>опыт, высокая квалификация, профессионализм наших сотрудников что помогает максимально удобно для клиента, качественно и в срок организовать  международные авиаперевозки грузов, соблюдая особые условия грузовых  авиаперевозок и таможенного оформления</li>
+        </ul>
+    </div>
+    <div class="col-xs-5">
+        <img style="width:365px;height:225px; float:right;" src="{% static '/images/air_depart.jpg' %}"/>
+        <img style="width:365px;height:225px; float:right; margin-top:10px" src="{% static '/images/mytnutsia.jpg' %}"/>
+    </div>
+</div>
+
+<div style="margin-bottom:50px" class="container" >
+    <div class="col-xs-5">
+        <img style="width:365px;height:225px;" src="{% static '/images/sklad2lrg.jpg' %}"/>
+    </div>
+    <div class="col-xs-7">
+        <p>Условия авиагрузоперевозки обговариваются индивидуально с каждым клиентом и фиксируются в договоре. Так, помимо самой доставки, предусмотрен целый пакет дополнительных услуг:</p>
+        <ul>
+            <li>комплектация грузов и  упаковка;</li>
+            <li>временное хранение на охраняемом складе;</li>
+            <li>оформление всей таможенной документации.</li>
+        </ul>
+    </div>
+
+</div>
+
+
+{% endblock content%}

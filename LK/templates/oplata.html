@@ -1,0 +1,41 @@
+{% extends 'base_for_LK.html' %}
+
+{% load static %}
+
+
+{% block head_title %}Оплата {{ title }}{% endblock head_title %}
+
+{% block content%}
+
+
+    <div class="col-xs-9">
+        <div class="col-xs-2">№ посылки</div>
+        <div class="col-xs-3">Фактический вес, кг</div>
+    </div>
+    {% for car in cargo %}
+    <div class="col-xs-9">
+        <div class="col-xs-2">{{ car.pack_number }}</div>
+        <div class="col-xs-3">{{ car.weight }}</div>
+    </div>
+
+    {% endfor %}
+<br/>
+<h2 style="margin-top:50px">Оплата:</h2>
+<div>Вес за который нужно оплачивать = {{ weight_full }} кг </div>
+<div>Ваша ставка: {{ user.stavka }} $</div>
+<h2>Итого к оплате: {{ oplata }} $</h2>
+
+
+<form method="POST" accept-charset="utf-8" action="https://www.liqpay.ua/api/3/checkout">
+	<input type="hidden" name="data" value="eyJ2ZXJzaW9uIjozLCJhY3Rpb24iOiJwYXkiLCJwdWJsaWNfa2V5IjoiaTYwMDI0Mzk4Nzc2IiwiYW1vdW50IjoiNSIsImN1cnJlbmN5IjoiVUFIIiwiZGVzY3JpcHRpb24iOiLQnNC+0Lkg0YLQvtCy0LDRgCIsInR5cGUiOiJidXkiLCJsYW5ndWFnZSI6InJ1In0=" />
+	<input type="hidden" name="signature" value="i84gjPJYx97PY9P3IwgC3k1E6Nc=" />
+	<button style="border: none !important; display:inline-block !important;text-align: center !important;padding: 7px 20px !important;
+		color: #fff !important; font-size:16px !important; font-weight: 600 !important; font-family:OpenSans, sans-serif; cursor: pointer !important; border-radius: 2px !important;
+		background: rgb(122,183,43) !important;"onmouseover="this.style.opacity='0.5';" onmouseout="this.style.opacity='1';">
+		<img src="https://static.liqpay.ua/buttons/logo-small.png" name="btn_text"
+			style="margin-right: 7px !important; vertical-align: middle !important;"/>
+		<span style="vertical-align:middle; !important">Оплатить</span>
+	</button>
+</form>
+
+{% endblock content %}

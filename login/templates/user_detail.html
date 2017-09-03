@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block title %}ProFile{% endblock title %}
+
+
+{% block main_content %}
+<div class = "container">
+    <div class="jumbotron">
+
+		 <p>Username: {{ user }}</p>
+		 <p>First name: {{ user.first_name }}</p>
+		 <p>Last name: {{ user.last_name }}</p>
+		 <p>Email: {{ user.email }}</p>
+		 <p>Phone: {{ user.userprofile.phone }}</p>
+		 <p>Adress: {{ user.userprofile.adress }}</p>
+
+		 <a href="{% url 'edit_user' user.userprofile.id %}" class="btn btn-info" role="button">изменить данные </a>
+
+	</div>
+</div>
+
+
+
+{% endblock main_content %}

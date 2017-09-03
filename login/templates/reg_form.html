@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>Register</h1>
+    <form method="post">
+        {% csrf_token %}
+       <div class="col-xs-5">
+        {{ form.as_p }}
+       </div>
+        <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

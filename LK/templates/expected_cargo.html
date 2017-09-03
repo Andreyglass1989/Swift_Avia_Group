@@ -1,0 +1,103 @@
+{% extends 'base_for_LK.html' %}
+
+{% block active_waiting %}class="active"{% endblock active_waiting %}
+{% block CSS %}
+<style>
+    tr{
+        border:solid 1px black;
+        vertical-align: middle;
+        width: 1%;
+    }
+
+    td{
+        border:solid 1px black;
+        text-align:center;
+    }
+</style>
+{% endblock CSS%}
+
+{% block content %}
+
+{% if messages %}
+<div class="alert alert-success" role="alert">
+
+<ul class="messages">
+    {% for message in messages %}
+    <span class="glyphicon glyphicon-ok" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+
+
+<div style="float:right">
+        <a href="/LK/add_expected_cargo/"><button style="border-radius:10px; padding: 5px; font-size:15px" class="btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true">Добавить</button></span></a>
+    </div>
+
+
+    <h3>Иформация о грузе, который ожидается:</h3>
+
+<table style="margin-top:20px; border-color:rgb(117,211,242);" >
+    <tr>
+        <td style="border-color:rgb(117,211,242);">...</td>
+        <td style="padding:20px 50px; border-color:rgb(117,211,242);">Наименование</td>
+        <td style="padding:20px; border-color:rgb(117,211,242);">К-во</td>
+        <td style="padding:20px; border-color:rgb(117,211,242);">Цена за ед.</td>
+        <td style="padding:20px; border-color:rgb(117,211,242);">Служба доставки</td>
+        <td style="padding:20px 50px; border-color:rgb(117,211,242);">Трэк номер</td>
+        <td style="padding:20px 50px; border-color:rgb(117,211,242);">Комментарий</td>
+        <td style="padding:20px 50px; border-color:rgb(117,211,242);">Ссылка</td>
+    </tr>
+    {% for car in cargo %}
+    <tr>
+        <td style="border-color:rgb(117,211,242);"><a href="/LK/edit_expected_cargo/{{ car.id }}/"><button style="border-radius:5px;" class="btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button></span></a></td>
+        <td style="border-color:rgb(117,211,242);">{{ car.name }}</td>
+        <td style="border-color:rgb(117,211,242);">{{ car.quantity }}</td>
+        <td style="border-color:rgb(117,211,242);">{{ car.price }}</td>
+        <td style="border-color:rgb(117,211,242);">{{ car.post_delivery }}</td>
+        <td style="border-color:rgb(117,211,242);">{{ car.treck }}</td>
+        <td style="border-color:rgb(117,211,242);">{{ car.comment|truncatechars:30 }}</td>
+        <td style="border-color:rgb(117,211,242);">{{ car.url|truncatechars:20 }}</td> <!-- slice:":20" -->
+   </tr>
+    {% endfor %}
+</table>
+
+
+
+
+
+
+<!--
+
+    <div style="padding-right: 2px; padding-left: 2px;" class="col-xs-12">
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-1">...</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-2">Наименование</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-1">К-во</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-1">Цена за ед.</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-2">Служба доставки</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-2">Трэк номер</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-2">Комментарий</div>
+        <div style="margin-right:0px; margin-left:0px; padding-right: 0px; padding-left: 0px;" class="col-xs-2">Ссылка</div>
+    </div>
+
+  {% for car in cargo %}
+
+    <div class="col-xs-12">
+        <div class="col-xs-1"><a href="/LK/edit_expected_cargo/{{ car.id }}/"><button style="border-radius:5px;" class="btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button></span></a></div>
+        <div class="col-xs-2">{{ car.name }}</div>
+        <div class="col-xs-1">{{ car.quantity }}</div>
+        <div class="col-xs-1">{{ car.price }}</div>
+        <div class="col-xs-2">{{ car.post_delivery }}</div>
+        <div class="col-xs-2">{{ car.treck }}</div>
+        <div class="col-xs-2">{{ car.comment }}</div>
+        <div class="col-xs-2">{{ car.url }}</div>
+    </div>
+
+    <hr class="col-xs-10">
+
+    {% endfor %}
+-->
+
+
+
+{% endblock content %}

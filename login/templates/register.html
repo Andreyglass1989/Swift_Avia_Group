@@ -1,0 +1,45 @@
+{% extends 'base0.html' %}
+
+{% block CSS %}
+<style>
+    span.helptext{
+         clear:both;
+    }
+    label{
+        clear:both;
+    }
+
+    input{
+        margin-left:50px;
+        clear:both;
+    }
+</style>
+{% endblock CSS%}
+
+{% block head_title %}Регистрация{% endblock head_title %}
+{% block login %}
+
+
+{% if messages %}
+<div style="margin: 5px" class="messages">
+    {% for message in messages %}
+      <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"> {{ message }}</span></div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div style="padding: 50px; position: fixed; top: 50%; left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);" class="col-md-6">
+    <form action="/auth/register/" method="post">{% csrf_token %}
+       <!-- <div style="clear:both;">{{ form.as_p }}</div> <br/> -->
+        <div style="clear:both;">*Имя</div> <div >{{ form.username }}</div><div>Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</div>
+        <div style="clear:both;">*Пароль</div><div>{{ form.password1 }}</div>
+        <div style="clear:both;">*Пароль еще раз</div><div>{{ form.password2 }}</div><div>Для подтверждения введите, пожалуйста, пароль ещё раз.</div></br>
+        <input style="padding:5px; border-radius:10px; float:right;" class="button btn-success" type="submit" value="Зарегестрироваться">
+
+    </form>
+</div>
+
+{% endblock login %}

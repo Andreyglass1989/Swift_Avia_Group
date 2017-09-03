@@ -1,0 +1,54 @@
+{% extends 'base_for_LK.html' %}
+
+{% block active1 %}class="active"{% endblock active1 %}
+
+{% block content %}
+<!--------------------------Messages---------------------------------------->
+{% if messages %}
+<div class="alert alert-success" role="alert">
+
+<ul class="messages">
+    {% for message in messages %}
+    <span class="glyphicon glyphicon-ok" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+<!------------------------End Messages---------------------------------------->
+<div style="float:right">
+        <a href="/LK/add_recipients/"><button style="border-radius:10px; padding: 5px; font-size:15px" class="btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true">Добавить</button></span></a>
+    </div>
+
+
+  <h3>Получатели для груза:</h3>
+    <div class="col-xs-12">
+        <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-3">Ф.И.</div>
+        <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-1">Страна</div>
+        <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-1">Город</div>
+        <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-2">Улица</div>
+        <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-2">Телефон</div>
+        <div class="col-xs-2"></div>
+
+    </div>
+  <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
+
+    {% if recip %}
+        {% for rec in recip %}
+                <div class="col-xs-12">
+                    <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-3">{{ rec.lastname}} {{ rec.name }}</a></div>
+                    <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-1">{{ rec.country }}</div>
+                    <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-1">{{ rec.city }}</div>
+                    <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-2">{{ rec.street }} {{ rec.home }}</div>
+                    <div style="border-right: 2px solid rgb(117,211,242);" class="col-xs-2">{{ rec.phone }}</div>
+                   <!-- <div class="col-xs-2">{{ rec.phone }}</div> -->
+                    <div class="col-xs-2"><a href="/LK/edit_recipients/{{ rec.cr_id }}/"><button style="border-radius:5px;" class="btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></button></span></a>
+                    <a href="/LK/delete_recipients/{{ rec.cr_id }}/"><button style="border-radius:5px;" class="btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></button></span></a></div>
+                </div>
+        <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
+        {% endfor %}
+  <!--  <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">-->
+
+    {% endif %}
+
+
+{% endblock content %}

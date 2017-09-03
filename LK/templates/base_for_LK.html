@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head_title %}Swift_Avia_Group{% endblock head_title %} </title>
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap-theme.min.css'%}">
+    {% block CSS %}{% endblock CSS%}
+
+    <style>
+    .b_body{
+      background-color:rgb(255, 255, 255);
+    }
+
+    body{
+        background-color:rgb(117,211,242);
+
+    }
+
+      .container{
+        background-color:rgb(255, 255, 255);
+        width:1090px;
+        margin-right: 5px;
+        background-image:url(/static/images/2.png);
+        background-repeat: no-repeat no-repeat;
+        background-size:cover;
+        border-radius:10px;
+        margin-left:220px;
+
+}
+    h1, h2, h3{
+      color: #337ab7;
+    }
+
+
+    </style>
+{% block CSS0 %}{% endblock CSS0 %}
+</head>
+<body>
+<!--------------------------Messages---------------------------------------->
+<!--{% if messages %}
+    <div class="alert alert-success" role="alert">
+
+    <ul class="messages">
+        {% for message in messages %}
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+    </ul>
+{% endif %}
+    </div>
+<!-----------------------------End Messages---------------------------------->
+
+<div class="b_body col-xs-12" style="margin-bottom:40px;">
+  <div class="col-xs-6">
+    <a style="text-decoration: none;" href="/"><h2 style="color:black; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:red">AVIA</span> GROUP</h2>
+    <!--<h2 style="color:#fff; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>-->
+
+<!-- <img style="margin-top:0px; height:100px; width:100px" src="{% static 'images/logo11.png' %}">--></a>
+  </div>
+    <div  class="col-xs-6">
+        <div style="margin-top:10px; float:right;">{{ username.first_name }} {{ username.last_name }} <br/>
+        Код клиента: <strong>{{user.code_clienta}}</strong><br>
+       <a href="/auth/logout/">Выйти({{ username|truncatewords:"5" }})</a>
+        </div>
+    </div>
+</div>
+    <br/>
+
+<div class="col-sm-2">
+  {% if user.gander == 'Female' %}
+  <img src="{% static 'images/user-women.png' %}" width="100px" height="100px">
+  {% elif user.gander == 'Male'%}
+  <img src="{% static 'images/user-boy.png' %}" width="100px" height="100px">
+  {% endif %}<br>
+
+  <ul class="nav nav-pills nav-stacked b_body" style="margin-left:0px; margin-top:10px; border-radius:5px; ">
+
+{% if user %}
+  <li role="presentation" {% block active1 %}{% endblock active1 %}><a href="/LK/recipients/">Получатели</a></li>
+      <hr style="margin:0px;">
+  <li role="presentation" {% block active_waiting %}{% endblock active_waiting %}><a href="/LK/expected_cargo/">Ожидаются на складе</a></li>
+      <hr style="margin:0px;">
+  <li role="presentation" {% block active_consolidation %}{% endblock active_consolidation %}><a href="/LK/consolidation/">Консолидация</a></li>
+      <hr style="margin:0px;">
+  <li role="presentation" {% block active_v_puti %}{% endblock active_v_puti %}><a href="/LK/v_puti/">В пути</a></li>
+      <hr style="margin:0px;">
+  <li role="presentation" {% block active_dostavleno %}{% endblock active_dostavleno %}><a href="/LK/priletel/">Доставлено</a></li>
+      <hr style="margin:0px;">
+  <li role="presentation" {% block active_about_user %}{% endblock active_about_user %}><a href="/LK/about_user/">Информация о пользователе</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" style="visibility: hidden;" role="presentation" {% block active_in_menu_ABOUT %}{% endblock active_in_menu_ABOUT %}><a href="/LK/oplata/">Оплата</a></li>
+</ul>
+ {% else %}
+      <li class="disabled" role="presentation"><a href="/LK/recipients/">Получатели</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" role="presentation"><a href="/LK/expected_cargo/">Ожидаются на складе</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" role="presentation"><a href="/LK/consolidation/">Консолидация</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" role="presentation"><a href="/LK/v_puti/">В пути</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" role="presentation"><a href="/LK/priletel/">Доставлено</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" role="presentation"><a href="/LK/about_user/">Информация о пользователе</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" style="visibility: hidden;" role="presentation"><a href="/LK/oplata/">Оплата</a></li>
+</ul>
+{% endif %}
+</div>
+
+
+{#{% include 'snipets/nav_for_LK.html' %}#}
+
+
+<!--<div class="container"></div>-->
+
+<div class="container" style="margin-top:100px"><div id="content">{% block content %}{% endblock content %}</div> </div>
+
+{% include 'snipets/js.html' %}
+
+<script>
+    $(document).ready(function() {
+    $(".messages, .alert-success").fadeOut(5000);
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base_for_LK.html' %}
+
+
+{% block content %}
+<!--<a href="../">Назад</a>-->
+
+    <h3>Иформация о выбранной посылке {{ pack_number }}:</h3>
+
+<div class="col-xs-9">
+    <div class="col-xs-6">Наименование</div>
+    <div class="col-xs-2">Количество</div>
+</div>
+
+{% for car in cargo %}
+<div class="col-xs-9">
+    <div class="col-xs-6">{{ car.name }}</div>
+    <div class="col-xs-2">{{ car.quantity }}</div>
+</div>
+
+{% endfor %}
+
+
+
+{% endblock content %}

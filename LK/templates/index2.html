@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head_title %}Swift_Avia_Group{% endblock head_title %} </title>
+    {% block CSS %}{% endblock CSS%}
+
+</head>
+<body style="background-image:url(/static/images/blue_air.jpg);">
+{% include 'snipets/nav.html' %}
+{% include 'snipets/css.html' %}
+
+<div class="container">
+{% block login %}{% endblock login %}
+
+{% block content %}{% endblock content%}
+</div>
+{% include 'snipets/js.html' %}
+</body>
+</html>

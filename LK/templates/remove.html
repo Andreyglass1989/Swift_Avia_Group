@@ -1,0 +1,16 @@
+{% extends 'base_for_LK.html' %}
+
+{% load static %}
+
+
+{% block head_title %}Удаление {{ title }}{% endblock head_title %}
+
+{% block content%}
+
+<div class="alert alert-danger col-xs-12" role="alert">Внимание! {{ title }} - будет удален!!!</div><br>
+<!--<h1 style="margin:10px"><span style="color:red"> *{{ title.name }}* </span> has been deleted!!!</h1>-->
+
+<form method="post"> {% csrf_token %}
+    <input class="btn btn-danger" style="margin:10px" type="submit" value="Удалить"/>
+</form>
+{% endblock content %}
