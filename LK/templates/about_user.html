@@ -2,13 +2,16 @@
 
 
 {% block active_about_user %}class="active"{% endblock active_about_user %}
-{% block CSS %}
+{% block CSS0 %}
 
+    textarea{
+      background:rgb(117,211,242, 0.25)
 
-{% endblock CSS%}
+    }
+{% endblock CSS0 %}
 
 {% block content %}
-
+<div class="col-xs-6">
     <h3>Иформация о пользователе:</h3>
 
     <table width="20%" cellspacing="0" cellpadding="5">
@@ -30,5 +33,18 @@
     <div class="col-sm-9" style="float:right">
         <a href="/LK/edit_user/{{ username.id }}/"><button style="border-radius:10px; padding: 5px; font-size:15px" class="btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true">Изменить</button></span></a>
     </div>
+</div>
+<div style="float:right" class="col-xs-6">
+<h2 style="margin-top:20px">Оставьте отзыв!</h2>
+<form method="post" action="">{% csrf_token %}
+    <div class="small-5 large-5" style="margin-left:10px;">
 
+    <p>{{ form.recomend }} Рекомендую</p>
+    <p>{{ form.text_reviews }} </p>
+    <p style="visibility: hidden;">{{ form.reviews_client }} Код клиента</p>
+    <input style="border-radius:5px; padding: 5px;" class="btn-primary" type="submit" value="Отправить"><br/>
+</div>
+
+</form>
+</div>
 {% endblock content %}

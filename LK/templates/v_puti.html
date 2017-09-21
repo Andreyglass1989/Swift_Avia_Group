@@ -14,14 +14,14 @@
         <div class="col-xs-2">вес, кг</div>
     </div>
    <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
-    {% for car in cargo %}
+    {% for car in cargo_v_puti %}
     <div class="col-xs-10">
         <div class="col-xs-2"><a id="trigger" href="/LK/detail/{{ car.pack_number }}/">{{ car.pack_number }}</a></div>
         <div class="col-xs-3">{{ car.date_added }}</div>
         <div class="col-xs-2">{{ car.pack_status }}</div>
         <div class="col-xs-2">{{ car.weight }}</div>
     </div>
-    <hr class="col-xs-10">
+    <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
     {% endfor %}
 
     <div id='box' style='display: none;padding:10px;background-color:#f1f1f1;margin:10px;width:210px;'>Содержимое скрытого блока</div>

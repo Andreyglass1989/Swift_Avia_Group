@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 #from LK.models import User
-from login.models import UserProfile, ExpectedCargo
+from login.models import UserProfile, ExpectedCargo, Reviews
 
 
 # Define an inline admin descriptor for Employee model
@@ -25,6 +25,12 @@ class ExpectedCargoAdmin(admin.ModelAdmin):
     list_filter = ["date_add",]
     search_fields = ["treck"]
 
+class ReviewsAdmin(admin.ModelAdmin):
+    list_display = ["reviews_client", "text_reviews",]
+    list_filter = ["date_add", ]
+    #search_fields = ["reviews_client"]
+
+
 class UserAdmin(admin.ModelAdmin):
     inlines = (EmployeeInline,)
     list_display = ["username", "code", "full_name", "email"]
@@ -45,6 +51,6 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
 
-# admin.site.register(UserAdmin)
+admin.site.register(Reviews, ReviewsAdmin)
 # admin.site.register(MyUserAdmin)
 admin.site.register(ExpectedCargo, ExpectedCargoAdmin)

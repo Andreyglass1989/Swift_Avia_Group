@@ -1,6 +1,19 @@
 {% extends 'base0.html' %}
 
+{% load static %}
+
 {% block head_title %}Авторизация{% endblock head_title %}
+
+{% block CSS %}
+<style>
+    div.input-group>input{
+     width: 300px
+    }
+
+</style>
+
+{% endblock CSS%}
+
 {% block login %}
 
 {% if messages %}
@@ -19,22 +32,33 @@
         {% csrf_token %}
         <label for="username">Имя пользователя</label>
         <div class="input-group">
-            <span class="input-group-addon glyphicon glyphicon glyphicon-user" id="basic-addon1"></span>
+            <span class="input-group-addon glyphicon glyphicon glyphicon-user" id="basic-addon2"></span>
             <input type="text" name="username" id="username">
+            <a href="/auth/register/" style="text-decoration: none;">
+                <abbr style="border-bottom:none" title="Регистрация"><img src="{% static '/images/social/add_user0.png' %}" height="30px" width="30px"></abbr>
+            </a>
         </div>
         </br>
         <label for="password">Пароль</label>
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
             <input type="password" name="password" id="password">
+            <a href="/auth/reset_password/" style="text-decoration: none;">
+             <abbr style="border-bottom:none" title="Восстановить пароль"><img src="{% static '/images/social/forgot-password.png' %}" width="35px" height="35px"></abbr>
+            </a>
         </div>
+
+
+
         {% if login_error %}
             <label class="error">{{ login_error }}</label>
         {% endif %}
 </br>
-        <input style="padding:10px; border-radius:10px" class="button btn-success" type="submit" value="Войти">
-        <a href="/auth/register/" style="text-decoration: none;"><span style="padding:5px; border-radius:10px; " class="button btn-primary">Регистрация</span></a>
-        <a href="/auth/reset_password/" style="text-decoration: none;"><span style="padding:5px; border-radius:10px;" class="button btn-warning">Восстановить пароль</span></a>
+       <!-- <button style="padding:2px; border-radius:10px; margin-right:40px" class="button btn-primary">Регистрация</button>-->
+
+        <input style="padding:10px; border-radius:10px; float:right; margin-right:40px" class="button btn-success" type="submit" value="Войти">
+
+        <!--<a href="/auth/reset_password/" style="text-decoration: none;"><span style="padding:5px; border-radius:10px;" class="button btn-warning">Восстановить пароль</span></a>-->
     </form>
 </div>
 

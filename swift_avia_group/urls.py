@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^contacts/$', contacts, name='contacts'),
     url(r'^if/$', if_delivery, name='if_delivery'),
     url(r'^all_cargo/$', all_cargo, name='all_cargo'),
-    url(r'^LK/', include('LK.urls')),
+    url(r'^LK/', include('LK.urls', namespace='LK')),
 ]

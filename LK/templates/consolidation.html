@@ -32,15 +32,15 @@
 
     {% if cargo_consolidation %}
         <h5>Обработан складом: </h5>
-        {% for car in cargo_consolidation %}
-            <div class="col-xs-10">
+        {% for car in cargo_consol %}
+            <div class="col-xs-12">
                 <div class="col-xs-2"><a href="/LK/detail/{{ car.pack_number }}/">{{ car.pack_number }}</a></div>
-                <div class="col-xs-3">{{ car.date_added|date:"d F Y" }}</div>
+                <div class="col-xs-4">{{ car.date_added|date:"d F Y" }}</div>
                 <div class="col-xs-2">{{ car.pack_status }}</div>
                 <div class="col-xs-2">{{ car.weight }}</div>
             </div>
         {% endfor %}
-    <hr class="col-xs-10">
+    <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-12">
     {% endif %}
 
 </div>

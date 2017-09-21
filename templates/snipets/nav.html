@@ -1,4 +1,15 @@
 {% load static %}
+
+
+{% block CSS0 %}
+<style>
+.vertical_line{margin:5px 0px; height:40px; width:1px;background-color: #e0e0e0;}
+</style>
+
+{% endblock CSS0 %}
+
+
+
 <!--------------------------------------NAVBAR------------------------->
 <div class="container">
 <a class="navbar-brand" href="/">
@@ -8,19 +19,39 @@
 
    <ul class="navbar" style="text-color:; font-size:16px;background-color:#fff;margin-top:65px; float:right; width:auto;">
     <ul class="nav navbar-nav" style="background-color:#fff; padding-left:0px; margin-left:0px  ">
-        <li style="margin-left:0px;margin-top:5px;" class="active"><a style="margin-left:-20px; padding-left:5px;" href="/">Главная</a></li>
-        <li style="margin-top:5px"><a href="{% url 'about_us' %}">О нас</a></li>
-        <li style="margin-top:5px"><a href="{% url 'if_delivery' %}">Условия доставки</a></li>
-        <li style="margin-top:5px"><a href="{% url 'contacts' %}">Контакты</a></li>
-
-
+        <li style="margin-left:0px" class="active"><a style="margin-left:-20px; padding-left:5px;" href="/">ГЛАВНАЯ</a></li>
+        <li><div class="vertical_line"></div></li>
+        <li><a href="{% url 'about_us' %}">О НАС</a></li>
+        <li><div class="vertical_line"></div></li>
+        <li><a href="{% url 'if_delivery' %}">УСЛОВИЯ ДОСТАВКИ</a></li>
+        <li><div class="vertical_line"></div></li>
+        <li><a href="{% url 'contacts' %}">КОНТАКТЫ</a></li>
+        <li><div class="vertical_line"></div></li>
 
         {% if username %}
-        <li style="margin-top:5px"><a href="/auth/logout/">Выйти</a></li>
-        <li><a  href="/LK/"><button style="padding-top:10px" type="button" class="btn btn-primary btn"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>({{ username|truncatechars:10 }})</a></li>
+       <!-- <li style="margin-top:5px"><a href="/auth/logout/">ВЫЙТИ</a></li>-->
+        <li>
+                <!-- Single button -->
+        <div class="btn-group">
+          <button style="margin:7px 10px" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ({{ username|truncatechars:10 }}) <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="/LK/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Личный кабинет</a></li>
+            <!--<li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>-->
+            <li role="separator" class="divider"></li>
+            <li><a href="/auth/logout/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> ВЫЙТИ</a></li>
+          </ul>
+        </div>
+
+        </li>
+
+     <!--   <li><a  href="/LK/"><button style="padding-top:10px" type="button" class="btn btn-primary btn"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>({{ username|truncatechars:10 }})</a></li>-->
 
         {% else  %}
-            <li style="margin-top:5px"><a href="/auth/login/">Ввойти</a></li>
+
+            <li><a href="/auth/login/"><span style="margin-right:3px" class="glyphicon glyphicon-log-in" aria-hidden="true"></span> ВХОД</a></li>
 
         {% endif %}
 

@@ -5,7 +5,11 @@
 {% block content%}
 
 {% if form.errors %}
-<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"> ЗАПОЛНЯТЬ ЛАТИНСКИМИ</span></div>
+
+{% if form.errors %}
+<div style="margin-top:5px" class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true">{{ form.errors }}</span></div>
+{% endif %}
+
         <ul class="messages">
         {% for message in messages %}
         <span class="glyphicon glyphicon-warning-sign" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
@@ -15,16 +19,16 @@
 <h1>Добавить получателя:<h3 style="color:red">Заполнять латиницей</h3>
 <form method="post" action="">{% csrf_token %}
    <!-- <div class="small-5 large-5" style="margin-left:10px;">{{ form.as_p }}</div> -->
-    <p>{{ form.name }} *Имя</p>
-    <p>{{ form.lastname }} *Фамилия</p>
-    <p>{{ form.phone }} *Телефон</p>
-    <p>{{ form.city }} *Город</p>
-    <p>{{ form.street }} *Улица</p>
-    <p>{{ form.home }} *Дом</p>
-    <p>{{ form.room }} Квартира</p>
+    <p>{{ form.name }} *Name</p>
+    <p>{{ form.lastname }} *Lastname</p>
+    <p>{{ form.phone }} *Phone</p>
+    <p>{{ form.city }} *City</p>
+    <p>{{ form.street }} *Street</p>
+    <p>{{ form.home }} *House</p>
+    <p>{{ form.room }} Room</p>
     <p style="visibility: hidden;">{{ form.customer }} Код клиента</p>
     <p style="visibility: hidden;">{{ form.country }} Страна</p>
-    <p>{{ form.email }} email</p>
+    <!--<p>{{ form.email }} email</p>
   <!--       {% if uploaded_file_url %}
     <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
   {% endif %} -->

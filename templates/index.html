@@ -29,6 +29,11 @@
     a:hover{
         text-decoration: none;
     }
+
+    .container{
+    padding-right: 0px;
+    padding-left: 0px;
+    }
     </style>
 {% block CSS0 %}{% endblock CSS0 %}
     <script src="{% static '/js/bootstrap.js' %}"></script>
@@ -39,8 +44,8 @@
                $("#showHideContent_en,#showHideContent_ru,#showHideContent_ch ").click(function () {
                            if ($("#content_en,#content_ru").is(":hidden")) {
 
-                                   $("#content_en,#content_ru,#content_ch").show("slow");
-
+                                   $("#content_en,#content_ru,#content_ch, #show_info").show("slow");
+                                   $("#hide_info").hide();
                            } else {
 
                                    $("#content_en,#content_ru,#content_ch").hide("slow");
@@ -84,12 +89,12 @@
 <footer class="footer">
     <div style="background-image:url(/static/images/blue.svg); height:50px; border-radius:10px; margin:20px 0px;">
         <span class="text-muted" style="float:left; margin-left:20px; margin-top:8px; ">
-            <a style="float:left; margin-left:10px;" href="https://www.facebook.com/swift.avia.group/"><img src="{% static '/images/social/facebook2.jpeg' %}" style="height:35px; width:35px"></a>
+            <a style="float:left; margin-left:10px;" href="https://www.facebook.com/swift.avia.group/"><img src="{% static '/images/social/Facebook-2561.png' %}" style="height:35px; width:35px"></a>
         </span>
 
         <span class="text-muted" style="float:left; margin-left:10px; margin-top:8px; ">
             <a style="float:left; margin-left:10px;" href="https://www.instagram.com/swift_avia_group_/?hl=ru">
-                <img src="{% static '/images/social/insta.jpeg' %}" style="height:35px; width:35px"></a>
+                <img src="{% static '/images/social/insta0.png' %}" style="height:35px; width:35px"></a>
         </span>
 
         <span class="text-muted" style="margin:15px 20px; color:#fff; float:right">Swift Avia Group &#169; 2017 ВСЕ ПРАВА ЗАЩИЩЕНЫ  |  ПОЛИТИКА КОНФИДИЦИАЛЬНОСТИ</span> </div>

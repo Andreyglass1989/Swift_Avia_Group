@@ -54,3 +54,18 @@ class ExpectedCargo(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+
+class Reviews(models.Model):
+    class Meta():
+        db_table= 'Reviews' #u'Отзывы клиентов'
+
+
+    text_reviews = models.TextField(u'Добавить отзыв', max_length=250)
+    reviews_client = models.ForeignKey(Customer)#verbose_name=u'Клиент'
+    date_add = models.DateField(auto_now=True)
+    recomend = models.BooleanField(u'Рекомендую', default=True)
+
+    def __unicode__(self):
+        return self.text_reviews

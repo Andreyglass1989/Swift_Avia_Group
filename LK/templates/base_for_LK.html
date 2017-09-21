@@ -33,9 +33,9 @@
       color: #337ab7;
     }
 
-
-    </style>
 {% block CSS0 %}{% endblock CSS0 %}
+    </style>
+
 </head>
 <body>
 <!--------------------------Messages---------------------------------------->
@@ -81,9 +81,9 @@
       <hr style="margin:0px;">
   <li role="presentation" {% block active_waiting %}{% endblock active_waiting %}><a href="/LK/expected_cargo/">Ожидаются на складе</a></li>
       <hr style="margin:0px;">
-  <li role="presentation" {% block active_consolidation %}{% endblock active_consolidation %}><a href="/LK/consolidation/">Консолидация</a></li>
+  <li role="presentation" {% block active_consolidation %}{% endblock active_consolidation %}><a href="/LK/consolidation/">Консолидация <span style="float:right" class="badge">{{ cargo_consolidation.count }}</span></a></li>
       <hr style="margin:0px;">
-  <li role="presentation" {% block active_v_puti %}{% endblock active_v_puti %}><a href="/LK/v_puti/">В пути</a></li>
+  <li role="presentation" {% block active_v_puti %}{% endblock active_v_puti %}><a href="/LK/v_puti/">В пути <span style="float:right" class="badge">{{ cargo_v_puti.count }}</span></a></li>
       <hr style="margin:0px;">
   <li role="presentation" {% block active_dostavleno %}{% endblock active_dostavleno %}><a href="/LK/priletel/">Доставлено</a></li>
       <hr style="margin:0px;">

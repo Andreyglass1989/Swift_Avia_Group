@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_protect
 from django.http import Http404
 from django.contrib import auth
-from login.models import UserProfile, ExpectedCargo
+from login.models import UserProfile, ExpectedCargo, Reviews
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 #CBV-----------------
@@ -12,11 +13,13 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from django.urls import reverse_lazy
 #CBV------------------
 
-from LK.forms import UserModelForm, RecipientsModelForm, ExpectedCargoModelForm
+from LK.forms import UserModelForm, RecipientsModelForm, ExpectedCargoModelForm, EmailForm, ReviewsForm
 
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
+from django.template import Context
+from django.template.loader import get_template
 
 
 #
@@ -34,11 +37,86 @@ def about_us(request):
     return render(request, 'about_us.html', context)
 
 def contacts(request):
-    context = {'username': auth.get_user(request).username,}
-    return render(request, 'contacts.html', context)
+    form_email = EmailForm
+
+    # new logic!
+    if request.method == 'POST':
+        form = form_email(data=request.POST)
+
+        if form.is_valid():
+            name = request.POST.get('name', '')
+            cont_email = request.POST.get('email', '')
+            tema = request.POST.get('tema', '')
+            msg = request.POST.get('message', '')
+            # Email the profile with the
+            # contact information
+            template = get_template('contact_template.txt')
+        context = Context({
+            'contact_name': name,
+            'contact_email': cont_email,
+            'tema': tema,
+            'form_content': msg,
+
+        })
+        print(context)
+        content = template.render(context)
+
+        subject = tema
+        message = msg
+        from_email = cont_email
+        to_list = [settings.EMAIL_HOST_USER]
+
+        send_mail(subject, message, from_email, to_list, fail_silently=True)
+        return HttpResponseRedirect("/contacts/")
+
+
+    return render(request, 'contacts.html', {'form': form_email,})
+
+
+    #
+    # context = {'username': auth.get_user(request).username,
+    #            'email': email,
+    #            }
+    # return render(request, 'contacts.html', context)
+
+#--------------SEND MAIL TO US ---------------------------
+# @csrf_protect
+# def send_mail_to_us(request):
+#
+#     if request.method == 'GET':
+#         print("get data")
+#     if request.method == 'POST':
+#         print("post data")
+#         print(request.POST)
+#         name = request.POST.get("name")
+#         print(name)
+#         email = request.POST.get("email")
+#         print(email)
+#         tema = request.POST.get("tema")
+#         print(tema)
+#         msg = request.POST.get("message")
+#         print(msg)
+#         #---from backend send mail-----
+#         subject = tema
+#         message = msg
+#         from_email = email
+#         to_list = settings.EMAIL_HOST_USER
+#         print(to_list)
+#
+#         send_mail(subject, message, from_email, to_list, fail_silently=True)
+#         return HttpResponseRedirect("/contacts/")
+#     template_name = "main.html"
+#     context = {}
+#     return render(request, template_name, context)
+#--------------END SEND MAIL TO US ---------------------------
+
+
 
 def if_delivery(request):
-    context = {'username': auth.get_user(request).username,}
+    otziv = Reviews.objects.all()
+    context = {'username': auth.get_user(request).username,
+               'otziv': otziv,
+               }
     return render(request, 'if_delivery.html', context)
 
 def all_cargo(request):
@@ -83,6 +161,12 @@ def all_cargo(request):
 
 def lk (request):
     username = auth.get_user(request)
+    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+    user = UserProfile.objects.get(user_id=username.id)
+    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+  #  cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     if username:
         try:
             user = UserProfile.objects.get(user_id=username.id)
@@ -90,7 +174,13 @@ def lk (request):
             user = None
         context = {
                 'username': username,
-                'user':user,
+                'user': user,
+            # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+              #  'cargo_ne_obrabotan': cargo_ne_obrabotan,
+                'cargo_consolidation': cargo_consolidation,
+                'cargo_v_puti': cargo_v_puti,
+
+            # ---- для вывода к-ва/цифры упаковочных на боковую панельку
             }
     return render(request, 'LK.html', context)
 
@@ -100,9 +190,26 @@ def lk (request):
 def about_user (request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id = username.id)
+    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+
+
+    if request.method == "POST":
+        form = ReviewsForm(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            messages.success(request, "Благодарим за отзыв!!!")
+            return redirect("/LK/about_user/")
+    else:
+        form = ReviewsForm(initial={'reviews_client': user.code_clienta, 'recomend': True})
+
     context = {
         'username': username,
-        'user':user,
+        'user': user,
+        'cargo_v_puti': cargo_v_puti,
+        'cargo_consolidation': cargo_consolidation,
+        'form': form,
     }
     return render(request, 'about_user.html', context)
 
@@ -122,7 +229,9 @@ def consolidation(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
     cargo_ne_obrabotan = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 1)
-    cargo_consolidation = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 2)
+    cargo_consol = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 2)
+    cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
     client_email = username.email
     name_client = username.first_name
     gruz=[]
@@ -131,7 +240,6 @@ def consolidation(request):
         gruz0 = gr.pack_number
         #print(gruz.pack_number)
         gruz.append(int(gr.pack_number))
-    print('i-%s'%gruz)
     # print(client_email)
     # print('%s' % name_client)
     # if cargo_consolidation:
@@ -147,8 +255,10 @@ def consolidation(request):
     context = {
         'username': username,
         'user': user,
-        'cargo_consolidation': cargo_consolidation,
+        'cargo_consol': cargo_consol,
         'cargo_ne_obrabotan': cargo_ne_obrabotan,
+        'cargo_v_puti': cargo_v_puti,
+        'cargo_consolidation': cargo_consolidation,
     }
     return render(request, 'consolidation.html', context)
 
@@ -156,21 +266,28 @@ def consolidation(request):
 def v_puti(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
-    cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 5).order_by('-date_added')
+    cargo_v_puti = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 5).order_by('-date_added')
+    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
     context = {
         'username': username,
         'user': user,
-        'cargo': cargo,
+        'cargo_v_puti': cargo_v_puti,
+        'cargo_consolidation': cargo_consolidation,
     }
     return render(request, 'v_puti.html', context)
 
 def priletel(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
+    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
     context = {
         'username': username,
         'user': user,
+        'cargo_consolidation': cargo_consolidation,
+        'cargo_v_puti': cargo_v_puti,
         'cargo': cargo,
     }
     return render(request, 'priletel.html', context)
@@ -193,10 +310,15 @@ def detail (request, pack_number):
 def recipients (request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
+    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     recip = CustomerRecipients.objects.filter(customer_id = user.code_clienta)
     context = {
         'username': username,
         'user': user,
+        'cargo_consolidation': cargo_consolidation,
+        'cargo_v_puti': cargo_v_puti,
         'recip': recip,
     }
     return render(request, 'recipients.html', context)
@@ -306,6 +428,7 @@ def oplata(request):
         'cargo': cargo,
         'weight_full': weight_full,
         'oplata': oplata,
+
     }
     return render(request, 'oplata.html', context)
 
@@ -320,11 +443,16 @@ class ExpectedCargoListView(ListView):
         context = super(ExpectedCargoListView, self).get_context_data(**kwargs)
         username = auth.get_user(self.request)
         user = UserProfile.objects.get(user_id=username.id)
+        cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+        cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+        # ---- для вывода к-ва/цифры упаковочных на боковую панельку
         cargo = ExpectedCargo.objects.filter(customer_id = user.code_clienta)
         context = {
             'username': username,
             'user': user,
             'cargo': cargo,
+            'cargo_consolidation': cargo_consolidation,
+            'cargo_v_puti': cargo_v_puti,
         }
 
         return context
