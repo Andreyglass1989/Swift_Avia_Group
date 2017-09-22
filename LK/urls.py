@@ -16,6 +16,7 @@ from LK.views import (
     ExpectedCargoCreateView,
     ExpectedCargoUpdateView,
     remove_recip,
+   # search,
    # send_mail_to_us
     )
 
@@ -37,6 +38,7 @@ urlpatterns = [
     url(r'^expected_cargo/$', ExpectedCargoListView.as_view()),
     url(r'^add_expected_cargo/$', ExpectedCargoCreateView.as_view()),
     url(r'^edit_expected_cargo/(?P<pk>\d+)/$', ExpectedCargoUpdateView.as_view()),
+#    url(r'^search/$', search),
 
 
 

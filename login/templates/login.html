@@ -10,6 +10,107 @@
      width: 300px
     }
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.demo {
+    max-width: 550px;
+    margin: 5% auto;
+    font-family: "Trebuchet MS",Tahoma,Arial,sans-serif;
+}
+/* Оформление ссылки */
+a {
+color: #666;
+    text-decoration: none;
+    border-bottom: 1px dotted #bbb;
+}
+a:hover,
+a:focus {
+    color:#36c;
+}
+a:active {
+    top:1px;
+}
+
+/**
+ * Формируем стили подсказки
+ */
+
+/* атрибут элемента с подсказкой */
+[data-tooltip] {
+  display: inline-block;
+  position: relative;
+  /* вид курсора для элементов с подсказкой */
+  cursor: pointer;
+}
+
+/*  по умолчанию скрываем содержимое подсказки */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* определяем позицию подсказки над элементом
+* её размеры, форму, цвет фона и текста
+*/
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 5px;
+  padding: 7px 15px; /* внутренние отступы */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;; /* скругляем углы */
+  background: #006104;
+  background: hsla(110,100%,17%,.9); /* цвет фона */
+  color: #f4f4f4;
+  content: attr(data-tooltip);
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 1.2;
+  text-shadow: 0 1px 1px hsla(0,0%,0%,1);/* тень для текста */
+}
+
+/* формируем указатель  */
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 100%;
+  left: 24px;
+  width: 0;
+  border-top: 5px solid #006104;
+  border-top: 5px solid hsla(110,100%,17%,.9);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Показываем подсказку с указателем при наведении */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  transition: all 0.4s ease-in-out; /* добавляем плавности перехода */
+}
+
+
+
+
+
 </style>
 
 {% endblock CSS%}
@@ -34,20 +135,23 @@
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon glyphicon-user" id="basic-addon2"></span>
             <input type="text" name="username" id="username">
-            <a href="/auth/register/" style="text-decoration: none;">
-                <abbr style="border-bottom:none" title="Регистрация"><img src="{% static '/images/social/add_user0.png' %}" height="30px" width="30px"></abbr>
-            </a>
+           <!-- <abbr style="border-bottom:none" title="Регистрация">-->
+                <a href="/auth/register/" style="text-decoration: none; border-bottom:none" data-tooltip="Регистрация">
+                <img src="{% static '/images/social/add_user0.png' %}" height="30px" width="30px"></a>
+            <!--</abbr>-->
+
         </div>
         </br>
         <label for="password">Пароль</label>
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
             <input type="password" name="password" id="password">
-            <a href="/auth/reset_password/" style="text-decoration: none;">
-             <abbr style="border-bottom:none" title="Восстановить пароль"><img src="{% static '/images/social/forgot-password.png' %}" width="35px" height="35px"></abbr>
-            </a>
-        </div>
+            <!--<abbr style="border-bottom:none" title="Восстановить пароль">-->
+            <a href="/auth/reset_password/" style="text-decoration: none; border-bottom:none" data-tooltip="Восстановить пароль">
+             <img src="{% static '/images/social/forgot-password.png' %}" width="35px" height="35px"></a>
+           <!--  </abbr>-->
 
+        </div>
 
 
         {% if login_error %}

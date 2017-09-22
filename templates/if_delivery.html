@@ -38,12 +38,16 @@
     <div class="thumbnail">
      <!-- <img src="..." alt="..."> -->
       <div class="caption">
+        <section id="demo">
+         <article>
           <h3>О шести резонансных приговорах, которые потрясли мир</h3>
 
           <p>03.07.2017</p>
 
 <p>Чтобы создать первый пост в блоге, нажмите здесь один раз и выберите «Добавить и редактировать посты». Блог является отличным способом взаимодействия с аудиторией и заставляет посетителей возвращаться к вам на сайт снова и снова. Важно, чтобы темы постов в блоге были с...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Подробнее</a> <!--<a href="#" class="btn btn-default" role="button">Button</a></p>-->
+          </article>
+
+             <!--<p><a href="#" class="btn btn-primary" role="button">Подробнее</a> <!--<a href="#" class="btn btn-default" role="button">Button</a></p>-->
       </div>
     </div>
 
@@ -53,14 +57,16 @@
      <div class="thumbnail">
      <!-- <img src="..." alt="..."> -->
       <div class="caption">
-        <h3>О новом законопроекте, изменяющем существующий Федеральный Закон</h3>
+        <article>
+          <h3>О новом законопроекте, изменяющем существующий Федеральный Закон</h3>
 
 
 <p>22.06.2017</p>
 
           <p>Чтобы создать первый пост в блоге, нажмите здесь один раз и выберите «Добавить и редактировать посты». Блог является отличным способом взаимодействия с аудиторией и заставляет посетителей возвращаться к вам на сайт снова и снова. Важно, чтобы темы постов в блоге были с...</p>
         <p>... bafksefrkgkrlgdgr</p>
-        <p><a href="#" class="btn btn-primary" role="button">Подробнее</a> <!--<a href="#" class="btn btn-default" role="button">Button</a></p>-->
+        </article>
+
       </div>
     </div>
 
@@ -70,6 +76,7 @@
     <div class="thumbnail">
      <!-- <img src="..." alt="..."> -->
       <div class="caption">
+       <article>
         <h3>Широкий доступ в глобальную сеть и иное в стратегии Правительства</h3>
 
 
@@ -77,7 +84,7 @@
 
           <p>Чтобы создать первый пост в блоге, нажмите здесь один раз и выберите «Добавить и редактировать посты». Блог является отличным способом взаимодействия с аудиторией и заставляет посетителей возвращаться к вам на сайт снова и снова. Важно, чтобы темы постов в блоге были с...</p>
         <p>... bafksefrkgkrlgdgr</p>
-        <p><a href="#" class="btn btn-primary" role="button">Подробнее</a> <!--<a href="#" class="btn btn-default" role="button">Button</a></p>-->
+        </article>
       </div>
     </div>
 
@@ -86,6 +93,7 @@
      <div class="thumbnail">
      <!-- <img src="..." alt="..."> -->
       <div class="caption">
+       <article>
         <h3>Непредсказуемые события юридической жизни в 2017 г.</h3>
 
 
@@ -93,11 +101,11 @@
 
           <p>Чтобы создать первый пост в блоге, нажмите здесь один раз и выберите «Добавить и редактировать посты». Блог является отличным способом взаимодействия с аудиторией и заставляет посетителей возвращаться к вам на сайт снова и снова. Важно, чтобы темы постов в блоге были с...</p>
         <p>... bafksefrkgkrlgdgr</p>
-        <p><a href="#" class="btn btn-primary" role="button">Подробнее</a> <!--<a href="#" class="btn btn-default" role="button">Button</a></p>-->
+       </article>
       </div>
     </div>
 
-
+</section>
 </div>
 
 
@@ -173,6 +181,20 @@
 
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<!--   Показать/скрыть текст   -->
+    	<script src="{% static 'js/readmore.js' %}"></script>
+	<script>
+		$('article').readmore({
+			maxHeight: 150,
+			moreLink: '<a href="#">Показать полностью...</a>',
+			lessLink: '<a href="#">Скрыть</a>'
+		});
+	</script>
+
+
+<!--   Показать/скрыть текст   -->
+
 <script type="text/javascript">
 var text_slide_cur=0;
 function showtext_slide(){

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.views.decorators.csrf import csrf_protect
 from django.http import Http404
 from django.contrib import auth
@@ -27,8 +27,14 @@ from LK.models import Pack, PackProduct, CustomerRecipients, Country
 # Create your views here.
 #-------------------------------------------------------Menu----------------------------------------#
 def index(request):
+    pack = Pack.objects.all()
+    query = request.GET.get("query")
+    pack_list = None
+    if query:
+        pack_list = pack.filter(pack_number__icontains=query)
     context = {
             'username': auth.get_user(request).username,
+            'pack_list': pack_list,
         }
     return render(request, 'main.html', context)
 
@@ -36,9 +42,10 @@ def about_us(request):
     context = {'username': auth.get_user(request).username,}
     return render(request, 'about_us.html', context)
 
+
+@csrf_protect
 def contacts(request):
     form_email = EmailForm
-
     # new logic!
     if request.method == 'POST':
         form = form_email(data=request.POST)
@@ -58,19 +65,20 @@ def contacts(request):
             'form_content': msg,
 
         })
-        print(context)
         content = template.render(context)
 
         subject = tema
         message = msg
-        from_email = cont_email
+        from_email = str(cont_email)
+        from_email0 = [from_email]
+        # print(from_email)
+        # print (type(from_email))
         to_list = [settings.EMAIL_HOST_USER]
-
-        send_mail(subject, message, from_email, to_list, fail_silently=True)
+        # print (settings.EMAIL_HOST_USER)
+        # print (type(settings.EMAIL_HOST_USER))
+        send_mail(subject, message, from_email0, to_list, fail_silently=True)
         return HttpResponseRedirect("/contacts/")
-
-
-    return render(request, 'contacts.html', {'form': form_email,})
+    return render(request, 'contacts.html', {'form': form_email, 'username': auth.get_user(request).username,})
 
 
     #
@@ -495,5 +503,20 @@ class ExpectedCargoUpdateView(UpdateView):
 
 #-------------Служебные функции-------------------------------------------------------------------
 #def info_about_cargo():
+
+# def search (request):
+#     if request.method == "POST":
+#         search_text = request.POST['search_text']
+#         if search_text > '':
+#             pack_res = Pack.objects.filter(pack_number__contains=search_text)
+#         else:
+#             pack_res = Pack.objects.none()
+#             text = 1
+#     else:
+#         search_text = ''
+#     print(pack_res)
+#     return render('search.html', {'pack_res': pack_res})
+
+
 
 #-------------Служебные функции-------------------------------------------------------------------

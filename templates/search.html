@@ -1,0 +1,26 @@
+{% if pack_list.count > 0 %}
+
+<h3>Иформация о найденном грузе:</h3>
+
+<div class="col-xs-12">
+    <div class="col-xs-2">№ посылки</div>
+    <div class="col-xs-3">дата добавления</div>
+    <div class="col-xs-2">статус</div>
+    <div class="col-xs-2">вес, кг</div>
+
+</div>
+
+<hr>
+    <div class="col-xs-12">
+      {% for pack in pack_list %}
+        <div class="col-xs-2">{{ pack.pack_number }}</a></div>
+        <div class="col-xs-3">{{ pack.date_added|date:"d F Y" }}</div>
+        <div class="col-xs-2">{{ pack.pack_status }}</div>
+        <div class="col-xs-2">{{ pack.weight }}</div>
+      {% endfor %}
+    </div>
+
+{% endif %}
+
+
+

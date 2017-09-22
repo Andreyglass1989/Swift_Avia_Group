@@ -110,5 +110,18 @@
 </div>
 
 
+<div style="display: inline-block; margin-left:20px">
+    <h3>Поиск <span style="font-size:15px">посылки </span></h3>
+{% csrf_token %}
+<form method="GET" action="">
+<input type="text" placeholder="Номер посылки" name="query" value="{{ request.GET.query }}"/>
+<input type="submit" value="Найти"/>
+
+</form>
+</div>
+
+{% include 'search.html'%}
+
+
 
 {% endblock content%}

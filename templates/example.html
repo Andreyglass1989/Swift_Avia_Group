@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+
+{% load static %}
+
+
+{% block CSS0 %}
+<style>
+
+</style>
+{% endblock CSS0 %}
+
+{% block head_title %}Поиск посылки{% endblock head_title %}
+
+
+{% block content %}
+
+<div style="display: inline-block; margin-left:20px">
+    <h3>Поиск <span style="font-size:15px">посылки </span></h3>
+
+<form method="GET" action="">{% csrf_token %}
+<input type="text" placeholder="Номер посылки" name="search"/>
+<input type="submit" value="Найти"/>
+
+</form>
+</div>
+
+
+
+{% endblock content %}
