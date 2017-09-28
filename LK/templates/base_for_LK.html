@@ -18,23 +18,22 @@
 
     }
 
-      .container{
+      .cool{
         background-color:rgb(255, 255, 255);
-        width:1090px;
-        margin-right: 5px;
+        margin-right: 0px;
         background-image:url(/static/images/2.png);
         background-repeat: no-repeat no-repeat;
         background-size:cover;
         border-radius:10px;
-        margin-left:220px;
-
+        padding-bottom:25px
 }
     h1, h2, h3{
       color: #337ab7;
     }
 
+</style>
 {% block CSS0 %}{% endblock CSS0 %}
-    </style>
+
 
 </head>
 <body>
@@ -53,7 +52,7 @@
 
 <div class="b_body col-xs-12" style="margin-bottom:40px;">
   <div class="col-xs-6">
-    <a style="text-decoration: none;" href="/"><h2 style="color:black; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:red">AVIA</span> GROUP</h2>
+    <a style="text-decoration: none;" href="/"><h2 style="color:black; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>
     <!--<h2 style="color:#fff; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>-->
 
 <!-- <img style="margin-top:0px; height:100px; width:100px" src="{% static 'images/logo11.png' %}">--></a>
@@ -81,7 +80,7 @@
       <hr style="margin:0px;">
   <li role="presentation" {% block active_waiting %}{% endblock active_waiting %}><a href="/LK/expected_cargo/">Ожидаются на складе</a></li>
       <hr style="margin:0px;">
-  <li role="presentation" {% block active_consolidation %}{% endblock active_consolidation %}><a href="/LK/consolidation/">Консолидация <span style="float:right" class="badge">{{ cargo_consolidation.count }}</span></a></li>
+  <li role="presentation" {% block active_consolidation %}{% endblock active_consolidation %}><a href="/LK/consolidation/">Консолидация<span style="float:right" class="badge">{{ cargo_consolidation.count }}</span></a></li>
       <hr style="margin:0px;">
   <li role="presentation" {% block active_v_puti %}{% endblock active_v_puti %}><a href="/LK/v_puti/">В пути <span style="float:right" class="badge">{{ cargo_v_puti.count }}</span></a></li>
       <hr style="margin:0px;">
@@ -115,7 +114,7 @@
 
 <!--<div class="container"></div>-->
 
-<div class="container" style="margin-top:100px"><div id="content">{% block content %}{% endblock content %}</div> </div>
+<div class="col-xs-10 cool" style="margin-top:100px"><div id="content">{% block content %}{% endblock content %}</div> </div>
 
 {% include 'snipets/js.html' %}
 

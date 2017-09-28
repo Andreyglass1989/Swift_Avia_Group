@@ -166,7 +166,7 @@
               <div class="caption">
                {% for otz in otziv %}
                   {% if otz.recomend == True %}
-                    <h4>{{ otz.reviews_client.first_name }}</h4>
+                   <!-- <h4>{{ otz.reviews_client }}</h4>-->
 
                     <div class="col-xs-10" style="font-size:10px; padding-left:0px">{{ otz.date_add }}</div>
                     <div class="col-xs-2" style="float:right"><img src="{% static '/images/social/like.svg' %}" width="25px" height="25px"></div>

@@ -1,0 +1,107 @@
+
+ .accordion{
+  /* ширина в % для резинового макета,
+  * можно определить фиксированное
+  * значение в px
+  */
+  width: 90%;
+  padding: auto;
+  margin: 0 auto;
+}
+
+.toggle-box {
+  /* по умаолчанию скрыт */
+  display: none;
+}
+
+/* формируем внешний вид панелей аккордеона */
+
+.toggle-box + label {
+  background: #6c6e74;
+  background: -moz-linear-gradient(top,  #6c6e74 0%, #4b4d51 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6c6e74), color-stop(100%,#4b4d51));
+  background: -webkit-linear-gradient(top,  #6c6e74 0%,#4b4d51 100%);
+  background: -o-linear-gradient(top,  #6c6e74 0%,#4b4d51 100%);
+  background: -ms-linear-gradient(top,  #6c6e74 0%,#4b4d51 100%);
+  background: linear-gradient(top,  #6c6e74 0%,#4b4d51 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6c6e74', endColorstr='#4b4d51',GradientType=0 );
+  color: #C9C9C9;
+  cursor: pointer;
+  display: block;
+  font: normal 14px Helvetica, Arial, sans-serif;
+  line-height: 21px;
+  padding: 8px 22px;
+  margin-bottom: 0px;
+}
+label a, a:hover{color: #ddd;}
+
+/* формируем внешний вид панелей при наведении */
+
+.toggle-box + label:hover{opacity: 0.9;}
+
+/* формируем внешний вид панелей при нажатии на них */
+
+.toggle-box + label:active{
+  background: #6c6e74;
+  background: -moz-linear-gradient(top,  #6c6e74 0%, #545359 11%, #756d73 84%, #4b4d51 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6c6e74), color-stop(11%,#545359), color-stop(84%,#756d73), color-stop(100%,#4b4d51));
+  background: -webkit-linear-gradient(top,  #6c6e74 0%,#545359 11%,#756d73 84%,#4b4d51 100%);
+  background: -o-linear-gradient(top,  #6c6e74 0%,#545359 11%,#756d73 84%,#4b4d51 100%);
+  background: -ms-linear-gradient(top,  #6c6e74 0%,#545359 11%,#756d73 84%,#4b4d51 100%);
+  background: linear-gradient(to bottom,  #6c6e74 0%,#545359 11%,#756d73 84%,#4b4d51 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#545359', endColorstr='#4b4d51',GradientType=0 );
+}
+
+/* содержание блоков скрыто */
+
+.toggle-box + label + div {
+  display: none;
+}
+
+/* при обработке флажка (checkbox) показываем блок с содержанием */
+
+.toggle-box:checked + label + div {
+  display: block;
+}
+
+/* формируем внешний вид кнопки переключателя на панели справа */
+
+.toggle-box + label:before {
+  background: #404247;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  color: #C9C9C9;
+  content: "\2714";
+  display: block;
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  height: 18px;
+  line-height: 18px;
+  margin: 2px 5px 0px;
+  text-align: center;
+  width: 18px;
+  box-shadow: inset 1px 1px 1px rgba(0,0,0, .2), 1px 1px 1px rgba(255,255,255, .1);
+  -moz-box-shadow: inset 1px 1px 1px rgba(0,0,0, .2), 1px 1px 1px rgba(255,255,255, .1);
+  -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0, .2), 1px 1px 1px rgba(255,255,255, .1);
+}
+.toggle-box:checked + label:before {
+  content: "\2718";
+}
+
+/* оформляем блок с содержанием */
+
+.box{
+  background: #fefefe;
+  border-left: rgba(0,0,0,0.1) solid 1px;
+  border-right: rgba(0,0,0,0.1) solid 1px;
+  border-bottom: rgba(0,0,0,0.1) solid 1px;
+  padding:10px 10px 10px;
+  font: 14px Helvetica, Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+}
+
+
+    }

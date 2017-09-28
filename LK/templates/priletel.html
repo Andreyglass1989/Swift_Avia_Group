@@ -1,38 +1,42 @@
 {% extends 'base_for_LK.html' %}
 
+{% load static %}
 
 {% block active_dostavleno %}class="active"{% endblock active_dostavleno %}
 
 {% block CSS0 %}
-<style>
-    .container{
-        width:1075px;
-    }
-</style>
+<link rel="stylesheet" href="{% static '/css/accordion.css'%}">
 {% endblock CSS0 %}
 
 {% block content %}
 
 <h3>Иформация о доставленном грузе:</h3>
 
-<div class="col-xs-11">
-    <div class="col-xs-2">№ посылки</div>
-    <div class="col-xs-3">дата добавления</div>
-    <div class="col-xs-2">статус</div>
-    <div class="col-xs-2">вес, кг</div>
+{% include 'info_pack.html' %}
 
+<!----------------------------ПАГИНАЦИЯ---------------------------------------------->
+<div align="center">
+ {% if cargo.has_other_pages %}
+   <ul class="pagination">
+     {% if cargo.has_previous %}
+       <li><a href="?page={{ cargo.previous_page_number }}">&laquo;</a></li>
+     {% else %}
+       <li class="disabled"><span>&laquo;</span></li>
+     {% endif %}
+     {% for i in cargo.paginator.page_range %}
+       {% if cargo.number == i %}
+         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+       {% else %}
+         <li><a href="?page={{ i }}">{{ i }}</a></li>
+       {% endif %}
+     {% endfor %}
+     {% if cargo.has_next %}
+       <li><a href="?page={{ cargo.next_page_number }}">&raquo;</a></li>
+     {% else %}
+       <li class="disabled"><span>&raquo;</span></li>
+     {% endif %}
+   </ul>
+ {% endif %}
 </div>
-<hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-8">
-{% for car in cargo %}
-<div class="col-xs-11">
-    <div class="col-xs-2"><a href="/LK/detail/{{ car.pack_number }}/">{{ car.pack_number }}</a></div>
-    <div class="col-xs-3">{{ car.date_added|date:"d F Y" }}</div>
-    <div class="col-xs-2">{{ car.pack_status }}</div>
-    <div class="col-xs-2">{{ car.weight }}</div>
-</div>
-<hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-8">
-{% endfor %}
-
-
-
+<!----------------------------ПАГИНАЦИЯ---------------------------------------------->
 {% endblock content %}

@@ -16,6 +16,7 @@ from LK.views import (
     ExpectedCargoCreateView,
     ExpectedCargoUpdateView,
     remove_recip,
+    # DetailDetailView,
    # search,
    # send_mail_to_us
     )
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'^consolidation/$', consolidation),
     url(r'^v_puti/$', v_puti),
     url(r'^detail/(?P<pack_number>\d+)/$', detail),
+    # url(r'^(?P<username>[\w-]+)/priletel/$', DetailDetailView.as_view()),
     url(r'^priletel/$', priletel),
     url(r'^recipients/$', recipients, name='recipients'),
     url(r'^add_recipients/$', RecipientsCreateView.as_view(), name='create_recipients'),

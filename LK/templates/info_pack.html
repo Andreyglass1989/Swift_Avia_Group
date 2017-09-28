@@ -1,0 +1,35 @@
+<div class="col-xs-11">
+        <div class="col-xs-2">№ посылки</div>
+        <div class="col-xs-3">дата добавления</div>
+        <div class="col-xs-2">статус</div>
+        <div class="col-xs-2">вес, кг</div>
+    </div>
+   <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
+
+{% for car in cargo %}
+  <div class="col-xs-11 accordion" style="margin:2px 0px">
+     <input class="toggle-box" id="block-{{ car.pack_number }}" type="checkbox">
+        <label for="block-{{ car.pack_number }}">
+            <div class="col-xs-2" style="margin-left:5px">{{ car.pack_number }}</div>
+            <div class="col-xs-3">{{ car.date_added|date:"d F Y" }}</div>
+            <div class="col-xs-2">{{ car.pack_status }}</div>
+            <div class="col-xs-1">{{ car.weight }}</div><br>
+        </label>
+
+     <div class="box" style="margin-bottom:10px;">
+                <table>
+                    <tr>
+                     <td class="col-xs-6">Наименование товара</td>
+                     <td class="col-xs-2">К-во</td>
+                    </tr>
+                    {% for ing in car.packproduct_set.all %}
+                    <tr>
+                        <td class="col-xs-6">{{ ing }}</td>
+                        <td class="col-xs-2">{{ ing.quantity }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br >
+            </div>
+  </div>
+{% endfor %}

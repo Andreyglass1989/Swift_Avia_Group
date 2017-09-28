@@ -1,49 +1,17 @@
 {% extends 'base_for_LK.html' %}
 
+{% load static %}
 {% block active_v_puti %}class="active"{% endblock active_v_puti %}
+
+{% block CSS0 %}
+<link rel="stylesheet" href="{% static '/css/accordion.css'%}">
+{% endblock CSS0 %}
 
 {% block content %}
 
 
     <h3>Иформация о грузе, который в пути:</h3>
 
-    <div class="col-xs-10">
-        <div class="col-xs-2">№ посылки</div>
-        <div class="col-xs-3">дата добавления</div>
-        <div class="col-xs-2">статус</div>
-        <div class="col-xs-2">вес, кг</div>
-    </div>
-   <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
-    {% for car in cargo_v_puti %}
-    <div class="col-xs-10">
-        <div class="col-xs-2"><a id="trigger" href="/LK/detail/{{ car.pack_number }}/">{{ car.pack_number }}</a></div>
-        <div class="col-xs-3">{{ car.date_added }}</div>
-        <div class="col-xs-2">{{ car.pack_status }}</div>
-        <div class="col-xs-2">{{ car.weight }}</div>
-    </div>
-    <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-11">
-    {% endfor %}
-
-    <div id='box' style='display: none;padding:10px;background-color:#f1f1f1;margin:10px;width:210px;'>Содержимое скрытого блока</div>
-
-
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-
-  <!-- Скрипт плавного открытия и закрытия блока -->
-  <script type='text/javascript'>
-    $(document).ready(function() {
-      $("A#trigger1").toggle(function() {
-        // Отображаем скрытый блок
-        $("DIV#box").fadeIn(); // fadeIn - плавное появление
-        return false; // не производить переход по ссылке
-      },
-      function() {
-        // Скрываем блок
-        $("DIV#box").fadeOut(); // fadeOut - плавное исчезновение
-        return false; // не производить переход по ссылке
-      }); // end of toggle()
-    }); // end of ready()
-  </script>
+    {% include 'info_pack.html' %}
 
 {% endblock content %}

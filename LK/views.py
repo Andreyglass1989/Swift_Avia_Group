@@ -5,11 +5,12 @@ from django.http import Http404
 from django.contrib import auth
 from login.models import UserProfile, ExpectedCargo, Reviews
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect
 #CBV-----------------
 # from django.views.generic import DetailView
 # from django.views.generic import ListView
-from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView, DetailView
 from django.urls import reverse_lazy
 #CBV------------------
 
@@ -21,10 +22,13 @@ from django.conf import settings
 from django.template import Context
 from django.template.loader import get_template
 
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #
 from LK.models import Pack, PackProduct, CustomerRecipients, Country
 # Create your views here.
+
+User = get_user_model()
+
 #-------------------------------------------------------Menu----------------------------------------#
 def index(request):
     pack = Pack.objects.all()
@@ -121,9 +125,10 @@ def contacts(request):
 
 
 def if_delivery(request):
-    otziv = Reviews.objects.all()
-    context = {'username': auth.get_user(request).username,
-               'otziv': otziv,
+    otziv = Reviews.objects.all().order_by('-date_add')
+    username = auth.get_user(request).username
+    context = {'username': username,
+               'otziv': otziv[:3],
                }
     return render(request, 'if_delivery.html', context)
 
@@ -236,18 +241,18 @@ class UserUpdateView(UpdateView):
 def consolidation(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
-    cargo_ne_obrabotan = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 1)
-    cargo_consol = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 2)
+    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_consol = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id=2) #user.code_clienta.pack_set.filter
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
     client_email = username.email
     name_client = username.first_name
-    gruz=[]
-    for gr in cargo_consolidation:
-        print(gr.pack_number)
-        gruz0 = gr.pack_number
-        #print(gruz.pack_number)
-        gruz.append(int(gr.pack_number))
+    # gruz=[]
+    # for gr in cargo_consolidation:
+    #     print(gr.pack_number)
+    #     gruz0 = gr.pack_number
+    #     #print(gruz.pack_number)
+    #     gruz.append(int(gr.pack_number))
     # print(client_email)
     # print('%s' % name_client)
     # if cargo_consolidation:
@@ -274,11 +279,13 @@ def consolidation(request):
 def v_puti(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
-    cargo_v_puti = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 5).order_by('-date_added')
+    cargo = user.code_clienta.pack_set.filter(customer_id=user.code_clienta, pack_status_id=5).order_by('-date_added')#Pack.objects.filter
+    cargo_v_puti = cargo
     cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
     context = {
         'username': username,
         'user': user,
+        'cargo': cargo,
         'cargo_v_puti': cargo_v_puti,
         'cargo_consolidation': cargo_consolidation,
     }
@@ -290,7 +297,24 @@ def priletel(request):
     cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
-    cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
+    # cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
+    cargo = user.code_clienta.pack_set.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
+
+    paginator = Paginator(cargo, 15)  # Show 1 contacts per page Paginator begin
+    page = request.GET.get('page')
+    try:
+        cargo = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        cargo = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        cargo = paginator.page(paginator.num_pages)  # """"""Paginator end"""""
+
+    #
+    # for car in cargo:
+    #     tovar = car.packproduct_set.all()
+    #     print (tovar)
     context = {
         'username': username,
         'user': user,
@@ -299,6 +323,23 @@ def priletel(request):
         'cargo': cargo,
     }
     return render(request, 'priletel.html', context)
+
+
+#
+# class DetailDetailView(DetailView):
+#     template_name = 'priletel.html'
+#
+#     def get_object(self):
+#         username = self.kwargs.get("username")
+#         print(self.kwargs)
+#         if username is None:
+#             raise Http404
+#         return get_object_or_404(User, username__iexact=username)
+
+
+
+
+
 
 def detail (request, pack_number):
     username = auth.get_user(request)
@@ -407,7 +448,7 @@ class RecipientsUpdateView(UpdateView):
 #         return super(RecipientsDeleteView, self).delete(request, *args, **kwargs) #HttpResponseRedirect(success_url)
 
 
-def remove_recip (request, pk):
+def remove_recip(request, pk):
     recip = CustomerRecipients.objects.get(cr_id=pk)
     if request.method == "POST":
         recip.delete()
