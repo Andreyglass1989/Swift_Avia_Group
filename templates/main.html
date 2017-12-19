@@ -28,33 +28,33 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" style="background: #4da6ff; background: radial-gradient(circle at 80px 40px, #99ccff, #b3d9ff, #4da6ff); background-image:url(/static/images/social/global000.jpg); background-size: contain; height:450px; border-radius:25px; position: relative; ">
+  <div class="carousel-inner" style="background: #4da6ff; background: radial-gradient(circle at 80px 40px, #99ccff, #b3d9ff, #4da6ff); background-image:url(/static/images/social/global000.jpg); background-size: contain; max-height:450px; min-height:150px; height:auto; border-radius:25px; position: relative; ">
 
     <div class="item active" >
-        <div style="margin-top:80px" class="col-xs-5">
-            <h1 style="color:#fff; text-align:center;">Авиадоставка под ключ. Комплексное решение</h1>
+        <div style="margin:2.3vw 0vw" class="col-xs-5">
+            <h1 style="color:#fff; text-align:center; font-size:4.5vw;">Авиадоставка под ключ. Комплексное решение</h1>
         </div>
-        <div style="float:right; margin-top:100px" class="col-xs-7">
-            <img src="{% static '/images/airplane.png' %}" width="600px" height="250px">
-        </div>
-    </div>
-
-    <div class="item" >
-        <div style="margin-top:150px" class="col-xs-5">
-            <h1 style="color:#fff; text-align:center;">Мы заботимся о вашем грузе</h1>
-        </div>
-        <div style="float:right; margin-top:100px" class="col-xs-7">
-            <img style="float:right" src="{% static '/images/cargo0.png' %}" width="250px" height="200px">
-            <img style="float:right" src="{% static '/images/cargo.png' %}" width="250px" height="250px">
+        <div style="float:right; margin:8vw 0vw" class="col-xs-7">
+            <img style="width:90%; height:50%;" src="{% static '/images/airplane.png' %}">
         </div>
     </div>
 
     <div class="item" >
-        <div style="margin-top:100px" class="col-xs-7">
-            <h1 style="color:#fff; text-align:center;">Комманда профессионалов - ключ к Вашему успеху!</h1>
+        <div style="margin:4vw 0vw" class="col-xs-5">
+            <h1 style="color:#fff; text-align:center; font-size:4.5vw;">Мы заботимся о вашем грузе</h1>
         </div>
-        <div style="float:right; margin-top:100px" class="col-xs-5">
-            <img style="float:right" src="{% static '/images/our_team.png' %}" width="400px" height="300px">
+        <div style="float:right; margin:4.1vw 0vw" class="col-xs-7">
+            <img style="float:right; width:41%; height:40%;" src="{% static '/images/cargo0.png' %}">
+            <img style="float:right; width:41%; height:40%;" src="{% static '/images/cargo.png' %}">
+        </div>
+    </div>
+
+    <div class="item" >
+        <div style="margin:2vw 0vw" class="col-xs-7">
+            <h1 style="color:#fff; text-align:center; font-size:4.5vw;">Комманда профессионалов - ключ к Вашему успеху!</h1>
+        </div>
+        <div style="float:right; margin:4.66vw 0vw" class="col-xs-5">
+            <img style="float:right; width:80%; height:85%;" src="{% static '/images/our_team.png' %}">
         </div>
     </div>
 
@@ -72,20 +72,21 @@
 </div>
 
 
-<div class="col-xs-12 container" style="border-radius:25px; margin-top:50px; clear:both; background-image:url(/static/images/blue000.png); height:300px; background-size: cover;">
-    <div style="float:left" class="col-xs-8">
-        <img style="width:600px; height:40  0px;" src="{% static '/images/chine0.png' %}">
+<div class="col-xs-12 container" style="border-radius:25px; margin-top:50px; clear:both; background-image:url(/static/images/blue000.png); background-size: cover; height:auto; border-bottom:2px solid #fff;">
+    <div style="float:left" class="col-xs-6">
+        <img style="width:90%; height:40%;" src="{% static '/images/chine0.png' %}">
     </div>
 
-    <div style="float:right; color:#fff;" class="col-xs-4">
-        <ul style="margin-top:50px; font-size:30px">Склад в Китае:
-            <li style="margin-left:45px">Гуанчжоу</li>
+    <div style="float:right; color:#fff;" class="col-xs-6">
+        <ul style="margin:10% 15%; font-size:2.375rem; float:right">Склад в Китае:
+            <li style="margin-left:10%">Гуанчжоу</li>
         </ul>
     </div>
 </div>
 
-<div class="container">
 
+
+<div class="container">
     <div class="col-xs-6">
       <div style="display: inline-block; margin-left:20px">
         <h3 style="color:#fff">Поиск <span style="font-size:15px; color:#fff">посылки </span></h3>
@@ -102,7 +103,7 @@
     </div>
 
 
-    <div style="color:#fff" class="col-xs-6">
+    <div style="color:#fff; " class="col-xs-6">
         <h2>Услуги:</h2>
             <h4>Проверка целосности, работоспособности товара</h4>
             <h4>Фотоинспекция</h4>
@@ -111,23 +112,13 @@
 
 
         <h2 style="text-align:center">Новости:</h2>
-            <h4>Генератор текста рыбы Lorem Ipsum</h4>
-            <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.</p>
-
-            <h4>Генератор текста рыбы Lorem Ipsum</h4>
-            <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.</p>
+          <h4>Всемирный день почты</h4>
+            <p>В 1974 году 14-тым конгрессом Всемирного союза почтовых работников, который был создан в 1974 году, было принято решение утвердить еще один международный праздник, отмеченный в системе ООН как Всемирный день почты...</p>
+            <a href="/if/#POST-DAY""><button type="button" class="btn btn-info">Подробнее</button></a>
     </div>
-
-
 
 </div>
 
 <hr>
-
-
-
-
-
-
 
 {% endblock content%}

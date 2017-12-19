@@ -3,63 +3,217 @@
 
 {% block CSS0 %}
 <style>
-.vertical_line{margin:5px 0px; height:40px; width:1px;background-color: #e0e0e0;}
+
+div.col-xs-8{
+    padding-right:0px;
+    margin-right:0px;
+    clear:both;
+}
+
+nav  {
+	    display: block;
+	    width: 100%;
+	    overflow: hidden;
+	    float:right;
+	    height:15vw;
+
+	}
+
+	nav ul {
+	    margin: 4.5% 0 20px 0;
+	    padding: 0px;
+	    float: right;
+	    list-style: none;
+	    background: #444;
+	    background: rgba(0,0,0,.2);
+	    -moz-border-radius: .5em;
+	    -webkit-border-radius: .5em;
+	    border-radius: .5em;
+	    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.2), 0 2px 1px rgba(0,0,0,.8) inset;
+	    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.2), 0 2px 1px rgba(0,0,0,.8) inset;
+	    box-shadow: 0 1px 0 rgba(255,255,255,.2), 0 2px 1px rgba(0,0,0,.8) inset;7
+	    z-index:500;
+	}
+
+	nav li {
+	    float:left;
+
+	}
+
+	nav a {
+	    float:left;
+	    padding: .8em 1.5em;
+	    text-decoration: none;
+	    color: #555;
+	    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	    font: bold 1.1vw 'trebuchet MS', Arial, Helvetica;
+	    letter-spacing: 1px;
+	    text-transform: uppercase;
+	    border-width: 1px;
+        border-style: solid;
+	    border-color: #fff #ccc #999 #eee;
+	    background: #c1c1c1;
+	    background: -moz-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#c1c1c1));
+	    background: -webkit-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -o-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -ms-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: linear-gradient(#f5f5f5, #c1c1c1);
+	 }
+
+	nav a:hover, nav a:focus {
+	    outline: 0;
+	    color: #fff;
+	    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+	    background: rgb(117,211,242);
+	/*    background: -moz-linear-gradient(#fac754, #f8ac00);
+	    background: -webkit-gradient(linear, left top, left bottom, from(#fac754), to(#f8ac00));
+	    background: -webkit-linear-gradient(#fac754, #f8ac00);
+	    background: -o-linear-gradient(#fac754, #f8ac00);
+	    background: -ms-linear-gradient(#fac754, #f8ac00);
+	    background: linear-gradient(#fac754, #f8ac00);*/
+	}
+
+	nav a:active {
+	    -moz-box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
+	    -webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
+	    box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
+	}
+
+   nav li:first-child a {
+        border-left: 0;
+	    -moz-border-radius: 4px 0 0 4px;
+	    -webkit-border-radius: 4px 0 0 4px;
+	    border-radius: 4px 0 0 4px;
+	}
+
+   nav li:last-child a {
+	    border-right: 0;
+	    -moz-border-radius: 0 4px 4px 0;
+	    -webkit-border-radius: 0 4px 4px 0;
+	    border-radius: 0 4px 4px 0;
+	}
+
+nav > ul > li, nav > ul > a > li {
+    margin-top: 0px;
+    }
+
+.nav ul {
+    display: block;
+    width: 100%;
+}
+
+.nav > li.hover > ul , .nav li li.hover ul {
+    position: static;
+}
+
+
+	ul.dropdown-menu.dropdown-menu-right {
+	    padding: .8em 1.5em;
+	    text-decoration: none;
+	    color: #555;
+	    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	    font: bold 1.1vw 'trebuchet MS', Arial, Helvetica;
+	    letter-spacing: 1px;
+	    text-transform: uppercase;
+	    border-width: 1px;
+        border-style: solid;
+	    border-color: #fff #ccc #999 #eee;
+	    background: #c1c1c1;
+	    background: -moz-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#c1c1c1));
+	    background: -webkit-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -o-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -ms-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: linear-gradient(#f5f5f5, #c1c1c1);
+	 }
+
+	 ul.dropdown-menu.dropdown-menu-right>li>a{
+
+	  border-width: 1px;
+        border-style: solid;
+	    border-color: #fff #ccc #999 #eee;
+	    background: #c1c1c1;
+	    background: -moz-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#c1c1c1));
+	    background: -webkit-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -o-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: -ms-linear-gradient(#f5f5f5, #c1c1c1);
+	    background: linear-gradient(#f5f5f5, #c1c1c1);
+	 }
+
+
 </style>
 
 {% endblock CSS0 %}
 
 
-
-<!--------------------------------------NAVBAR------------------------->
-<div class="container">
-<a style="border:none" class="navbar-brand" href="/">
-    <img alt="Swift Avia Group" style="margin-top:20px; width:300px; hight:300px; " src="{% static 'images/log000.png' %}" >
-   <h2 style="color:#fff; margin-left:125px; margin-top:-45px; border:none">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>
+<!--------------------------------------LOGO------------------------->
+<div class="col-xs-12">
+    <div class="col-xs-4">
+<a  class="navbar-brand" href="/" style="border:none; padding-left:0">
+    <img alt="Swift Avia Group" style="margin-top:20px; width:70%; hight:70%; " src="{% static 'images/log000.png' %}" >
+   <h2 style="color:#fff; margin-left:0%; margin-top:-4.5%; border:none; font-size:1.75vw;">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>
 </a>
+    </div>
+<!--------------------------------------LOGO------------------------->
 
-   <ul class="navbar" style="text-color:; font-size:16px;background-color:#fff;margin-top:65px; float:right; width:auto;">
-    <ul class="nav navbar-nav" style="background-color:#fff; padding-left:0px; margin-left:0px  ">
-        <li style="margin-left:0px" class="active"><a style="margin-left:-20px; padding-left:5px;" href="/">ГЛАВНАЯ</a></li>
-        <li><div class="vertical_line"></div></li>
-        <li><a href="{% url 'about_us' %}">О НАС</a></li>
-        <li><div class="vertical_line"></div></li>
-        <li><a href="{% url 'if_delivery' %}">УСЛОВИЯ ДОСТАВКИ</a></li>
-        <li><div class="vertical_line"></div></li>
-        <li><a href="{% url 'contacts' %}">КОНТАКТЫ</a></li>
-        <li><div class="vertical_line"></div></li>
+<!--------------------------------------NAVBAR00------------------------->
+    <div class="col-xs-8" style="float:right;">
+    	<nav style="z-index:100; position: relative;">
+	    <ul style="z-index:100; position: relative;>
+	        <li class="active"><a href="/">Главная</a></li>
+	        <li><a href="{% url 'service' %}">Услуги</a></li>
+            <li><a href="{% url 'partner' %}">Партнерам</a></li>
+	       <!-- <li><a href="{% url 'if_delivery' %}">Условия доставки</a></li>-->
+	        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+			<li style="z-index:100; position: relative; overflow-y: visible" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            О нас
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="display: block;" href="{% url 'about_us' %}">О нас</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'if_delivery' %}">Условия доставки</a></li>
+            </ul></li> 
 
-        {% if username %}
-       <!-- <li style="margin-top:5px"><a href="/auth/logout/">ВЫЙТИ</a></li>-->
-        <li>
-                <!-- Single button -->
-        <div class="btn-group">
-          <button style="margin:7px 10px" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ({{ username|truncatechars:10 }}) <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu pull-right">
-            <li><a href="/LK/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Личный кабинет</a></li>
-            <!--<li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>-->
-            <li role="separator" class="divider"></li>
-            <li><a href="/auth/logout/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> ВЫЙТИ</a></li>
-          </ul>
-        </div>
 
-        </li>
 
-     <!--   <li><a  href="/LK/"><button style="padding-top:10px" type="button" class="btn btn-primary btn"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>({{ username|truncatechars:10 }})</a></li>-->
 
-        {% else  %}
+
+            {% if username %}
+            <li style="z-index:100; position: relative; overflow-y: visible" class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                    ({{ username|truncatechars:10 }})
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+
+                  {% if user0 == None %}
+                  <li  style="visibility: hidden;" class="disabled"><a  href="/LK/about_user/"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span> Личный кабинет</a></li>
+                  {% else %}
+                   <li><a style="display: block;" href="/LK/about_user/"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span> Личный кабинет</a></li>
+                  {% endif %}
+
+                  <li role="separator" class="divider"></li>
+                  <li><a style="display: block;" href="/auth/logout/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> ВЫЙТИ</a></li>
+            {% else  %}
 
             <li><a href="/auth/login/"><span style="margin-right:3px" class="glyphicon glyphicon-log-in" aria-hidden="true"></span> ВХОД</a></li>
 
-        {% endif %}
+            {% endif %}
+			
+			
 
+                </ul>
+            </li>
 
+           	 
+	    </ul>
+	    </nav>
+   </div>
 
-
-   </ul>
-</ul>
-<!--------------------------------------NAVBAR------------------------->
+<!--------------------------------------NAVBAR00------------------------->
 
 </div>

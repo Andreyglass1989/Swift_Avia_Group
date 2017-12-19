@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from LK.models import Customer
+from LK.models import Customer, Pack
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -40,23 +40,6 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
 
-
-class ExpectedCargo(models.Model):
-    name = models.CharField(max_length=200)
-    quantity = models.IntegerField()
-    price = models.FloatField()
-    date_add = models.DateTimeField(auto_now=True)
-    url = models.CharField(max_length=255, blank=True, null=True)
-    post_delivery = models.CharField(max_length=100, blank=True, null=True)
-    treck = models.CharField(max_length=50)
-    comment = models.CharField(max_length=255, blank=True, null=True)
-    customer = models.ForeignKey(Customer, null=True, blank=True)
-
-    def __unicode__(self):
-        return self.name
-
-
-
 class Reviews(models.Model):
     class Meta():
         db_table= 'Reviews' #u'Отзывы клиентов'
@@ -69,3 +52,23 @@ class Reviews(models.Model):
 
     def __unicode__(self):
         return self.text_reviews
+
+
+class File_document(models.Model):
+    class Meta():
+        db_table= 'File' #u'Отзывы клиентов'
+
+    document = models.FileField(null=True, blank=True)
+    packid = models.ForeignKey(Pack)
+
+
+
+class CalculatorGroup(models.Model):
+    # class Meta():
+    #     db_table = 'CalculatorGroup'
+
+    name = models.CharField(max_length=50)
+    price = models.FloatField()
+
+    def __unicode__(self):
+        return self.name

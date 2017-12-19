@@ -356,6 +356,8 @@ class CategoryGroup(models.Model):
         managed = False
         db_table = 'category_group'
 
+    def __unicode__(self):
+        return self.name
 
 class CategoryPath(models.Model):
     category_id = models.IntegerField()
@@ -474,6 +476,9 @@ class Currency(models.Model):
     class Meta:
         managed = False
         db_table = 'currency'
+
+    def __str__(self):
+        return self.code
 
 
 class CustomField(models.Model):
@@ -1478,32 +1483,51 @@ class PackStatus(models.Model):
         return self.name
 
 
+
+class Sklad(models.Model):
+    sklad_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=64)
+    address = models.CharField(max_length=255)
+    date_added = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'sklad'
+
+    def __unicode__(self):
+        return self.name
+
+
 class Pack(models.Model):
     pack_id = models.AutoField(primary_key=True)
-    pack_number = models.CharField(max_length=20)
-    external_id = models.CharField(max_length=16)
-    date_added = models.DateTimeField()
-    customer = models.ForeignKey(Customer)       #_id
-    sklad_id = models.IntegerField()
-    pack_status = models.ForeignKey(PackStatus)     #_id
-    total = models.FloatField()
-    volume = models.FloatField()
-    weight = models.FloatField()
-    point = models.IntegerField()
-    language_id = models.IntegerField()
-    currency_id = models.IntegerField()
-    currency_code = models.CharField(max_length=3)
-    currency_value = models.FloatField()
-    comment = models.TextField()
-    category_group_id = models.IntegerField()
-    sandbox = models.IntegerField(blank=True, null=True)
-    def_field = models.IntegerField(db_column='def', blank=True, null=True)  # Field renamed because it was a Python reserved word.
-    packlist = models.IntegerField(blank=True, null=True)
-    ttn = models.CharField(max_length=20, blank=True, null=True)
+    pack_number = models.IntegerField(default=191100000)   #
+    external_id = models.CharField(max_length=16)   #++++++++++++++++++++
+    date_added = models.DateTimeField(auto_now_add=True)#++++++++++++++++
+    customer = models.ForeignKey(Customer)          #++++++++++++++++++++_id
+    sklad = models.ForeignKey(Sklad)             #++++++++++++++++++++ id
+    pack_status = models.ForeignKey(PackStatus)     #++++++++++++++++++++_id
+    total = models.FloatField(blank=True, null=True)                     #++++++++++++++++++++
+    volume = models.FloatField(blank=True, null=True)           #++++++++++++++++++++
+    weight = models.FloatField(blank=False, null=False)                    #++++++++++++++++++++
+    point = models.IntegerField(blank=False, null=False)                   #++++++++++++++++++++
+    language = models.ForeignKey(Language, default=2)#+++++++++++++++++++  id
+    currency = models.ForeignKey(Currency)          #++++++++++++++++++++ id
+    currency_code = models.CharField(max_length=3, default='USD')#+++++++
+    currency_value = models.FloatField(default=1, blank=True, null=True)   #++++++++++++++++++++
+    comment = models.TextField(blank=True, null=True)                    #++++++++++++++++++++
+    category_group = models.ForeignKey(CategoryGroup, default=3)#+++++++++++++++++
+    sandbox = models.IntegerField(default=0, blank=True, null=True)         #+++++++++++++++++++
+    def_field = models.IntegerField(db_column='def', default=0, blank=True, null=True)  # Field renamed because it was a Python reserved word.                          #+++++++++++++++++++
+    packlist = models.IntegerField(default=0, blank=True, null=True)        #+++++++++++++++++++
+    ttn = models.CharField(max_length=20, blank=False, null=False) #+++++++++++++++++++
+   # document_file = models.FileField(null=True, blank=True)
+
 
     class Meta:
         managed = False
         db_table = 'pack'
+        ordering = ["-date_added"]
+
     def __str__(self):
         return self.pack_number
 
@@ -1526,23 +1550,23 @@ class PackHistory(models.Model):
 class PackProduct(models.Model):
     pack_product_id = models.AutoField(primary_key=True)
     pack = models.ForeignKey(Pack)                       #_id
-    name = models.CharField(max_length=255)
-    price = models.FloatField()
-    quantity = models.IntegerField()
-    item_class_id = models.IntegerField()
-    weight = models.FloatField()
-    weight_netto = models.FloatField()
-    volume = models.FloatField()
-    point = models.IntegerField()
-    url = models.CharField(max_length=255)
-    packed_quantity = models.IntegerField()
+    name = models.CharField(verbose_name='*Наименование товара',max_length=255)
+    price = models.FloatField(verbose_name='*Цена/ед.')
+    quantity = models.IntegerField(verbose_name='*Кол-во')
+    item_class_id = models.IntegerField(default=0, null=True, blank=True)
+    weight = models.FloatField(verbose_name='*Вес', null=True, blank=True)
+    weight_netto = models.FloatField(default=0, null=True, blank=True)
+    volume = models.FloatField(default=0, null=True, blank=True)
+    point = models.IntegerField(verbose_name='*Мест', null=True, blank=True)
+    url = models.CharField(verbose_name='Ссылка', max_length=255, null=True, blank=True)
+    packed_quantity = models.IntegerField(default=0, null=True, blank=True)
 
     class Meta:
         managed = False
         db_table = 'pack_product'
 
     def __str__(self):
-        return self.name
+        return self.name.encode('utf8')
 
 
 class PackProductChild(models.Model):
@@ -1588,7 +1612,7 @@ class PacklistProduct(models.Model):
 class Parcel(models.Model):
     parcel_id = models.AutoField(primary_key=True)
     parcel_number = models.CharField(max_length=20)
-    parcel_status_id = models.IntegerField()
+    parcel_status = models.ForeignKey(PackStatus)
     sklad_id = models.IntegerField()
     date_added = models.DateTimeField()
     weight = models.FloatField()
@@ -1758,6 +1782,8 @@ class PlombaDimension(models.Model):
     class Meta:
         managed = False
         db_table = 'plomba_dimension'
+
+
 
 
 class Product(models.Model):
@@ -2124,15 +2150,6 @@ class SimpleCustomData(models.Model):
         unique_together = (('object_type', 'object_id', 'customer_id'),)
 
 
-class Sklad(models.Model):
-    sklad_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=64)
-    address = models.CharField(max_length=255)
-    date_added = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'sklad'
 
 
 class Sms(models.Model):

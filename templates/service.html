@@ -1,0 +1,256 @@
+{% extends 'index.html' %}
+
+
+{% load static %}
+
+<title>{% block head_title %}Услуги{% endblock head_title %}</title>
+
+
+{% block CSS0 %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
+
+<style>
+
+div#tabs.tabs>nav{
+	height: 10vw !important;
+}
+
+p{
+	text-indent: 20px;
+}
+
+
+.outer{
+    min-height:300px;
+    display: flex;
+    justify-content: center; /*Центрирование по горизонтали*/
+    align-items: center;
+}
+
+.inner{
+    background-color:rgb(117,211,242); /*#ff8033; #ffbf66;*/
+    min-height:200px;
+    margin:auto;
+    float:none !important;
+    text-align:center;
+    display: flex;
+    justify-content: center; /*Центрирование по горизонтали*/
+    align-items: center;
+    font: bold 1.5vw 'trebuchet MS', Arial, Helvetica;
+    color:#fff;
+}
+
+
+
+
+
+
+</style>
+
+
+
+{% endblock CSS0 %}
+
+{% block content_full %}
+<!--
+<div class="col-xs-12" style="min-height:600px; background-image:url({% static '/images/avia-uslugi.jpg' %}); background-size:cover; background-repeat: no-repeat;">
+   <div class="col-xs-6 outer">
+    <div class="col-xs-6 inner">
+        <img style="width:60%; height:60%; margin-left:-10px" src="{% static 'images/social/custom_clearence0.png' %}">
+        ТАМОЖЕННАЯ ОЧИСТКА</div>
+   </div>
+
+   <div class="col-xs-6 outer">
+    <div class="col-xs-6 inner">
+        <img style="width:45%; height:45%" src="{% static 'images/social/air_freight.png' %}">
+        <div style="margin-left:20px">ФРАХТ</div></div>
+   </div>
+
+
+   <div class="col-xs-6 outer">
+    <div class="col-xs-6 inner">
+        <img style="width:85%; height:85%; margin-left:-35px" src="{% static 'images/social/klients.png' %}">
+        РОЗНИЧНЫЕ КЛИЕНТЫ</div>
+   </div>
+
+   <div class="col-xs-6 outer">
+    <div class="col-xs-6 inner">
+        <img style="width:35%; height:35%" src="{% static 'images/social/vikup.png' %}">
+        <div style="margin-left:10px">ВЫКУП ТОВАРА</div></div>
+   </div>
+
+</div>
+
+
+-->
+<!----------------------------------------------->
+
+
+
+<!----------------------------------------------->
+
+<div style="background-color:#fff" class="container">
+
+<!--
+			<header class="clearfix">
+				<span>Blueprint <span class="bp-icon bp-icon-about" data-content="The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration."></span></span>
+				<h1>Responsive Full Width Tabs</h1>
+				<nav>
+					<a href="http://tympanus.net/Blueprints/SplitLayout/" class="bp-icon bp-icon-prev" data-info="previous Blueprint"><span>Previous Blueprint</span></a>
+					<a href="http://tympanus.net/Blueprints/GridGallery/" class="bp-icon bp-icon-next" data-info="next Blueprint"><span>Next Blueprint</span></a>
+					<a href="http://tympanus.net/codrops/?p=18521" class="bp-icon bp-icon-drop" data-info="back to the Codrops article"><span>back to the Codrops article</span></a>
+					<a href="http://tympanus.net/codrops/category/blueprints/" class="bp-icon bp-icon-archive" data-info="Blueprints archive"><span>Go to the archive</span></a>
+				</nav>
+			</header>
+
+-->
+			<div id="tabs" class="tabs">
+				<nav>
+					<ul>
+					<!--	<li><a href="#section-1"><img style="width:35px; height:35px; margin-left:-10px" src="{% static 'images/social/custom_clearence0.png' %}"><span>ТАМОЖЕННАЯ ОЧИСТКА</span></a></li>-->
+						<li><a href="#section-2"><img style="width:40px; height:30px" src="{% static 'images/social/air_freight.png' %}"><span> ОПТОВЫМ КЛИЕНТАМ</span></a></li>
+						<li><a href="#section-3"><img style="width:55px; height:35px; margin-left:-35px" src="{% static 'images/social/klients.png' %}"><span>РОЗНИЧНЫМ КЛИЕНТАМ</span></a></li>
+						<li><a href="#section-4"><img style="width:35px; height:35px" src="{% static 'images/social/vikup.png' %}"><span> ВЫКУП ТОВАРА</span></a></li>
+					<!--	<li><a href="#section-5" class="icon-truck"><span>Order</span></a></li> -->
+					</ul>
+				</nav>
+				<div class="content">
+				<!--	<section id="section-1">
+						<div style="margin-top:-5%; color: #00000" class="col-xs-12">
+							<h2>Таможенная очистка</h3>
+							<p>«Swiftaviagroup» надежный партнер в оформлении ваших посылок. Если вам необходимо отправить посылку из-за границы - обращайтесь к нам и мы с радостью поможем. Таможенная очистка посылки производится не зависимо от того с какой страны она прибыла.
+							</p>
+							<ul>
+							 <li>консультация опытных Брокеров касательно документов необходимых для таможенного оформления;
+							 </li>
+								<li>предоставление информаци об оплате таможенных платежей;
+</li>
+							<li>совершение подачи документов в отсутствие получателя
+</li>
+							</ul>
+							<p>
+								Компания «Swiftaviagroup» является гарантом оформления ваших посылок. Мы оформляем почтовое отправление от вашего имени согласно совместно заключенного с вами договора и являемся официальным представителем ваших интересов при оформлении почты. Мы осуществляем контроль над всеми документами, которые предусмотрены таможенным законодательством. Так же мы занимаемся всеми сопутствующими платежами.
+							</p>
+							<p>
+								Благодаря команде профессионалов и их глубокому опыту компания «Swiftaviagroup» является надежным партнером, который поможет вам развивать свой бизнес и станет настоящим помощником в сфере таможенного оформления. Наша команда  поможет свести к минимуму ваши затраты, сэкономит ваше время.
+							</p>
+
+						<a style="color:blue" href="/if/#MPO">Основные правила формирования и обработки международных почтовых отправлений (МПО).</a>
+							
+						</div> 
+					</section> -->
+					<section id="section-2">
+						
+						<div style="text-align: center" class="row"><h1>Доставка "ПОД КЛЮЧ"</h1></div>
+						<div style="text-align: center; margin: auto" class="row">
+							<div class="col-xs-3"><img src="{% static 'images/tab_client/Calculator-icon.png' %}" style="width: 45%"></div>
+							<div class="col-xs-2"><img src="{% static 'images/tab_client/agreement.png' %}" style="width:75%"></div>
+							<div style="text-align: center" class="col-xs-2"><img src="{% static 'images/tab_client/ukraine1.png' %}" style="width:120%"></div>
+							<div class="col-xs-2"><img src="{% static 'images/tab_client/Customs_invoice.jpg' %}" style="width:100%; margin-top: -10px"></div>
+							<div class="col-xs-3"><img src="{% static 'images/tab_client/cargo-to-client.png' %}" style="width:70%; margin-top: 5px"></div>
+						</div>
+
+						<div style="text-align: center; margin: auto" class="row">
+							<div class="col-xs-3">Предварительный расчет</div>
+							<div class="col-xs-2">Согласование деталей</div>
+							<div class="col-xs-2">Доставка товара в Украину</div>
+							<div class="col-xs-2">Таможенная очистка груза</div>
+							<div class="col-xs-3">Доставка товара клиенту</div>
+						</div>
+
+					</section>
+					<section id="section-3">
+					  <div class="row">
+						<div style="text-align: center" class="col-xs-2"><img src="{% static 'images/tab_client/register_to_site.png' %}" style="width: 60%; padding-top: 12%"></div>
+						<div class="col-xs-2"><img src="{% static 'images/tab_client/client.png' %}" style="width: 90%; padding-top: 5%"></div>
+						<div style="text-align: center" class="col-xs-2"><img src="{% static 'images/tab_client/pack.png' %}" style="width: 65%; padding-top: 10%"></div>
+						<div class="col-xs-2"><img src="{% static 'images/tab_client/oplata.png' %}" style="width: 100%; padding-top: 12%"></div>
+						<div class="col-xs-2"><img src="{% static 'images/tab_client/time.png' %}" style="width: 100%"></div>
+						<div style="text-align: center" class="col-xs-2"><img src="{% static 'images/tab_client/pokupki.png' %}" style="width: 80%; padding-top: 12%"></div>
+					  </div>
+					  <div class="row">
+						<div style="text-align: center" class="col-xs-2">Зарегистрируйтесь на сайте</div>
+						<div style="text-align: center" class="col-xs-2">Получите код клиента</div>
+						<div style="text-align: center" class="col-xs-2">Отправьте товар к нам на склад</div>
+						<div style="text-align: center" class="col-xs-2">Оплатите посылку</div>
+						<div style="text-align: center" class="col-xs-2">Ожидайте посылку</div>
+						<div style="text-align: center" class="col-xs-2">Наслаждайтесь вашей покупкой</div>
+					  </div>
+						
+					<div style="margin-top:10%" class="row">
+						<div class="col-xs-6">
+							<p>Регистрация на сайте займет меньше минуты, после чего наш менеджер поможет вам получить код клиента и предоставит вам адрес нашего склада в Китае.</p>
+							<p>Для отправки посылки на наш склад попросите указать продавца ваш код клиента на посылку.</p>
+							<p>После получения посылки на нашем складе в Китае вы можете её увидеть в личном кабинете.</p>
+							<p>Оплатите доставку вашей посылки и в скором времени мы её доставим к вам.</p>
+						</div>
+						<div style="text-align: center; border:2px solid rgb(117,211,242);" class="col-xs-6"><h3>Рассчет авиа доставки</h3>
+
+
+						<form action=""><!--Calculate-->
+							<select style="margin-bottom: 10px" name="action" required="">
+								{% for calc in calculator %}
+								<option value="{{ calc.price}}">{{ calc.name }}</option>
+								{% endfor %}
+							</select>
+
+							<div><label>Вес:</label><input style="width:35%; margin-left: 5%" type="text" name="second" placeholder="Вес посылки в кг"/></div>
+							<div><input style="margin-top: 5%;" type="button" name="send" value="Расcчитать"/></div>
+							<div><label>Стоимость доставки составит:</label><br><input style="width:20%" type="text" name="result" placeholder="Ответ"/> $</div>
+						</form>
+
+						<br>
+
+						</div>
+					</div>
+
+	
+
+					</section>
+					<section id="section-4">
+						<div class="row">
+							<h3 style="text-align: center">По всем вопросам связанных с выкупом товара обратитесь к нам по <a style="color: blue" href="../contacts/#contact_anna">контактам</a></h3>
+						</div>
+					</section>
+				<!--	<section id="section-5">
+						<div class="mediabox">
+							<img src="img/02.png" alt="img02" />
+							<h3>Radish Tomato</h3>
+							<p>Catsear cauliflower garbanzo yarrow salsify chicory garlic bell pepper napa cabbage lettuce tomato kale arugula melon sierra leone bologi rutabaga tigernut.</p>
+						</div>
+						<div class="mediabox">
+							<img src="img/06.png" alt="img06" />
+							<h3>Fennel Wasabi</h3>
+							<p>Sea lettuce gumbo grape kale kombu cauliflower salsify kohlrabi okra sea lettuce broccoli celery lotus root carrot winter purslane turnip greens garlic.</p>
+						</div>
+						<div class="mediabox">
+							<img src="img/01.png" alt="img01" />
+							<h3>Red Tofu Wrap</h3>
+							<p>Green horseradish azuki bean lettuce avocado asparagus okra. Kohlrabi radish okra azuki bean corn fava bean mustard tigernut wasabi tofu broccoli mixture soup.</p>
+						</div>
+					</section> -->
+				</div><!-- /content -->
+			</div><!-- /tabs -->
+		</div>
+		<script src="{% static 'js/cbpFWTabs.js' %}"></script>
+		<script>
+			new CBPFWTabs( document.getElementById( 'tabs' ) );
+		</script>
+<script>
+$(document).ready(function() { // Ждём загрузки страницы
+
+	$("input[name=send]").click( function () { // Событие нажатия на кнопку "Расчёт"
+		var action = $("select[name=action]").val().replace(/,/, '.') // Получаем значение действия, которое нужно выполнить
+		console.log(action)
+		var second = $("input[name=second]").val().replace(/,/, '.') ; // Переменная второго числа
+//		console.log(second)
+		var result; // Переменная результата
+		result = action * second; // умножаем
+		$("input[name=result]").val(result); // записываем результат
+	});
+});
+</script>
+
+
+{% endblock content_full %}

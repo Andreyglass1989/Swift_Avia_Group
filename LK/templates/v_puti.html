@@ -14,4 +14,10 @@
 
     {% include 'info_pack.html' %}
 
+    {% if cargo_v_puti.count == 0 %}
+
+        <h3 style="text-align:center; clear:both; margin-top:10%; margin-bottom:5%">У ВАС НЕТ ГРУЗА В ПУТИ</h3>
+
+    {% endif %}
+
 {% endblock content %}

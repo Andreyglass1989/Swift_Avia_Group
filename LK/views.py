@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, render_to_resp
 from django.views.decorators.csrf import csrf_protect
 from django.http import Http404
 from django.contrib import auth
-from login.models import UserProfile, ExpectedCargo, Reviews
+from login.models import UserProfile, Reviews
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect
@@ -14,7 +14,7 @@ from django.views.generic import TemplateView, CreateView, UpdateView, DeleteVie
 from django.urls import reverse_lazy
 #CBV------------------
 
-from LK.forms import UserModelForm, RecipientsModelForm, ExpectedCargoModelForm, EmailForm, ReviewsForm
+from LK.forms import UserModelForm, RecipientsModelForm, ExpectedCargoModelForm, ExpectedCargoPackModelForm, EmailForm, ReviewsForm, PackProductFormSet
 
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMessage
@@ -25,12 +25,22 @@ from django.template.loader import get_template
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #
 from LK.models import Pack, PackProduct, CustomerRecipients, Country
+from login.models import CalculatorGroup
+
+from django.db.models.base import ObjectDoesNotExist
+from django.db import transaction
 # Create your views here.
 
 User = get_user_model()
 
 #-------------------------------------------------------Menu----------------------------------------#
 def index(request):
+    user = auth.get_user(request)
+    try:
+        user0 = UserProfile.objects.get(user_id=user.id)
+    except ObjectDoesNotExist:
+        user0 = None
+
     pack = Pack.objects.all()
     query = request.GET.get("query")
     pack_list = None
@@ -38,17 +48,47 @@ def index(request):
         pack_list = pack.filter(pack_number__icontains=query)
     context = {
             'username': auth.get_user(request).username,
+            'user': user,
             'pack_list': pack_list,
+            'user0': user0,
         }
     return render(request, 'main.html', context)
 
 def about_us(request):
-    context = {'username': auth.get_user(request).username,}
+    user = auth.get_user(request)
+    try:
+        user0 = UserProfile.objects.get(user_id=user.id)
+    except ObjectDoesNotExist:
+        user0 = None
+
+    context = {'username': user.username,
+               'user0': user0,
+               }
     return render(request, 'about_us.html', context)
+
+
+def partner(request):
+    user = auth.get_user(request)
+    try:
+        user0 = UserProfile.objects.get(user_id=user.id)
+    except ObjectDoesNotExist:
+        user0 = None
+
+    context = {'username': user.username,
+               'user0': user0,
+               }
+    return render(request, 'partner.html', context)
+
 
 
 @csrf_protect
 def contacts(request):
+    user = auth.get_user(request)
+    try:
+        user0 = UserProfile.objects.get(user_id=user.id)
+    except ObjectDoesNotExist:
+        user0 = None
+
     form_email = EmailForm
     # new logic!
     if request.method == 'POST':
@@ -82,7 +122,7 @@ def contacts(request):
         # print (type(settings.EMAIL_HOST_USER))
         send_mail(subject, message, from_email0, to_list, fail_silently=True)
         return HttpResponseRedirect("/contacts/")
-    return render(request, 'contacts.html', {'form': form_email, 'username': auth.get_user(request).username,})
+    return render(request, 'contacts.html', {'form': form_email, 'username': auth.get_user(request).username, 'user0':user0,})
 
 
     #
@@ -125,15 +165,39 @@ def contacts(request):
 
 
 def if_delivery(request):
+    user = auth.get_user(request)
+    try:
+        user0 = UserProfile.objects.get(user_id=user.id)
+    except ObjectDoesNotExist:
+        user0 = None
+
     otziv = Reviews.objects.all().order_by('-date_add')
-    username = auth.get_user(request).username
-    context = {'username': username,
+    #username = auth.get_user(request).first_name
+    context = {'user0': user0,
                'otziv': otziv[:3],
+               'username': user.username,
                }
     return render(request, 'if_delivery.html', context)
 
+
+def service(request):
+    user = auth.get_user(request)
+    try:
+        user0 = UserProfile.objects.get(user_id=user.id)
+    except ObjectDoesNotExist:
+        user0 = None
+
+    calculator = CalculatorGroup.objects.all().order_by('name')    
+    context = {'user0': user0,
+               'username': user.username,
+               'calculator': calculator,
+               }
+    return render(request, 'service.html', context)
+    
+
+
 def all_cargo(request):
-    username = auth.get_user(request)
+    #username = auth.get_user(request)
     #user = UserProfile.objects.get(user_id=username.id)
     cargo_ne_obrabotan = Pack.objects.filter( pack_status_id=1)
     clients_emails = []
@@ -176,8 +240,10 @@ def lk (request):
     username = auth.get_user(request)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     user = UserProfile.objects.get(user_id=username.id)
-    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
-  #  cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                       pack_status_id=2)  # user.code_clienta.pack_set.filter
+    cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     if username:
@@ -200,10 +266,13 @@ def lk (request):
 
 #-------------------------------------------------------Menu----------------------------------------#
 
-def about_user (request):
+def about_user(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id = username.id)
-    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                       pack_status_id=2)  # user.code_clienta.pack_set.filter
+    cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
 
@@ -242,9 +311,10 @@ def consolidation(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
     cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
-    cargo_consol = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id=2) #user.code_clienta.pack_set.filter
+    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2)            #user.code_clienta.pack_set.filter
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
-    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_consolidation = cargo_ne_obrabotan.count()+cargo_consol.count()
+
     client_email = username.email
     name_client = username.first_name
     # gruz=[]
@@ -281,7 +351,11 @@ def v_puti(request):
     user = UserProfile.objects.get(user_id=username.id)
     cargo = user.code_clienta.pack_set.filter(customer_id=user.code_clienta, pack_status_id=5).order_by('-date_added')#Pack.objects.filter
     cargo_v_puti = cargo
-    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                       pack_status_id=2)  # user.code_clienta.pack_set.filter
+
+    cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
     context = {
         'username': username,
         'user': user,
@@ -294,7 +368,10 @@ def v_puti(request):
 def priletel(request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
-    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                       pack_status_id=2)  # user.code_clienta.pack_set.filter
+    cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     # cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
@@ -359,7 +436,10 @@ def detail (request, pack_number):
 def recipients (request):
     username = auth.get_user(request)
     user = UserProfile.objects.get(user_id=username.id)
-    cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                       pack_status_id=2)  # user.code_clienta.pack_set.filter
+    cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     recip = CustomerRecipients.objects.filter(customer_id = user.code_clienta)
@@ -481,9 +561,9 @@ def oplata(request):
     }
     return render(request, 'oplata.html', context)
 
-#-------------------------------------------------------------------------
+#--------------------------------------ExpectedCargo-----------------------------------
 class ExpectedCargoListView(ListView):
-    model = ExpectedCargo
+    model = Pack
     template_name = "expected_cargo.html"
     #paginate_by = 6
     context_object_name = "rooms"
@@ -492,10 +572,14 @@ class ExpectedCargoListView(ListView):
         context = super(ExpectedCargoListView, self).get_context_data(**kwargs)
         username = auth.get_user(self.request)
         user = UserProfile.objects.get(user_id=username.id)
-        cargo_consolidation = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=2 and 1)
+        cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+        cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                           pack_status_id=2)  # user.code_clienta.pack_set.filter
+
+        cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
         cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
         # ---- для вывода к-ва/цифры упаковочных на боковую панельку
-        cargo = ExpectedCargo.objects.filter(customer_id = user.code_clienta)
+        cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id=8)
         context = {
             'username': username,
             'user': user,
@@ -506,40 +590,167 @@ class ExpectedCargoListView(ListView):
 
         return context
 
+
+
+
 class ExpectedCargoCreateView(CreateView):
-    model = ExpectedCargo
+    model = Pack
     template_name = "add_excepted_cargo.html"
     form_class = ExpectedCargoModelForm
-    success_url = "/LK/expected_cargo/"
+    success_url = "/LK/excepted_cargo/"
 
-    def form_valid(self, form):
-        response = super(ExpectedCargoCreateView, self).form_valid(form)
-        data = form.cleaned_data
-        self.object = form.save()
-        # d = data['name']+ data['lastname']
-        messages.success(self.request, "Груз - успешно добавлен в <ОЖИДАЕМЫЕ>!" )
-        return super(ExpectedCargoCreateView, self).form_valid(form)
+    # def form_valid(self, form):
+    #     response = super(ExpectedCargoCreateView, self).form_valid(form)
+    #     data = form.cleaned_data
+    #     self.object = form.save()
+    #     # d = data['name']+ data['lastname']
+    #     messages.success(self.request, "Груз - успешно добавлен в <ОЖИДАЕМЫЕ>!" )
+    #     return super(ExpectedCargoCreateView, self).form_valid(form)
 
     def get_initial(self):
         initial = super(ExpectedCargoCreateView, self).get_initial()
         username = self.request.user
-        user = UserProfile.objects.get(user_id = username.id)
-        self.initial = {'customer': user.code_clienta}
+        user = UserProfile.objects.get(user_id=username.id)
+        pack = Pack.objects.all()
+        #pack = pack.count() + 191100000
+        #print(dir(pack))
+        pack = pack.first()
+        pack = int(pack.pack_number) + 1
+        self.initial = {'customer': user.code_clienta,
+                        'pack_status': 8,
+                        'sklad': 1,
+                        'packlist': 0,
+                        'def_field': 0,
+                        'sandbox': 0,
+                        'currency': 2,
+                        'currency_code': 'USD',
+                        'currency_value': 1,
+                        'total': 1.0,
+                        'volume': 1.0,
+                        'language': 2,
+                        'pack_number': pack,
+                        }
         return self.initial
 
 
-class ExpectedCargoUpdateView(UpdateView):
-    model = ExpectedCargo
-    template_name = "edit_expected_cargo.html"
-    form_class = ExpectedCargoModelForm
-    success_url = "/LK/expected_cargo/"
+
+    def get_context_data(self, **kwargs):
+        data = super(ExpectedCargoCreateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data['pack_form'] = PackProductFormSet(self.request.POST)
+            print(data['pack_form'])
+        else:
+            data['pack_form'] = PackProductFormSet()
+            print(data['pack_form'])
+        return data
 
     def form_valid(self, form):
-        response = super(ExpectedCargoUpdateView, self).form_valid(form)
-        self.object = form.save()
-        messages.success(self.request, "Изменения успешно сохранены!")
+        context = self.get_context_data()
+        pack_form = context['pack_form']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if pack_form.is_valid():
+                pack_form.instance = self.object
+                pack_form.save()
+                messages.success(self.request, "Груз - успешно добавлен в <ОЖИДАЕМЫЕ>!")
+        return super(ExpectedCargoCreateView, self).form_valid(form)
+
+
+
+
+    # def form_valid(self, form):
+    #     context = self.get_context_data()
+    #     pack_form = context['pack_form']
+    #     with transaction.atomic():
+    #         form.instance.created_by = self.request.user
+    #         form.instance.updated_by = self.request.user
+    #         self.object = form.save()
+    #     if pack_form.is_valid():
+    #         pack_form.instance = self.object
+    #         pack_form.save()
+    #         messages.success(self.request, "Груз - успешно добавлен в <ОЖИДАЕМЫЕ>!")
+    #     return super(ExpectedCargoCreateView, self).form_valid(form)
+
+
+
+
+
+    # def get(self, request, *args, **kwargs):
+    #     self.object = None
+    #     form_class = self.get_form_class()
+    #     form = self.get_form(form_class)
+    #     pack_form = PackProductFormSet()
+    #     return self.render_to_response(self.get_context_data(form=form,
+    #                                                          pack_form=pack_form))
+    #
+    # def post(self, request, *args, **kwargs):
+    #     self.object = None
+    #     form_class = self.get_form_class()
+    #     form = self.get_form(form_class)
+    #     pack_form = PackProductFormSet(self.request.POST)#, self.request.FILES)
+    #     if (form.is_valid() and pack_form.is_valid()):
+    #         return self.form_valid(form, pack_form)
+    #     else:
+    #         return self.render_to_response(self.get_context_data(form=form, pack_form=pack_form))
+    #
+    #
+    # def form_valid(self, form, pack_form):
+    #     form.instance.user = self.request.user
+    #     self.object = form.save()
+    #     pack_form.instance = self.object
+    #     pack_form.save()
+    #     messages.success(self.request, "Груз - успешно добавлен в <ОЖИДАЕМЫЕ>!")
+    #     return HttpResponseRedirect(self.get_success_url())
+
+
+
+class ExpectedCargoUpdateView(UpdateView):
+    model = Pack
+    template_name = "edit_expected_cargo.html"
+    form_class = ExpectedCargoModelForm
+    success_url = "/LK/excepted_cargo/"
+
+
+    def get_context_data(self, **kwargs):
+        data = super(ExpectedCargoUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data['pack_form'] = PackProductFormSet(self.request.POST, instance=self.object)
+        else:
+            data['pack_form'] = PackProductFormSet(instance=self.object)
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        pack_form = context['pack_form']
+        with transaction.atomic():
+            self.object = form.save()
+
+            if pack_form.is_valid():
+                pack_form.instance = self.object
+                pack_form.save()
+                messages.success(self.request, "Изменения успешно сохранены!")
+            else:
+                pack_form = context['pack_form']
+                messages.error(self.request, "Ooops! Заполните *обязательные поля для наименований товара!")    
         return super(ExpectedCargoUpdateView, self).form_valid(form)
 
+
+
+def remove_excepted_cargo(request, pk):
+    excepted_cargo = Pack.objects.get(pack_id=pk)
+    if request.method == "POST":
+        r = u'уп - %s, %s кг' %(excepted_cargo.pack_number, excepted_cargo.weight)
+        excepted_cargo.delete()
+        messages.success(request, u"Груз %s был удален." % r)
+        return redirect("/LK/excepted_cargo/")
+    else:
+        # recip = u'Recip ' + recip.lastname + ' ' + recip.name
+        form = ExpectedCargoModelForm(instance=excepted_cargo)
+        rec = u'Груз уп - %s, %s кг' %(excepted_cargo.pack_number, excepted_cargo.weight)
+    return render(request, 'remove.html', {'title': rec})
+
+#-----------------------------------END---ExpectedCargo-----------------------------------
 
 
 #-------------Служебные функции-------------------------------------------------------------------
@@ -557,6 +768,51 @@ class ExpectedCargoUpdateView(UpdateView):
 #         search_text = ''
 #     print(pack_res)
 #     return render('search.html', {'pack_res': pack_res})
+
+
+def export_xls(modeladmin, request, queryset):
+    import xlwt
+    response = HttpResponse(mimetype='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=mymodel.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet("MyModel")
+
+    row_num = 0
+
+    columns = [
+        (u"ID", 2000),
+        (u"Title", 6000),
+        (u"Description", 8000),
+    ]
+
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    for col_num in xrange(len(columns)):
+        ws.write(row_num, col_num, columns[col_num][0], font_style)
+        # set column width
+        ws.col(col_num).width = columns[col_num][1]
+
+    font_style = xlwt.XFStyle()
+    font_style.alignment.wrap = 1
+
+    for obj in queryset:
+        row_num += 1
+        row = [
+            obj.pk,
+            obj.title,
+            obj.description,
+        ]
+        for col_num in xrange(len(row)):
+            ws.write(row_num, col_num, row[col_num], font_style)
+
+    wb.save(response)
+    return response
+
+
+export_xls.short_description = u"Export XLS"
+
+
 
 
 

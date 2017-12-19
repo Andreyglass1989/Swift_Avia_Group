@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block head_title %}Swift_Avia_Group{% endblock head_title %} </title>
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap-theme.min.css'%}">
+    {% block CSS %}{% endblock CSS%}
+
+    <style>
+    .b_body{
+      background-color:rgb(255, 255, 255);
+    }
+
+    body{
+        background-color:rgb(117,211,242);
+
+    }
+
+      .cool{
+        background-color:rgb(255, 255, 255);
+        margin-right: 0px;
+        background-image:url(/static/images/2.png);
+        background-repeat: no-repeat no-repeat;
+        background-size:cover;
+        border-radius:10px;
+        padding-bottom:25px
+}
+    h1, h2, h3{
+      color: #337ab7;
+    }
+
+</style>
+{% block CSS0 %}{% endblock CSS0 %}
+
+
+</head>
+<body>
+<!--------------------------Messages---------------------------------------->
+<!--{% if messages %}
+    <div class="alert alert-success" role="alert">
+
+    <ul class="messages">
+        {% for message in messages %}
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+    </ul>
+{% endif %}
+    </div>
+<!-----------------------------End Messages---------------------------------->
+
+<div class="b_body col-xs-12" style="margin-bottom:40px;">
+  <div class="col-xs-6">
+    <a style="text-decoration: none;" href="/"><h2 style="color:black; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>
+    <!--<h2 style="color:#fff; margin-left:25px; padding:20px 0px; margin-top:0px">SWIFT <span style="color:rgb(51, 51, 255)">AVIA</span> GROUP</h2>-->
+
+<!-- <img style="margin-top:0px; height:100px; width:100px" src="{% static 'images/logo11.png' %}">--></a>
+  </div>
+
+</div>
+    <br/>
+
+
+<!--<div class="container"></div>-->
+
+<div class="col-xs-12 cool" style="margin-top:50px"><div id="content">{% block content %}{% endblock content %}</div></div>
+
+{% include 'snipets/js.html' %}
+
+<!----------------------------Footer---------------------------------->
+
+<div style="clear:both" class="col-xs-12">
+<footer class="footer">
+    <div style="background-image:url(/static/images/blue.svg); max-height:70px; min-height:20px; height:auto; border-radius:10px; margin:20px 0px; padding-bottom:4%">
+        <span class="col-xs-1" style="float:left; margin:0.7% 1%; margin-right:-4%">
+            <a style="float:left;" href="https://www.facebook.com/swift.avia.group/"><img src="{% static '/images/social/Facebook-2561.png' %}" style="height:40%; width:40%"></a>
+        </span>
+
+        <span class="col-xs-1" style="float:left; margin:0.6vw 0vw">
+            <a style="float:left; margin-left:10px;" href="https://www.instagram.com/swift_avia_group_/?hl=ru">
+                <img src="{% static '/images/social/insta0.png' %}" style="height:50%; width:50%"></a>
+        </span>
+
+        <span  style="margin-left:1%; margin-top:1.2%; color:#fff; float:right; margin-right:1%; font-size:1.1vw;">Swift Avia Group &#169; 2017 ВСЕ ПРАВА ЗАЩИЩЕНЫ  |  ПОЛИТИКА КОНФИДИЦИАЛЬНОСТИ</span>
+    </div>
+</footer>
+</div>
+
+
+<!----------------------------Footer---------------------------------->
+
+<script>
+    $(document).ready(function() {
+    $(".messages, .alert-success").fadeOut(5000);
+});
+
+</script>
+</body>
+</html>

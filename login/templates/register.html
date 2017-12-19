@@ -14,6 +14,10 @@
         clear:both;
         width:300px;
     }
+
+    input.button.btn-success{
+        text-align:center;
+    }
 </style>
 {% endblock CSS%}
 
@@ -33,12 +37,14 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);" class="col-md-6">
+
+
     <form action="/auth/register/" method="post">{% csrf_token %}
        <!-- <div style="clear:both;">{{ form.as_p }}</div> <br/> -->
-        <div style="clear:both;">*Имя</div> <div >{{ form.username }}</div><div>Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</div>
-        <div style="clear:both;">*Пароль</div><div>{{ form.password1 }}</div>
-        <div style="clear:both;">*Пароль еще раз</div><div>{{ form.password2 }}</div><div>Для подтверждения введите, пожалуйста, пароль ещё раз.</div></br>
-        <input style="width:auto; padding:5px; border-radius:10px; float:right;" class="button btn-success" type="submit" value="Зарегестрироваться">
+        <div class="col-md-6">*Логин</div> <div >{{ form.username }}</div><div>Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_. Заполнять латиницей!</div>
+        <div class="col-md-6">*Пароль</div><div>{{ form.password1 }}</div>
+        <div class="col-md-6">*Пароль еще раз</div><div>{{ form.password2 }}</div><div>Для подтверждения введите, пожалуйста, пароль ещё раз.</div></br>
+        <input style="width:auto; padding:5px; border-radius:10px; text-align:center;" class="button btn-success" type="submit" value="Зарегестрироваться">
 
     </form>
 </div>

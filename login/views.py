@@ -12,7 +12,7 @@ from django.views.generic.edit import FormView
 
 # Create your views here.
 @csrf_protect
-def login (request):
+def login(request):
     args = {}
     #args.update(csrf(request))
     if request.POST:
@@ -35,7 +35,7 @@ def logout (request):
 
 
 @csrf_protect
-def register (request):
+def register(request):
     args={}
     args['form'] = UserCreationForm()
     if request.POST:
@@ -49,7 +49,7 @@ def register (request):
         else:
             args['form'] = new_user_form
             messages.error(request, "Ooops! Что-то пошло не так!")
-    return  render(request, "register.html", args)
+    return render(request, "register.html", args)
 
 
 

@@ -3,6 +3,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-site-verification" content="mE5pTsJgjT4BLtlQBBSHUZaRPnTw3jycxxFX1gxWALk" />
     <title>{% block head_title %}Swift_Avia_Group{% endblock head_title %} </title>
     <link rel="shortcut icon" href="{% static 'images/logo11.png' %}"/>
     {% block CSS %}{% endblock CSS%}
@@ -83,21 +84,31 @@
 {% block content %}{% endblock content%}
 
 </div>
+
+{% block content_full %}{% endblock content_full%}
 <!----------------------------Footer---------------------------------->
 
-<div class="container">
+<div class="col-xs-12">
 <footer class="footer">
-    <div style="background-image:url(/static/images/blue.svg); height:50px; border-radius:10px; margin:20px 0px;">
-        <span class="text-muted" style="float:left; margin-left:20px; margin-top:8px; ">
-            <a style="float:left; margin-left:10px;" href="https://www.facebook.com/swift.avia.group/"><img src="{% static '/images/social/Facebook-2561.png' %}" style="height:35px; width:35px"></a>
+    <div style="background-image:url(/static/images/blue.svg); max-height:70px; min-height:20px; height:auto; border-radius:10px; margin:20px 0px; padding-bottom:4%">
+        <span class="col-xs-1" style="float:left; margin:0.7% 1%; margin-right:-4%">
+            <a style="float:left;" href="https://www.facebook.com/swift.avia.group/"><img src="{% static '/images/social/Facebook-2561.png' %}" style="height:50%; width:50%"></a>
         </span>
 
-        <span class="text-muted" style="float:left; margin-left:10px; margin-top:8px; ">
+        <span class="col-xs-1" style="float:left; margin:0.6vw 0vw">
             <a style="float:left; margin-left:10px;" href="https://www.instagram.com/swift_avia_group_/?hl=ru">
-                <img src="{% static '/images/social/insta0.png' %}" style="height:35px; width:35px"></a>
+                <img src="{% static '/images/social/insta0.png' %}" style="height:60%; width:60%"></a>
         </span>
 
-        <span class="text-muted" style="margin:15px 20px; color:#fff; float:right">Swift Avia Group &#169; 2017 ВСЕ ПРАВА ЗАЩИЩЕНЫ  |  ПОЛИТИКА КОНФИДИЦИАЛЬНОСТИ</span> </div>
+
+        <span class="col-xs-2" style="float:left; margin-right:-4%">
+            <a style="float:left; margin-left:10px;" href="https://play.google.com/store/apps/details?id=swiftaviagroup.com.swift">
+            <img src="{% static 'images/social/google_play.png' %}" style="width: 90%; height: 90%; margin-left: -30%;">
+            </a>
+        </span>
+
+        <span  style="margin-left:1%; margin-top:1.2%; color:#fff; float:right; margin-right:1%; font-size:1.1vw;">Swift Avia Group &#169; 2017 ВСЕ ПРАВА ЗАЩИЩЕНЫ  |  ПОЛИТИКА КОНФИДИЦИАЛЬНОСТИ</span>
+    </div>
 </footer>
 </div>
 

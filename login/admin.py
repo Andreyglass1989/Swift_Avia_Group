@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 #from LK.models import User
-from login.models import UserProfile, ExpectedCargo, Reviews
+from login.models import UserProfile, Reviews, File_document, CalculatorGroup
 
 
 # Define an inline admin descriptor for Employee model
@@ -19,11 +19,8 @@ class EmployeeInline(admin.StackedInline):
 
     #list_display = ["username", "last_name", "first_name", "email"]
 
-
-class ExpectedCargoAdmin(admin.ModelAdmin):
-    list_display = ["customer", "name", "quantity", "price", "post_delivery", "treck", "url", "comment"]
-    list_filter = ["date_add",]
-    search_fields = ["treck"]
+class File_documentAdmin(admin.ModelAdmin):
+    list_display = ['document' , 'packid']
 
 class ReviewsAdmin(admin.ModelAdmin):
     list_display = ["reviews_client", "text_reviews",]
@@ -47,10 +44,14 @@ class UserAdmin(admin.ModelAdmin):
     code.short_description = 'Код клиента'
 
 
+class CalculatorGroupAdmin(admin.ModelAdmin):
+    list_display = ['name', 'price']
+
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.register(File_document, File_documentAdmin)
 
-
+admin.site.register(CalculatorGroup, CalculatorGroupAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
 # admin.site.register(MyUserAdmin)
-admin.site.register(ExpectedCargo, ExpectedCargoAdmin)

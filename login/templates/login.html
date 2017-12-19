@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block head_title %}Авторизация{% endblock head_title %}
+{% block head_title %}Авторизация - Swift Avia Group{% endblock head_title %}
 
 {% block CSS %}
 <style>
@@ -108,7 +108,9 @@ a:active {
 }
 
 
-
+input.button.btn-success{
+    text-align:center;
+}
 
 
 </style>
@@ -128,27 +130,27 @@ a:active {
 <div style="padding: 100px; position: fixed; top: 50%; left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);" class="small-4 large-4">
+  transform: translate(-50%, -50%); text-align:center;" class="small-4">
     <form action="/auth/login/" method="post">
         {% csrf_token %}
-        <label for="username">Имя пользователя</label>
+        <label style="float:left" for="username">Имя пользователя</label>
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon glyphicon-user" id="basic-addon2"></span>
             <input type="text" name="username" id="username">
            <!-- <abbr style="border-bottom:none" title="Регистрация">-->
-                <a href="/auth/register/" style="text-decoration: none; border-bottom:none" data-tooltip="Регистрация">
-                <img src="{% static '/images/social/add_user0.png' %}" height="30px" width="30px"></a>
+
             <!--</abbr>-->
 
         </div>
+
+
         </br>
-        <label for="password">Пароль</label>
+        <label style="float:left" for="password">Пароль</label>
         <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
             <input type="password" name="password" id="password">
             <!--<abbr style="border-bottom:none" title="Восстановить пароль">-->
-            <a href="/auth/reset_password/" style="text-decoration: none; border-bottom:none" data-tooltip="Восстановить пароль">
-             <img src="{% static '/images/social/forgot-password.png' %}" width="35px" height="35px"></a>
+
            <!--  </abbr>-->
 
         </div>
@@ -157,13 +159,28 @@ a:active {
         {% if login_error %}
             <label class="error">{{ login_error }}</label>
         {% endif %}
-</br>
+<br>
        <!-- <button style="padding:2px; border-radius:10px; margin-right:40px" class="button btn-primary">Регистрация</button>-->
+       <a href="/auth/reset_password/" style="text-decoration: none; border-bottom:none; float:right;" data-tooltip="Восстановить пароль">
+             <img src="{% static '/images/social/forgot-password.png' %}" width="35px" height="35px"></a>
 
-        <input style="padding:10px; border-radius:10px; float:right; margin-right:40px" class="button btn-success" type="submit" value="Войти">
+
+      <a href="/auth/register/" style="text-decoration: none; border-bottom:none; float:right;" data-tooltip="Регистрация">
+                <img src="{% static '/images/social/add_user0.png' %}" height="30px" width="30px"></a>
+
+
+      <input class="button btn-success" style="padding:10px; border-radius:10px; margin-left:15%" type="submit" value="Войти">
 
         <!--<a href="/auth/reset_password/" style="text-decoration: none;"><span style="padding:5px; border-radius:10px;" class="button btn-warning">Восстановить пароль</span></a>-->
     </form>
+
+{% load socialaccount %}
+<a style="text-decoration: none;" href="{% provider_login_url "facebook" method="oauth2" %}">
+<img src="{% static 'images/social/facebook-sign.png' %}" style="width:230px; height:80px; "></a> <br>
+
+<a href="{% provider_login_url "google" method="oauth2" %}">
+<img src="{% static 'images/social/login-google.png' %}" style="width:200px; height:40px; "></a>
+
 </div>
 
 {% endblock login %}

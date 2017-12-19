@@ -15,16 +15,31 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from LK.views import index, about_us, contacts, if_delivery, all_cargo
+from LK.views import (
+    index, 
+    about_us, 
+    contacts, 
+    if_delivery, 
+    all_cargo, 
+    service,
+    partner
+)
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('login.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^$', index),
     url(r'^about/$', about_us, name='about_us'),
+    url(r'^service/$', service, name='service'),
     url(r'^contacts/$', contacts, name='contacts'),
+    url(r'^partner/$', partner, name='partner'),
     url(r'^if/$', if_delivery, name='if_delivery'),
     url(r'^all_cargo/$', all_cargo, name='all_cargo'),
     url(r'^LK/', include('LK.urls', namespace='LK')),
+    url(r'^api/auth/token', obtain_jwt_token),
+    url(r'^api/users/', include('login.api.urls', namespace='users-api')),
+    url(r'^api/LK/', include('LK.api.urls', namespace='LK-api')),
 
 ]

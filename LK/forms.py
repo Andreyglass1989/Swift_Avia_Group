@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.forms import ModelForm
-from login.models import User, UserProfile, ExpectedCargo, Reviews
-from LK.models import CustomerRecipients
+from login.models import User, UserProfile, Reviews
+from LK.models import CustomerRecipients, Pack, PackProduct
 from django.core.validators import RegexValidator
+from django.forms.models import inlineformset_factory
+from djangoformsetjs.utils import formset_media_js
+
+
 
 
 
@@ -23,10 +27,24 @@ class UserModelForm(forms.ModelForm):
 
 class ExpectedCargoModelForm(forms.ModelForm):
     class Meta:
-        model = ExpectedCargo
-        fields = ['name', 'quantity',  'price', 'post_delivery', 'treck', 'comment', 'url', 'customer']
+        model = Pack
+        exclude = []
 
 
+
+#MyFormSet = formset_factory(ExpectedCargoModelForm)
+
+class ExpectedCargoPackModelForm(forms.ModelForm):
+    class Meta:
+        model = PackProduct
+        exclude = ['weight_netto']
+
+    class Media(object):
+        js = formset_media_js + (
+            # Other form media here
+        )
+
+PackProductFormSet = inlineformset_factory(Pack, PackProduct, extra=3,  exclude=['weight_netto', 'item_class_id', 'packed_quantity', 'volume'], can_delete=True, labels='Tovar', form=ExpectedCargoPackModelForm)
 
 class EmailForm(forms.Form):
     name    = forms.CharField(widget=forms.TextInput(attrs={'placeholder': u"Ваше имя:"}), required=True)

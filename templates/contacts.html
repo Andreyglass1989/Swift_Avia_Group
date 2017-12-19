@@ -11,6 +11,22 @@
         color:#fff;
         }
 
+        ul>li, ul>a>li{
+         margin-top:2%;
+         font-size:1.5vw;
+         list-style-type: none;
+        }
+
+        ul>li>img, ul>a>li>img{
+         width:7%;
+         height:7%;
+         margin-right:2%;
+        }
+
+      ul>div#SkypeButton_Call_live:logistic24company_1>p#SkypeButton_Call_live:logistic24company_1_paraElement>a>img, #SkypeButton_Call_live:logistic24company_1>img, #SkypeButton_Call_live:logistic24company_1_paraElement>img{
+         margin:0px;
+         margin-top:2%;
+        }
     </style>
 
 {% endblock CSS%}
@@ -24,17 +40,18 @@
          padding-left: 0px;
         }
 
-        tr>td>input{
-         margin-bottom:10px;
-         width:350px
-        }
-
         textarea#id_messages{
             width:auto
         }
 
         tr>td>input, tr>td>textarea{
-            width:450px
+            margin-top:2%;
+            width:auto;
+            margin-right:2%;
+        }
+
+        body{
+        margin-top:-50px;
         }
     </style>
 
@@ -90,8 +107,8 @@
  Автобан:
 Гуанчжоу-Хуанду - 267-ое шоссе - Сиху Западная ул. потом 200м внутрь Джандзи рынка (слева)
  </div>
-
-    <abbr style="border-bottom:none" title="Подробнее"><a style="margin-top:20px" id="showHideContent_ru" href="#"><img style="margin-top:20px" src="{% static '/images/social/info000.png' %}" width="45px" height="45px" /></a></abbr>
+<br style="margin-bottom:3%">
+    <a style="text-decoration: none" id="showHideContent_ru" href="#"><img src="{% static '/images/social/info000.png' %}" width="10%" height="10%" /><span style="color:#fff; font-size:1.8vw">Подробнее</span></a>
     <!--<button id="showHideContent_ru" type="button" class="btn btn-default">Подробнее</button>-->
 </h3>
 </div>
@@ -100,7 +117,7 @@
 
 <br>
 
-<h3 style="margin-top:100px">Получатель / Recipient / 收货人: Slava 13711555952; Evgen 13042078364 </h3>
+<h3 style="margin-top:100px">Получатель / Recipient / 收货人: Slava 130 4207 8364; Igor 13802426344 </h3>
 <br>
 <h3>Время работы / Working time /  时间 时间 : 09:00-18:00</h3>
 <br>
@@ -131,8 +148,7 @@
 
     <hr style="color:#fff;">
 <div class="col-xs-12">
-    <div class="col-xs-5"><h2>Написать нам:</h2>
-
+    <div class="col-xs-6"><h2>Написать нам:</h2>
 
         <form method="POST" class="col-xs-12" style="color:black;" action="">{% csrf_token %}
             <table>
@@ -150,20 +166,25 @@
                 </tr>
             </table>
 
-            <input style="margin:10px 0px; width:auto; padding:5px; float:right;" class="button btn-primary" type="submit" value="Отправить">
+        <input style="margin-top:2%;padding:5px;" class="button btn-primary" type="submit" value="Отправить">
         </form>
    </div>
 
 
-    <div class="col-xs-7"><h2 style="text-align:center;">Свяжитесь с нами:</h2><br>
-      <h4>Вы можете задать нам любой вопрос по телефону: +38 (067) 654-23-81. (с 10:00 до 18:00).</h4>
+    <div class="col-xs-6"><h2 style="text-align:center;">Свяжитесь с нами:</h2><br>
+      <h4 id="contact_anna" style="text-align:right;">Вы можете задать нам любой вопрос (с 10:00 до 18:00)</h4>
+        <ul>
+            <a href="tel:+380676542381"><li><img src="{% static 'images/for_contact/telephone.png'%}">+38 (067) 654-23-81</li></a>
+            <a href="viber://add?number=3806542381"><li><img src="{% static 'images/for_contact/viber.png'%}">Viber: +38 (067) 654-23-81</li></a>
+            <a href="tg://resolve?domain=<USERNAME>"><li><img src="{% static 'images/for_contact/Telegram.png'%}">Telegram: +38 (067) 654-23-81</li></a>
+            <a title="WhatsApp" href="whatsapp://send?phone=+380675387986"><li><img src="{% static 'images/for_contact/whatsapp.png'%}">WhatsApp: +38 (067) 538 79 86</li></a>
 
+            <a href="weixin://dl/chat?annaaviaodessa"><li><img src="{% static 'images/for_contact/wechat.png'%}">WeChat ID: annaaviaodessa</li></a>
 
+            <a href="skype:live:logistic24company?chat"><li><img src="{% static 'images/for_contact/skype.png'%}">Skype: live:logistic24company</li></a>
+        </ul>    
 
     </div>
-
-
-
 
 </div>
 
