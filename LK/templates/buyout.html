@@ -1,0 +1,111 @@
+{% extends 'base_for_LK.html' %}
+
+{% load static %}
+{% block buyout %}class="active"{% endblock buyout %}
+
+{% block CSS0 %}
+<!-- <link rel="stylesheet" href="{% static '/css/accordion.css'%}"> -->
+{% endblock CSS0 %}
+
+{% block content %}
+<!--------------------------Messages---------------------------------------->
+{% if messages %}
+    <div class="alert alert-success" role="alert">
+
+    <ul class="messages">
+        {% for message in messages %}
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+        {% endfor %}
+    </ul>
+{% endif %}
+    </div>
+<!-----------------------------End Messages---------------------------------->
+
+<div style="float:right">
+        <abbr style="border-bottom:none" title="Добавить товар для выкупа"><a href="/LK/add_buyout/"><button style="border-radius:5px; padding: 13px; margin-top: 10%" class="btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button></span></a>
+    </div>
+
+
+<!-- <div style="float:right">
+    <abbr style="border-bottom:none" title="Добавить товар для выкупа"><a href="/LK/add_buyout/"><img src="{% static 'images/pack/buyout.png' %}" width="50px" height="50px"></a></abbr>
+</div>
+ -->
+<h3 style="text-align:center; clear:both; margin-bottom:5%">Выкуп товаров</h3>
+<!-- 		<div class="row">
+            <div class="col-xs-2">Название товара</div> 
+        	<div class="col-xs-1">К-во</div>
+        	<div class="col-xs-1">Цена,¥</div>
+        	<div class="col-xs-1">Размер</div>
+        	<div class="col-xs-1">Цвет</div>
+        	<div class="col-xs-2">Комментарий</div>
+        	<div class="col-xs-1">Статус</div>
+            <div class="col-xs-1">Выкуп,¥</div>
+            <div class="col-xs-1">Изображение</div>
+            <div class="col-xs-1">Сумма за доставку</div>
+        </div>
+
+
+
+{% if buyout_product %}
+	{% for b in buyout_product %}
+		<div class="row">
+            <div class="col-xs-2">{{ b.name}}</div> 
+        	<div class="col-xs-1">{{ b.quantity }}</div>
+        	<div class="col-xs-1">{{ b.price }}</div>
+        	<div class="col-xs-1">{{ b.size }}</div>
+        	<div class="col-xs-1">{{ b.color }}</div>
+        	<div class="col-xs-2">{{ b.comment }}</div>
+        	<div class="col-xs-1">{{ b.status }}</div>
+            <div class="col-xs-1 text-success" style="font-weight: bold; font-size:20px">{{ b.sum_buyout }}</div>
+            {% if b.image %} <div class="col-xs-1"><img src="{{ b.image.url }}" width="100"/></div>{% endif %}
+            <div class="col-xs-1">{{ b.amount_shipping}}</div>
+        </div>
+	{% endfor %}
+{% else %}
+	<p>У вас нет товаров на выкуп</p>
+{% endif %} -->
+
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Название</th>
+      <th scope="col">К-во</th>
+      <th scope="col">Цена,¥</th>
+      <th scope="col">Размер</th>
+      <th scope="col">Цвет</th>
+      <th scope="col">Комментарий</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Выкуп,¥</th>
+      <th scope="col">Изображение</th>
+      <th scope="col">Сумма за доставку</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if buyout_product %}
+        {% for b in buyout_product %}
+            <tr>
+              <th scope="row">{{ b.name}}</th>
+              <td>{{ b.quantity }}</td>
+              <td>{{ b.price }}</td>
+              <td>{{ b.size }}</td>
+              <td>{{ b.color }}</td>
+              <td>{{ b.comment }}</td>
+              <td>{{ b.status }}</td>
+              <td>{{ b.sum_buyout }}</td>
+              {% if b.image %} <td><img src="{{ b.image.url }}" width="100"/></td>{% endif %}
+              <td>{{ b.amount_shipping }}</td>
+            </tr>
+
+        {% endfor %}
+
+  </tbody>
+</table>
+
+{% else %}
+    <p>У вас нет товаров на выкуп</p>
+{% endif %}
+
+{% endblock content %}

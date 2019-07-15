@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from LK.views import (
-    lk,
+  #  lk,
     about_user,
     UserUpdateView,
     consolidation,
@@ -8,6 +8,11 @@ from LK.views import (
     priletel,
     detail,
     recipients,
+    get_data,
+
+    HomeView,
+    ChartData,
+
     RecipientsCreateView,
     RecipientsUpdateView,
     #RecipientsDeleteView,
@@ -21,10 +26,14 @@ from LK.views import (
    # search,
    # send_mail_to_us
     #pack_children,
+    BuyoutListView,
+    formset_view,
+    hello_world_ex,
     )
 
-urlpatterns = [
 
+urlpatterns = [
+    
     url(r'^about_user/$', about_user, name='about_user'),
     url(r'^edit_user/(?P<pk>\d+)/$', UserUpdateView.as_view(), name='update_user'),
     url(r'^consolidation/$', consolidation),
@@ -47,8 +56,14 @@ urlpatterns = [
     url(r'^delete_excepted_cargo/(?P<pk>\d+)/$', remove_excepted_cargo, name='delete_excepted_cargo'),
 #    url(r'^search/$', search),
 
+    url(r'^for-Sashka/$', get_data, name='Sashka'),
+    url(r'^for-Sashka-class/$', HomeView.as_view(), name='Sashka0'),
+    url(r'^for-Sashka-class1/$', ChartData.as_view(), name='Sashka1'),
 
+    url(r'^buyout/$', BuyoutListView.as_view(), name='buyout'),
+    url(r'^add_buyout/$', formset_view, name='add-buyout'),
 
-    url(r'^', lk, name='lk'),
+    url(r'^hello_world/$', hello_world_ex)
+
     #url(r'^', lk, name='lk'),
 ]

@@ -9,4 +9,6 @@ venv
 /swift_avia_group/wsgi.py
 /swift_avia_group/__init__.py
 /ЛК Газпром
+/django-allauth
+/static
 db12818242-avia.sql

@@ -1,0 +1,49 @@
+{% load static %}
+
+<h1>hello</h1>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+{% for b in boxs %}
+<h3 id="auto-{{ b.id }}">
+
+    {{ forloop.counter }}. {# starting index 1 #}
+
+	{{ b.box_number }}
+
+	<input type="checkbox" id="{{ b.id }}">
+
+
+</h3>
+
+{% endfor %}
+
+
+
+
+
+<script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('input[type="checkbox"]').click(function(){
+
+                if($(this).prop("checked") == true){
+                	var id = $(this).attr('id');
+
+                    // alert('auto-'+id);
+                    // $(this).fadeOut('slow');
+                    $('#auto-'+id).fadeOut('slow')
+                }
+
+                else if($(this).prop("checked") == false){
+
+                    alert("Checkbox is unchecked.");
+
+                }
+
+            });
+
+        });
+
+</script>

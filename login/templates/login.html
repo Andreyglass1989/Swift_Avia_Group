@@ -133,50 +133,52 @@ input.button.btn-success{
   transform: translate(-50%, -50%); text-align:center;" class="small-4">
     <form action="/auth/login/" method="post">
         {% csrf_token %}
-        <label style="float:left" for="username">Имя пользователя</label>
-        <div class="input-group">
-            <span class="input-group-addon glyphicon glyphicon glyphicon-user" id="basic-addon2"></span>
-            <input type="text" name="username" id="username">
+        <!-- <label style="float:left" for="username">Логин</label> -->
+        <!-- <div class="input-group"> -->
+            <!-- <span class="input-group-addon glyphicon glyphicon glyphicon-user" id="basic-addon2"></span> -->
+            <input type="text" name="username" id="username" placeholder="Логин" size="30">
            <!-- <abbr style="border-bottom:none" title="Регистрация">-->
 
             <!--</abbr>-->
 
-        </div>
+        <!-- </div> -->
 
 
-        </br>
-        <label style="float:left" for="password">Пароль</label>
-        <div class="input-group">
-            <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span>
-            <input type="password" name="password" id="password">
+        <p></p>
+        <!-- <label style="float:left" for="password">Пароль</label> -->
+        <!-- <div class="input-group"> -->
+            <!-- <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon1"></span> -->
+            <input type="password" name="password" id="password" placeholder="Пароль" size="30">
             <!--<abbr style="border-bottom:none" title="Восстановить пароль">-->
 
            <!--  </abbr>-->
 
-        </div>
+        <!-- </div> -->
 
 
         {% if login_error %}
             <label class="error">{{ login_error }}</label>
         {% endif %}
-<br>
+<p></p>
        <!-- <button style="padding:2px; border-radius:10px; margin-right:40px" class="button btn-primary">Регистрация</button>-->
-       <a href="/auth/reset_password/" style="text-decoration: none; border-bottom:none; float:right;" data-tooltip="Восстановить пароль">
+<!--        <a href="/auth/reset_password/" style="text-decoration: none; border-bottom:none; float:right;" data-tooltip="Восстановить пароль"> -->
+        <a href="{% url 'auth:password_reset' %}" style="text-decoration: none; border-bottom:none; float:right;" data-tooltip="Восстановить пароль">
              <img src="{% static '/images/social/forgot-password.png' %}" width="35px" height="35px"></a>
 
 
       <a href="/auth/register/" style="text-decoration: none; border-bottom:none; float:right;" data-tooltip="Регистрация">
                 <img src="{% static '/images/social/add_user0.png' %}" height="30px" width="30px"></a>
 
-
+<br/>
       <input class="button btn-success" style="padding:10px; border-radius:10px; margin-left:15%" type="submit" value="Войти">
 
         <!--<a href="/auth/reset_password/" style="text-decoration: none;"><span style="padding:5px; border-radius:10px;" class="button btn-warning">Восстановить пароль</span></a>-->
     </form>
+<br/>
 
+<p>Or log in with:</p>
 {% load socialaccount %}
-<a style="text-decoration: none;" href="{% provider_login_url "facebook" method="oauth2" %}">
-<img src="{% static 'images/social/facebook-sign.png' %}" style="width:230px; height:80px; "></a> <br>
+
 
 <a href="{% provider_login_url "google" method="oauth2" %}">
 <img src="{% static 'images/social/login-google.png' %}" style="width:200px; height:40px; "></a>

@@ -10,7 +10,25 @@ from django.conf import settings
 from login.forms import RegistrationForm
 from django.views.generic.edit import FormView
 
+from LK.models import Pack
+
+
 # Create your views here.
+
+def inkognito_pack(request):
+    pack_inkognito = Pack.objects.filter(pack_status=1, customer_id=0).order_by("-date_added")
+
+    context = {
+        "pack_inkognito": pack_inkognito,
+    }
+    return render(request, 'inkognito_pack.html', context)
+
+
+
+
+
+
+
 @csrf_protect
 def login(request):
     args = {}

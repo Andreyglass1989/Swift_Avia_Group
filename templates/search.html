@@ -9,7 +9,9 @@
 </style>
 {% endblock CSS %}
 
+{% if pack_list != None %}
 <h3>Иформация о найденном грузе:</h3>
+<div class="row">
 
 <div style="color:#fff" class="col-xs-12">
     <div class="col-xs-3">№ посылки</div>
@@ -28,7 +30,8 @@
       {% endfor %}
     </div>
 
+{% elif pack_list == None %}
+    <p>{{ answer }}</p>
 {% endif %}
-
-
-
+<br>
+{% endif %}

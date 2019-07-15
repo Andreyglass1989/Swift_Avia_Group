@@ -89,6 +89,8 @@
       <hr style="margin:0px;">
   <li role="presentation" {% block active_about_user %}{% endblock active_about_user %}><a href="/LK/about_user/">Информация о пользователе</a></li>
       <hr style="margin:0px;">
+  <li role="presentation" {% block buyout %}{% endblock buyout %}><a href="/LK/buyout/">Выкуп товаров <span class="badge badge-primary badge-pill">New</span></a></li>
+      <hr style="margin:0px;">
   <li class="disabled" style="visibility: hidden;" role="presentation" {% block active_in_menu_ABOUT %}{% endblock active_in_menu_ABOUT %}><a href="/LK/oplata/">Оплата</a></li>
 </ul>
  {% else %}
@@ -103,6 +105,8 @@
   <li class="disabled" role="presentation"><a href="/LK/priletel/">Доставлено</a></li>
       <hr style="margin:0px;">
   <li class="disabled" role="presentation"><a href="/LK/about_user/">Информация о пользователе</a></li>
+      <hr style="margin:0px;">
+  <li class="disabled" role="presentation"><a href="/LK/buyout/">Выкуп товаров</a></li>
       <hr style="margin:0px;">
   <li class="disabled" style="visibility: hidden;" role="presentation"><a href="/LK/oplata/">Оплата</a></li>
 </ul>

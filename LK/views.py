@@ -12,9 +12,23 @@ from django.http import HttpResponseRedirect
 # from django.views.generic import ListView
 from django.views.generic import TemplateView, CreateView, UpdateView, DeleteView, ListView, DetailView
 from django.urls import reverse_lazy
+
+from django.forms import formset_factory, modelformset_factory
+
 #CBV------------------
 
-from LK.forms import UserModelForm, RecipientsModelForm, ExpectedCargoModelForm, ExpectedCargoPackModelForm, EmailForm, ReviewsForm, PackProductFormSet
+from LK.forms import (
+    UserModelForm, 
+    RecipientsModelForm, 
+    ExpectedCargoModelForm, 
+    ExpectedCargoPackModelForm, 
+    EmailForm, 
+    ReviewsForm, 
+    PackProductFormSet,
+    BuyoutModelForm,
+    BuyoutFormset,
+    BuyoutFormSet
+    )
 
 from django.contrib import messages
 from django.core.mail import send_mail, EmailMessage
@@ -24,14 +38,45 @@ from django.template.loader import get_template
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #
-from LK.models import Pack, PackProduct, CustomerRecipients, Country
-from login.models import CalculatorGroup
+from LK.models import (
+    Pack, 
+    PackStatus,
+    PackProduct, 
+    CustomerRecipients, 
+    Country, 
+    Air,
+    AirHistory,
+    AirParcel,
+    Customer,
+    )
+from login.models import CalculatorGroup, Buyout
 
 from django.db.models.base import ObjectDoesNotExist
 from django.db import transaction
+from django.db.models import Q
+
+import datetime
+from datetime import date
+from datetime import timedelta
+from datetime import datetime, timedelta
+
+from django.http import JsonResponse
+from django.views.generic import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
+from twilio.rest import Client
+import telebot
+# from SwiftBOT.swiftBot import bot
+
 
 User = get_user_model()
+
+
+def hello_world_ex(request):
+    return render (request, "hello_world.html", {})
+
 
 #-------------------------------------------------------Menu----------------------------------------#
 def index(request):
@@ -44,13 +89,17 @@ def index(request):
     pack = Pack.objects.all()
     query = request.GET.get("query")
     pack_list = None
+    answer = None
     if query:
-        pack_list = pack.filter(pack_number__icontains=query)
+        pack_list = pack.filter(comment__icontains=query)
+        if len(pack_list) == 0:
+            answer = "sorry your treck not find"
     context = {
             'username': auth.get_user(request).username,
             'user': user,
             'pack_list': pack_list,
             'user0': user0,
+            'answer': answer,
         }
     return render(request, 'main.html', context)
 
@@ -195,6 +244,28 @@ def service(request):
     return render(request, 'service.html', context)
     
 
+def search_link(request):
+    query = request.GET.get("query")
+    bb = None
+    b_count = None
+    a = None
+    if query:
+        bb = PackProduct.objects.filter(name__icontains=query)
+        b_count=bb.count()
+        a = 0
+        l = []
+        for b in bb:
+
+            if b.url != '':
+                a +=1
+    context = {
+        'all': b_count,
+        'with_link': a,
+        'tovar': bb,
+    }
+    return render(request, 'special_for_Cheh.html', context)
+
+
 
 def all_cargo(request):
     #username = auth.get_user(request)
@@ -236,32 +307,32 @@ def all_cargo(request):
     return render(request, 'all_cargo.html', context)
 
 
-def lk (request):
-    username = auth.get_user(request)
-    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
-    user = UserProfile.objects.get(user_id=username.id)
-    cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
-    cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
-                                       pack_status_id=2)  # user.code_clienta.pack_set.filter
-    cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
-    cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
-    # ---- для вывода к-ва/цифры упаковочных на боковую панельку
-    if username:
-        try:
-            user = UserProfile.objects.get(user_id=username.id)
-        except UserProfile.DoesNotExist:
-            user = None
-        context = {
-                'username': username,
-                'user': user,
-            # ---- для вывода к-ва/цифры упаковочных на боковую панельку
-              #  'cargo_ne_obrabotan': cargo_ne_obrabotan,
-                'cargo_consolidation': cargo_consolidation,
-                'cargo_v_puti': cargo_v_puti,
-
-            # ---- для вывода к-ва/цифры упаковочных на боковую панельку
-            }
-    return render(request, 'LK.html', context)
+# def lk (request):
+#     username = auth.get_user(request)
+#     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+#     user = UserProfile.objects.get(user_id=username.id)
+#     cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+#     cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+#                                        pack_status_id=2)  # user.code_clienta.pack_set.filter
+#     cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
+#     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+#     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+#     if username:
+#         try:
+#             user = UserProfile.objects.get(user_id=username.id)
+#         except UserProfile.DoesNotExist:
+#             user = None
+#         context = {
+#                 'username': username,
+#                 'user': user,
+#             # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+#               #  'cargo_ne_obrabotan': cargo_ne_obrabotan,
+#                 'cargo_consolidation': cargo_consolidation,
+#                 'cargo_v_puti': cargo_v_puti,
+#
+#             # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+#             }
+#     return render(request, 'LK.html', context)
 
 
 #-------------------------------------------------------Menu----------------------------------------#
@@ -354,6 +425,8 @@ def v_puti(request):
     cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
     cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
                                        pack_status_id=2)  # user.code_clienta.pack_set.filter
+    cargo_ready = Pack.objects.filter(customer_id=user.code_clienta,
+                                       pack_status_id=3)
 
     cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
     context = {
@@ -362,6 +435,7 @@ def v_puti(request):
         'cargo': cargo,
         'cargo_v_puti': cargo_v_puti,
         'cargo_consolidation': cargo_consolidation,
+        'cargo_ready': cargo_ready,
     }
     return render(request, 'v_puti.html', context)
 
@@ -375,7 +449,7 @@ def priletel(request):
     cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
     # ---- для вывода к-ва/цифры упаковочных на боковую панельку
     # cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
-    cargo = user.code_clienta.pack_set.filter(customer_id = user.code_clienta, pack_status_id = 7, date_added__year = '2017').order_by('-date_added')
+    cargo = user.code_clienta.pack_set.filter(customer_id = user.code_clienta, pack_status_id = 6, date_added__year = '2018').order_by('-date_added')
 
     paginator = Paginator(cargo, 15)  # Show 1 contacts per page Paginator begin
     page = request.GET.get('page')
@@ -814,6 +888,328 @@ export_xls.short_description = u"Export XLS"
 
 
 
+#----------------------Begin Chartjs ---------------------------------------
+def get_data(request):
+    labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
+    default_items = [1, 2, 3, 4, 5, 6]
+    data = {
+        "default": default_items, 
+        "labels": labels,
+    }
+    return JsonResponse(data)
+
+
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        date_time_now = datetime.now()
+        day_today = date_time_now.strftime('%Y-%m-%d')
+        #--------------------------Consolidation----------------------------------
+        pack_consol = Pack.objects.filter(pack_status=2, sklad_id=1)
+        pack_consol_count = pack_consol.count()
+        weight_consol = 0
+        volume_consol = 0
+        for pack in pack_consol:
+            weight_consol = weight_consol + pack.weight
+            volume_consol = volume_consol + pack.volume
+        #--------------------------Consolidation----------------------------------  
+        #--------------------------Ne opredelennie-------------------------------
+        pack_inkognito = Pack.objects.filter(pack_status=1, customer_id=0, sklad_id=1)      
+        pack_inkognito_count = pack_inkognito.count()
+        weight_sklad_inkognito = 0
+        volume_sklad_inkognito = 0
+        for pack_ink in pack_inkognito:
+            weight_sklad_inkognito = weight_sklad_inkognito + pack_ink.weight
+            volume_sklad_inkognito = volume_sklad_inkognito + pack_ink.volume
+        #--------------------------Ne opredelennie----------------------------------
+
+        #--------------------------Ne upakovano----------------------------------
+        pack_sklad_all = Pack.objects.filter(pack_status=1, sklad_id=1)
+        pack_sklad_count = pack_sklad_all.count()
+        weight_sklad = 0
+        volume_sklad = 0
+        #pack_sklad_month_weight = Pack.objects.filter(date_added__icontains=date_time_now.strftime('%Y-%m-'))
+        for pack_sk in pack_sklad_all:
+            weight_sklad = weight_sklad + pack_sk.weight
+            volume_sklad = volume_sklad + pack_sk.volume
+        pack_vash_na_sklade_count = pack_sklad_count - pack_inkognito_count
+        weight_vash_na_sklade = weight_sklad - weight_sklad_inkognito
+        volume_vash_na_sklade = volume_sklad - volume_sklad_inkognito
+        #--------------------------Ne upakovano----------------------------------     
+
+        labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
+        default_items = [1.3, 2.5, 3, 4, 5, 6]
+
+        labels_main = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+                  "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                  "31"]
+        cargo_for_month = 0           
+        cargo_every_day = []
+        for x in labels_main:
+            cargo = Pack.objects.filter(date_added__icontains=date_time_now.strftime('%Y-%m-'), sklad_id=1)
+            weight_to_day = 0
+            for c in cargo:
+                weight_to_day = weight_to_day + c.weight
+            cargo_for_month = weight_to_day
+            cargo_every_day.append(int(weight_to_day))            
+#---------------------------------------------------------------------------------------------
+        air_for_month = []
+        air_for_month_id = []
+        air_added = []
+        air_arrival = []
+        time_air_fly = []
+        air_last = Air.objects.filter(date_added__icontains=date_time_now.strftime('%Y-%m-'))
+        for air in air_last:
+            air_for_month.append(air.name)
+            try:
+                air_priletel = AirHistory.objects.get(air_id=air.air_id, air_status_id=7)
+                # print (air_priletel.date_added)
+                arr = air_priletel.date_added
+                arr = arr.replace(tzinfo=None)
+                #air_arrival.append(air_priletel.date_added)
+                
+            except ObjectDoesNotExist:
+                arr = datetime.now()
+                air_arrival.append(datetime.now())
+           # air_for_month_id.append(air.air_id)
+          #  air_added.append(air.date_added)
+            t=air.date_added
+            t = t.replace(tzinfo=None)
+            #delta_time = date_time_now.replace(tzinfo=None) - t
+            days = arr-t
+            #print(days)
+            #time_air_fly.append(arr-t)
+#---------------------------------------------------------------------------------------------            
+        default_items = [1, 2, 3, 4, 5, 6]
+        data = {
+            "default": default_items,
+            "labels": labels,
+            "default_main": cargo_every_day, 
+            "labels_main": labels_main,
+            "cargo_for_month": cargo_for_month,
+            "date_time_now": date_time_now,
+            #-------------------
+
+            "air_for_month": air_for_month,
+            "time_air_fly": time_air_fly,
+
+            #-------------------    
+            "pack_inkognito_count": pack_inkognito_count,
+            "weight_sklad_inkognito": weight_sklad_inkognito,
+            "volume_sklad_inkognito": volume_sklad_inkognito,
+            "pack_sklad_count": pack_sklad_count, 
+            "weight_sklad": weight_sklad,
+            "pack_consol_count": pack_consol_count,
+            "weight_consol": weight_consol,
+            "volume_consol": volume_consol,
+            "pack_vash_na_sklade_count": pack_vash_na_sklade_count,
+            "weight_vash_na_sklade": weight_vash_na_sklade,
+            "volume_vash_na_sklade": volume_vash_na_sklade,
+            #-------------------    
+        }
+        return render(request, 'chartjs.html', data)
+
+
+class ChartData(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        date_time_now = datetime.now()
+        day_today = date_time_now.strftime('%Y-%m-%d')
+        #--------------------------Consolidation----------------------------------
+        pack_consol = Pack.objects.filter(pack_status=2, sklad_id=1)
+        pack_consol_count = pack_consol.count()
+        weight_consol = 0
+        for pack in pack_consol:
+            weight_consol = weight_consol + pack.weight
+        #--------------------------Consolidation----------------------------------
+
+        #--------------------------Ne opredelennie-------------------------------
+        pack_inkognito = Pack.objects.filter(pack_status=1, customer_id=0, sklad_id=1)      
+        pack_inkognito_count = pack_inkognito.count()
+        weight_sklad_inkognito = 0
+        for pack_ink in pack_inkognito:
+            weight_sklad_inkognito = weight_sklad_inkognito + pack_ink.weight
+        #--------------------------Ne opredelennie----------------------------------
+
+        #--------------------------Ne upakovano----------------------------------
+        pack_sklad_all = Pack.objects.filter(pack_status=1, sklad_id=1)
+        pack_sklad_count = pack_sklad_all.count()
+        weight_sklad = 0
+        for pack_sk in pack_sklad_all:
+            weight_sklad = weight_sklad + pack_sk.weight
+        pack_vash_na_sklade_count = pack_sklad_count - pack_inkognito_count
+        weight_vash_na_sklade = weight_sklad - weight_sklad_inkognito
+        #--------------------------Ne upakovano---------------------------------- 
+#---------------------------------------------------------------------------------------------
+        air_for_month = []
+        air_for_month_id = []
+        air_added = []
+        air_arrival = []
+        time_air_fly = []
+        time_air_fly1 = []
+        air_name = []
+        air_last = Air.objects.filter(date_added__icontains=date_time_now.strftime('%Y-%m-'))
+        for air in air_last:
+            try:
+                air_priletel = AirHistory.objects.get(air_id=air.air_id, air_status_id=7)
+                # print (air_priletel.date_added)
+                #air_arrival.append(air_priletel.date_added)
+                #arr = air_priletel.date_added
+                arr = air_priletel.date_added
+                arr = arr.replace(tzinfo=None)
+            except ObjectDoesNotExist:
+                arr = datetime.now()
+                air_arrival.append(datetime.now())
+            air_status = PackStatus.objects.get(pack_status_id=air.air_status_id) 
+            air_name.append(str(air.name))    
+            air_name_status = str(air.name) + " - " + unicode(air_status.name)
+            air_for_month.append(air_name_status)
+           # air_for_month_id.append(air.air_id)
+          #  air_added.append(air.date_added)
+            t=air.date_added
+            t = t.replace(tzinfo=None)
+            #delta_time = date_time_now.replace(tzinfo=None) - t
+            days = arr-t
+            #print(days)
+
+
+            #delta_time = date_time_now.replace(tzinfo=None) - t
+            time = str(days)
+            time_days = float(time.split()[0])
+            time_air_fly.append(time_days)
+            z =  str(air.name) + " - " + unicode(air_status.name) + " - " + str(days)
+
+            time_air_fly1.append(z)
+
+        air_weight = ['1140']
+
+#--------------------------------------------------------------------------------------------- 
+
+        labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
+        default_items = [1.2, 2.5, 3, 4, 5, 6]
+
+
+        labels_main = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+                  "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                  "31"]
+        cargo_for_month = 0          
+        cargo_every_day = []
+        for x in labels_main:
+            days = date_time_now.strftime('%Y-%m-') +x
+            cargo = Pack.objects.filter(date_added__icontains=days, sklad_id=1)
+            weight_to_day = 0
+            for c in cargo:
+                weight_to_day = weight_to_day + c.weight
+                cargo_for_month = cargo_for_month + weight_to_day
+            cargo_every_day.append(weight_to_day)            
+
+        data = {
+            "default": default_items,
+            "labels": labels,
+            "default_main": cargo_every_day, 
+            "labels_main": labels_main,
+            "cargo_for_month": cargo_for_month,
+            #-------------------
+
+            "air_for_month": air_for_month,
+            "time_air_fly": time_air_fly,
+            "time_air_fly1": time_air_fly1,
+            "air_name": air_name,
+            "air_weight": air_weight,
+
+            #-------------------    
+            "pack_inkognito_count": pack_inkognito_count,
+            "weight_sklad_inkognito": weight_sklad_inkognito,
+            "pack_sklad_count": pack_sklad_count, 
+            "weight_sklad": weight_sklad,
+            "pack_consol_count": pack_consol_count,
+            "weight_consol": weight_consol,
+            "pack_vash_na_sklade_count": pack_vash_na_sklade_count,
+            "weight_vash_na_sklade": weight_vash_na_sklade,
+            #-------------------    
+        }
+        return Response(data)
+#----------------------End Chartjs ---------------------------------------
 
 
 #-------------Служебные функции-------------------------------------------------------------------
+
+
+class BuyoutListView(ListView):
+    model = Buyout
+    template_name = "buyout.html"
+    #paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        context = super(BuyoutListView, self).get_context_data(**kwargs)
+        username = auth.get_user(self.request)
+
+        user = UserProfile.objects.get(user_id=username.id)
+        cargo_ne_obrabotan = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=1)
+        cargo_consol = Pack.objects.filter(customer_id=user.code_clienta,
+                                           pack_status_id=2)  # user.code_clienta.pack_set.filter
+
+        cargo_consolidation = cargo_ne_obrabotan.count() + cargo_consol.count()
+        cargo_v_puti = Pack.objects.filter(customer_id=user.code_clienta, pack_status_id=5)
+        # ---- для вывода к-ва/цифры упаковочных на боковую панельку
+        cargo = Pack.objects.filter(customer_id = user.code_clienta, pack_status_id=8)
+
+        buyout_product = Buyout.objects.filter(customer_id=user.code_clienta)
+        context = {
+            'username': username,
+            'user': user,
+            'cargo': cargo,
+            'cargo_consolidation': cargo_consolidation,
+            'cargo_v_puti': cargo_v_puti,
+            'buyout_product': buyout_product,
+        }
+
+        return context
+
+
+
+
+def formset_view(request):
+    username = request.user
+    subject = 'Swift-Выкуп'
+    message = 'Add new buyout'
+    from_email0 = 'yak0b@rambler.ru'
+    to_list = [settings.EMAIL_HOST_USER]
+    user = UserProfile.objects.get(user_id=username.id)
+    print("customer = %s" %user.code_clienta.customer_id)
+    ByoutModelFormset = modelformset_factory(Buyout, exclude=['status', 'sum_buyout', 'amount_shipping'], extra=1, form=BuyoutModelForm )
+    formset = ByoutModelFormset(queryset=Buyout.objects.none(), initial = [{'customer_id': user.id}])
+    if request.method == 'POST':
+        formset = ByoutModelFormset(request.POST, request.FILES or None, initial = [{'customer': user.code_clienta.customer_id}])
+        if formset.is_valid():
+            for form in formset:
+            #formset.save()
+            # do something.
+                form.save()
+        send_mail(subject, message, from_email0, to_list, fail_silently=True)
+        bot = telebot.TeleBot('727654152:AAHJ1Ez8KxL9yfXU8wSlq60IXnTJ01UdmTc')
+        bot.send_message(355503529, "Создан новый товар на выкуп от %s" %(str(user.code_clienta)))
+        bot.send_message(200670419, "Создан новый товар на выкуп от %s" %(str(user.code_clienta)))
+        # #TWILIO
+        # account_sid = "AC9014a034cc401571a651f3c0144416b2"
+        # auth_token  = "5d99208d221c2421d41bf84d0df846e2"
+        # client = Client(account_sid, auth_token)
+        # message = client.messages.create(
+        #     to=("+380937190220"),
+        #     from_="+14153606834",
+        #     body=u"Добавился ВЫКУП")
+        # #TWILIO
+        return HttpResponseRedirect("/LK/buyout/")
+
+    else:
+        formset = ByoutModelFormset(queryset=Buyout.objects.none(), initial = [{'customer': user.code_clienta.customer_id}])
+
+    context = {
+        "formset": formset,
+        "client_id": user.code_clienta.customer_id,
+        "user_name": username.first_name
+    }
+    return render(request, "formset_view.html", context)

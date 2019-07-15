@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Неопознанные грузы - Swift Avia Group</title>
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap-theme.min.css'%}">
+
+    <style type="text/css">
+      
+      .thumbnail {
+         max-width: 70%;
+      }
+
+    .lightbox {
+  /** Default lightbox to hidden */
+  display: none;
+
+  /** Position and style */
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+}
+
+.lightbox img {
+  /** Pad the lightbox image */
+  max-width: 90%;
+  max-height: 80%;
+  margin-top: 2%;
+}
+
+.lightbox:target {
+  /** Remove default browser outline */
+  outline: none;
+
+  /** Unhide lightbox **/
+  display: block;
+}  
+    </style>
+
+</head>
+<body>
+
+	<div class="col-xs-12">
+        <div class="col-xs-1">посылкa</div>
+        <div class="col-xs-3">Комментарий</div>
+        <div class="col-xs-2">дата добавления</div>
+        <div class="col-xs-1">вес, кг</div>
+        <div class="col-xs-1">мест</div>
+	<!--         <div class="col-xs-1">фото1</div>
+	        <div class="col-xs-1">фото2</div>
+	        <div class="col-xs-1">фото3</div>
+	        <div class="col-xs-1">фото4</div> -->
+
+    </div>
+   <hr style="background-color:rgb(117,211,242); margin:10px 0px;" class="col-xs-12">
+
+{% for p in pack_inkognito %}
+  <div class="col-xs-12">	
+	<p class="col-xs-1">{{ p.pack_number}}</p>
+	<p class="col-xs-3">{{ p.comment }}</p>
+	<p class="col-xs-2">{{ p.date_added }}</p>
+	<p class="col-xs-1">{{ p.weight }}</p>
+	<p class="col-xs-1">{{ p.point }}</p>
+	<br/>
+  </div>  
+  <div class="row" style="margin-left: 15px; margin-bottom: 50px">
+	 {% for ing in p.file_document_set.all %}
+     <div class="col-xs-3"> 
+      <a href="#img{{ing.id}}"> 
+       {% if ing.image.url %}<img src="{{ ing.image.url }}" class="thumbnail">{% endif %}
+      </a>
+
+
+<!-- lightbox container hidden with CSS -->
+    <a href="#_" class="lightbox" id="img{{ing.id}}">
+      {% if ing.image.url %}<img src="{{ ing.image.url }}">{% endif %}
+    </a>
+  </div>
+    {% endfor %}
+  </div> 
+{% endfor %}
+
+
+
+
+
+
+
+
+{% include 'snipets/js.html' %}
+
+<script>
+    $(document).ready(function() {
+    $(".messages, .alert-success").fadeOut(5000);
+});
+</script>
+</body>
+</html>
+
+
+
+

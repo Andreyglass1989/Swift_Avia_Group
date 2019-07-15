@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.forms import ModelForm
-from login.models import User, UserProfile, Reviews
+from django.forms import ModelForm, formset_factory, modelformset_factory, Textarea, TextInput
+from login.models import User, UserProfile, Reviews, Buyout
 from LK.models import CustomerRecipients, Pack, PackProduct
 from django.core.validators import RegexValidator
 from django.forms.models import inlineformset_factory
@@ -65,3 +65,43 @@ class ReviewsForm(forms.ModelForm):
 
     text_reviews    = forms.CharField(widget=forms.Textarea(attrs={'placeholder': u"Добавьте отзыв"}), required=True)
 
+
+class BuyoutModelForm(forms.ModelForm):
+
+    # comment = forms.CharField(widget=forms.Textarea(), help_text='Добавьте нужный комментарий к товару' required=False, error_messages={"required":"Поле не обязательно к заполнению"})
+
+
+    class Meta:
+        model = Buyout
+        exclude = ['status', 'customer', 'amount_shipping']
+
+        widgets = {
+            'comment': Textarea(attrs={'cols': 25, 'rows': 1}),
+            'price': TextInput(attrs={'size': '5'}),
+            'quantity': TextInput(attrs={'size': '4'}),
+            'size': TextInput(attrs={'size': '4'}),
+            # 'customer': TextInput(attrs={'size': '1', 'max_length':'1'}),
+            # 'name': TextInput(attrs={'size': '10'}),
+            'color': TextInput(attrs={'size': '10'}),
+        }
+
+
+
+
+class BuyoutFormset(forms.ModelForm):
+
+    class Meta:
+        model = Buyout
+        exclude = []
+
+        labels = {
+            'name': 'Наименование*',
+        }
+
+    class Media(object):
+        js = formset_media_js + (
+            # Other form media here
+        )    
+
+
+BuyoutFormSet = modelformset_factory(Buyout, extra=10,  can_delete=True, form=BuyoutFormset)

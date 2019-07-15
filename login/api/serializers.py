@@ -10,15 +10,13 @@ from rest_framework.serializers import (
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
-from login.models import UserProfile, Reviews, CalculatorGroup
+from login.models import UserProfile, Reviews, CalculatorGroup, Buyout, AirDataUploadFrom1C
 from LK.models import CustomerRecipients
 
 User = get_user_model()
 
 
 
-#-----------------------BEGIN Reviews-----------------------------------------------
-#--------------------------BEGIN List Reviews---------------------------------------------
 class ReviewsListSerializer(ModelSerializer):
 
     class Meta:
@@ -32,11 +30,6 @@ class ReviewsListSerializer(ModelSerializer):
         ]
 
 
-# --------------------------BEGIN List Reviews-------------------------------------------
-
-#--------------------------BEGIN CreateUpdate Reviews---------------------------------------------
-
-
 class ReviewsCreateUpdateSerializer(ModelSerializer):
 
     class Meta:
@@ -47,15 +40,6 @@ class ReviewsCreateUpdateSerializer(ModelSerializer):
             'date_add',
         ]
 
-# --------------------------END CreateUpdate Reviews---------------------------------------------
-
-
-
-
-#-----------------------END Reviews-----------------------------------------------
-
-#-----------------------BEGIN Customer Recipients-----------------------------------------------
-#--------------------------BEGIN List CustomerRecipients---------------------------------------------
 
 class CustomerRecipientsListSerializer(ModelSerializer):
 
@@ -69,8 +53,6 @@ class CustomerRecipientsListSerializer(ModelSerializer):
             'street',
         ]
 
-# --------------------------END List CustomerRecipients---------------------------------------------
-#--------------------------BEGIN Detail CustomerRecipients---------------------------------------------
 
 
 class CustomerRecipientsDetailSerializer(ModelSerializer):
@@ -126,9 +108,6 @@ class CustomerRecipientsCreateUpdateSerializer(ModelSerializer):
             'date_fix',
         ]
 
-# --------------------------END CreateUpdate CustomerRecipients---------------------------------------------
-
-#-----------------------END Customer Recipients-----------------------------------------------
 
 
 class UserDetalSerializer(ModelSerializer):
@@ -239,18 +218,14 @@ class UserLoginSerializer(ModelSerializer):
         if user.exists() and user.count() == 1:
             user_obj = user.first()
         else:
-            raise ValidationError("Пользователь с таким логином не найден.")#This Login/email not corrcet
-
+            # raise ValidationError("Пользователь с таким логином не найден.")#This Login/email not corrcet
+            raise ValidationError("User not found")
         if user_obj:
             if not user_obj.check_password(password):
                 raise ValidationError("Неверный пароль, пожалуйста повторите еще.")#"Password is not true, please repeate again")
 
         data["token"] = "SOME RANDOM TOKEN"
         return data
-
-
-
-
 
 
 class CalculatorSerializer(ModelSerializer):
@@ -265,3 +240,25 @@ class CalculatorSerializer(ModelSerializer):
 
     # def get_pack_status(self, obj):
     #     return obj.pack_status.name
+
+
+class BuyoutSerializer(ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        many = kwargs.pop('many', True)
+        super(BuyoutSerializer, self).__init__(many=many, *args, **kwargs)
+
+    class Meta:
+        model = Buyout
+        fields = '__all__'
+
+
+
+class AirDataUploadFrom1CSerializer(ModelSerializer):
+    # customer = SerializerMethodField()
+
+    class Meta:
+        model = AirDataUploadFrom1C
+        fields = '__all__'
+
+    # def get_customer(self, obj):
+    #     return obj.customer.external_id

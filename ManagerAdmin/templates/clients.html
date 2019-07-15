@@ -1,0 +1,93 @@
+{% extends 'base-admin.html' %}
+{% load static %}
+
+
+{% block active_clients %}active{% endblock active_clients %}
+
+
+{% block content %}
+
+ <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              
+              <a href="{% url 'ManagerAdmin:create_client'%}"><button class="btn btn-primary" >Добавить клиента</button></a>
+
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Менеджер {{ username.first_name }}/{{ username }}</h4>
+                  <p class="card-category"> Таблица клиентов </p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="example" class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Код клиента
+                        </th>
+                        <th>
+                          Имя
+                        </th>
+                        <th>
+                          Телефон
+                        </th>
+                        <th>
+                          E-mail
+                        </th>
+                        <th>
+                          Ставка
+                        </th>
+                      </thead>
+                      <tbody>
+
+                        {% for t in table %}
+
+                        <tr>
+                          <td>
+                            {{ t.code }}
+                          </td>
+                          <td>
+                            {{ t.code.firstname }} {{ t.code.lastname }}
+                          </td>
+                          <td>
+                            {{ t.code.telephone }}
+                          </td>
+                          <td>
+                            {% if t.code.email %} {{ t.code.email }} {% else %} Нет почты {% endif %}
+                          </td>
+                          <td class="text-primary">
+                            <!-- <label for="exampleInput1" class="bmd-label-floating">With Floating Label</label> -->
+                             <input type="text" class="form-control col-md-6" id="exampleInput1">
+                             <span class="bmd-help">We'll never share your email with anyone else.</span>
+                          </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+{% endblock content %}

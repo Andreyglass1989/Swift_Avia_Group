@@ -1,0 +1,102 @@
+{% extends 'base-admin.html' %}
+{% load static %}
+
+
+{% block active_NovaPost %}active{% endblock active_NovaPost %}
+
+
+
+{% block content %}
+
+ <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              
+              <a href="#"><button class="btn btn-primary" disabled>Добавить клиента</button></a>
+              {#<!-- {% url 'ManagerAdmin:AddClient'%} -->#}
+
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Менеджер {{ username.first_name }}/{{ username }}</h4>
+                  <p class="card-category"> Таблица клиентов </p>
+                </div>
+
+
+
+
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="nova-pochta" class="table table-hover">
+                      <thead class="">
+                        <th>
+                          Код клиента
+                        </th>
+                        <th>
+                          Адрес
+                        </th>
+                        <th>
+                          Ф.И.О.
+                        </th>
+                        <th>
+                          Телефон
+                        </th>
+                        <th>
+                          Комментарий
+                        </th>  
+                      </thead>
+                      <tbody>
+
+                        {% for t in table %}
+
+                        <tr>
+                          <td>
+                            {{ t.customer }}
+                          </td>
+                          <td>
+                            {{ t.city }}, {{ t.address_client }}
+                          </td>
+                          <td>
+                            {{ t.name }}
+                          </td>
+                          <td>
+                            {{ t.phone }}
+                          </td>
+                          <td>
+                            {% if t.comment %} {{ t.comment }} {% else %} - {% endif %}
+                          </td>
+<!--                           <td class="text-primary">
+                            $7
+                          </td> -->
+
+                        </tr>
+
+                        </tr>
+
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#nova-pochta').DataTable();
+} );
+</script>
+
+{% endblock content %}

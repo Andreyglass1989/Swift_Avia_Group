@@ -1,0 +1,107 @@
+{% extends 'base-admin.html' %}
+{% load static %}
+
+
+{% block active_cargo_list %}active{% endblock active_cargo_list %}
+
+
+{% block content %}
+
+ <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Менеджер {{ username.first_name }}/{{ username }}</h4>
+                  <p class="card-category"> Таблица клиентов </p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="example" class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          №
+                        </th>
+                        <th>
+                          Код клиента
+                        </th>
+                        <th>
+                          Имя покупателя
+                        </th>
+                        <th>
+                          Статус
+                        </th>
+                        <th>
+                          Дата добавления
+                        </th>
+                         <th>
+                          Вес
+                        </th>
+                         <th>
+                          Обьем
+                        </th>
+                         <th>
+                          Мест
+                        </th>
+                      </thead>
+                      <tbody>
+
+                        {% for t in table %}
+
+                        <tr>
+                          <td>
+                            {{ t.pack_number }}
+                          </td>
+                          <td>
+                            {{ t.customer.external_id }}
+                          </td>
+                          <th>
+                            {{ t.customer.firstname }}<br> {{ t.customer.lastname }}
+                          </th>
+                          <td>
+                            {{ t.pack_status }}
+                          </td>
+                          <td>
+                            {{ t.date_added }}
+                          </td>
+                          <td>
+                            {{ t.weight }}
+                          </td>
+                          <td class="text-primary">
+                            {{ t.volume }}
+                          </td>
+                          <td>
+                            {{ t.point }}
+                          </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+{% endblock content %}

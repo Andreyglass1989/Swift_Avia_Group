@@ -5,8 +5,10 @@ from rest_framework.filters import (
     OrderingFilter,
 )
 
+from rest_framework import viewsets
+
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 from rest_framework.mixins import DestroyModelMixin, UpdateModelMixin
@@ -16,7 +18,7 @@ from rest_framework.pagination import (
 
 )
 
-from login.models import UserProfile, Reviews, CalculatorGroup
+from login.models import UserProfile, Reviews, CalculatorGroup, Buyout, AirDataUploadFrom1C
 from LK.models import CustomerRecipients
 
 from django.contrib.auth import get_user_model
@@ -50,6 +52,8 @@ from .serializers import (
     ReviewsCreateUpdateSerializer,
 
     CalculatorSerializer,
+    BuyoutSerializer,
+    AirDataUploadFrom1CSerializer
 )
 
 
@@ -234,3 +238,33 @@ class CalculatorListAPIView(ListAPIView):
     serializer_class = CalculatorSerializer
     queryset = CalculatorGroup.objects.all()
     permission_classes = [AllowAny]
+
+
+class BuyoutAPIView(viewsets.ModelViewSet):
+    serializer_class = BuyoutSerializer
+    queryset = Buyout.objects.all()
+
+    def list(self, request):
+        queryset = Buyout.objects.all()
+        serializer = BuyoutSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=isinstance(request.data,list))
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
+
+
+class AirDataUploadFrom1CAPIView(ListAPIView):
+    serializer_class = AirDataUploadFrom1CSerializer
+    queryset = AirDataUploadFrom1C.objects.all()
+    permission_classes = [AllowAny]
+
+
+class AirDataUploadFrom1CUpdateAPIView(UpdateAPIView):
+    queryset = AirDataUploadFrom1C.objects.all()
+    serializer_class = AirDataUploadFrom1CSerializer
+    lookup_field = 'id'
+    #lookup_url_kwarg = "abc"

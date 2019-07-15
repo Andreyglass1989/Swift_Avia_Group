@@ -190,17 +190,17 @@ class Air(models.Model):
     def __str__(self):
         return self.name
 
-class AirHistory(models.Model):
-    air_history_id = models.AutoField(primary_key=True)
-    air_id = models.IntegerField()
-    user_id = models.IntegerField()
-    air_status_id = models.IntegerField()
-    date_added = models.DateTimeField()
-    comment = models.TextField()
+# class AirHistory(models.Model):
+#     air_history_id = models.AutoField(primary_key=True)
+#     air_id = models.IntegerField()
+#     user_id = models.IntegerField()
+#     air_status_id = models.IntegerField()
+#     date_added = models.DateTimeField()
+#     comment = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'air_history'
+#     class Meta:
+#         managed = False
+#         db_table = 'air_history'
 
 
 class AirParcel(models.Model):
@@ -711,7 +711,7 @@ class CustomerRecipients(models.Model):
     country = models.ForeignKey(Country, default=220, null=True, blank=True) #_id
     name = models.CharField(max_length=255, validators=[kirill], error_messages = {'invalid': ("Только символы латинского алфавита (a–z, A-Z).")})
     lastname = models.CharField(max_length=255, validators=[kirill], error_messages = {'invalid': ("Только символы латинского алфавита (a–z, A-Z).")})
-    city = models.CharField(max_length=255, choices=CITY_CHOICES, default='Kiev')
+    city = models.CharField(max_length=255, default='Kiev') #choices=CITY_CHOICES,
     street = models.CharField(max_length=255, validators=[kirill], error_messages = {'invalid': ("Только символы латинского алфавита (a–z, A-Z).")})
     home = models.IntegerField(validators=[cifra], error_messages = {'invalid': ("Только цифры (0-9).")})
     room = models.IntegerField(blank = True, validators=[cifra], error_messages = {'invalid': ("Только цифры (0-9).")})
@@ -1470,7 +1470,8 @@ class PackStatus(models.Model):
     pack_status_id = models.AutoField(primary_key=True)
     language_id = models.IntegerField()
     name = models.CharField(max_length=32)
-    sms_text = models.CharField(max_length=160)
+    #name2 = models.CharField(max_length=150)
+    sms_text = models.CharField(max_length=160, null=True, blank=True)
     customer_notify = models.IntegerField()
     next_status_text = models.CharField(max_length=255)
 
@@ -1501,7 +1502,7 @@ class Sklad(models.Model):
 class Pack(models.Model):
     pack_id = models.AutoField(primary_key=True)
     pack_number = models.IntegerField(default=191100000)   #
-    external_id = models.CharField(max_length=16)   #++++++++++++++++++++
+    external_id = models.CharField(max_length=16, blank=True, null=True)   #++++++++++++++++++++
     date_added = models.DateTimeField(auto_now_add=True)#++++++++++++++++
     customer = models.ForeignKey(Customer)          #++++++++++++++++++++_id
     sklad = models.ForeignKey(Sklad)             #++++++++++++++++++++ id
@@ -1510,16 +1511,17 @@ class Pack(models.Model):
     volume = models.FloatField(blank=True, null=True)           #++++++++++++++++++++
     weight = models.FloatField(blank=False, null=False)                    #++++++++++++++++++++
     point = models.IntegerField(blank=False, null=False)                   #++++++++++++++++++++
-    language = models.ForeignKey(Language, default=2)#+++++++++++++++++++  id
+    language = models.ForeignKey(Language)#+++++++++++++++++++  id
     currency = models.ForeignKey(Currency)          #++++++++++++++++++++ id
     currency_code = models.CharField(max_length=3, default='USD')#+++++++
     currency_value = models.FloatField(default=1, blank=True, null=True)   #++++++++++++++++++++
     comment = models.TextField(blank=True, null=True)                    #++++++++++++++++++++
-    category_group = models.ForeignKey(CategoryGroup, default=3)#+++++++++++++++++
+    category_group = models.ForeignKey(CategoryGroup)#+++++++++++++++++
     sandbox = models.IntegerField(default=0, blank=True, null=True)         #+++++++++++++++++++
     def_field = models.IntegerField(db_column='def', default=0, blank=True, null=True)  # Field renamed because it was a Python reserved word.                          #+++++++++++++++++++
     packlist = models.IntegerField(default=0, blank=True, null=True)        #+++++++++++++++++++
-    ttn = models.CharField(max_length=20, blank=False, null=False) #+++++++++++++++++++
+    is_received_1c = models.PositiveSmallIntegerField(blank=True, null=True) #+++++++++++++++++++
+    image = models.ImageField(upload_to='Pack/%Y/%m/%d', blank=True, null=True)
    # document_file = models.FileField(null=True, blank=True)
 
 
@@ -1534,7 +1536,7 @@ class Pack(models.Model):
 class PackHistory(models.Model):
     pack_history_id = models.AutoField(primary_key=True)
     pack_id = models.IntegerField()
-    pack_status_id = models.IntegerField()
+    pack_status = models.ForeignKey(PackStatus)
     use = models.IntegerField()
     notify = models.IntegerField()
     date_added = models.DateTimeField()
@@ -1549,7 +1551,7 @@ class PackHistory(models.Model):
 
 class PackProduct(models.Model):
     pack_product_id = models.AutoField(primary_key=True)
-    pack = models.ForeignKey(Pack)                       #_id
+    pack = models.ForeignKey(Pack, related_name='products', on_delete=models.CASCADE)                       #_id
     name = models.CharField(verbose_name='*Наименование товара',max_length=255)
     price = models.FloatField(verbose_name='*Цена/ед.')
     quantity = models.IntegerField(verbose_name='*Кол-во')
@@ -1632,10 +1634,24 @@ class Parcel(models.Model):
         db_table = 'parcel'
 
 
+
+class AirHistory(models.Model):
+    air_history_id = models.AutoField(primary_key=True)
+    air_id = models.IntegerField()
+    user_id = models.IntegerField()
+    air_status = models.ForeignKey(PackStatus)
+    date_added = models.DateTimeField()
+    comment = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'air_history'
+
+
 class ParcelHistory(models.Model):
     parcel_history_id = models.AutoField(primary_key=True)
     parcel_id = models.IntegerField()
-    parcel_status_id = models.IntegerField()
+    parcel_status = models.ForeignKey(PackStatus)
     use = models.IntegerField()
     notify = models.IntegerField()
     date_added = models.DateTimeField()
@@ -1650,9 +1666,12 @@ class ParcelHistory(models.Model):
 
 class ParcelPackProduct(models.Model):
     parcel_pack_product_id = models.AutoField(primary_key=True)
-    parcel_id = models.IntegerField()
-    pack_product_id = models.IntegerField()
-    pack_id = models.IntegerField()
+    # parcel_id = models.IntegerField()
+    parcel = models.ForeignKey(Parcel)
+    # pack_product_id = models.IntegerField()
+    pack_product = models.ForeignKey(PackProduct, related_name='parcel_products', on_delete=models.CASCADE)
+    # pack_id = models.IntegerField()
+    pack = models.ForeignKey(Pack)
     quantity = models.IntegerField()
     weight = models.FloatField()
     point = models.IntegerField()
@@ -1690,11 +1709,11 @@ class ParcelUa(models.Model):
 class ParcelUaData(models.Model):
     parcel_ua_id = models.IntegerField()
     plomba_id = models.IntegerField()
-    width = models.DecimalField(max_digits=4, decimal_places=2)
-    height = models.DecimalField(max_digits=4, decimal_places=2)
-    length = models.DecimalField(max_digits=4, decimal_places=2)
-    volume = models.DecimalField(max_digits=4, decimal_places=2)
-    weight = models.DecimalField(max_digits=4, decimal_places=2)
+    width = models.DecimalField(max_digits=5, decimal_places=2)
+    height = models.DecimalField(max_digits=5, decimal_places=2)
+    length = models.DecimalField(max_digits=5, decimal_places=2)
+    volume = models.DecimalField(max_digits=5, decimal_places=2)
+    weight = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:
         managed = False

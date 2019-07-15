@@ -27,7 +27,24 @@
          margin:0px;
          margin-top:2%;
         }
+
+      table>tr>td{
+        font-size: 35px;
+      }  
     </style>
+
+    <!-- MDBootstrap -->
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static '/css/MDBootstrap/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static '/css/MDBootstrap/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static '/css/MDBootstrap/style.css' %}" rel="stylesheet">
+
+<!-- MDBootstrap -->
 
 {% endblock CSS%}
 
@@ -48,6 +65,7 @@
             margin-top:2%;
             width:auto;
             margin-right:2%;
+            font-size: 50px;
         }
 
         body{
@@ -63,7 +81,7 @@
 {% block karta %}
 
 <div style="margin-top:50px" class="container">
-<iframe src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d916.1174750311872!2d113.2558219!3d23.2987038!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3402e4c3be5926bb%3A0xf0a8300a7080505b!2z6aG65bu26JqM54mp5Yqg5rK556uZ5pyJ6ZmQ5YWs5Y-4INCa0LjRgtCw0LksIEd1YW5nZG9uZyBTaGVuZywgR3Vhbmd6aG91IFNoaSwgQmFpeXVuIFF1LCDkurrlkozplYfopb_muZbmnZEg6YKu5pS_57yW56CBOiA1MTA0NTA!3m2!1d23.298600999999998!2d113.25556999999999!5e0!3m2!1sru!2sru!4v1504084598222" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m19!1m8!1m3!1d916.1174750311872!2d113.2558219!3d23.2987038!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3402e4c3be5926bb%3A0xf0a8300a7080505b!2z6aG65bu26JqM54mp5Yqg5rK556uZ5pyJ6ZmQ5YWs5Y-4INCa0LjRgtCw0LksIEd1YW5nZG9uZyBTaGVuZywgR3Vhbmd6aG91IFNoaSwgQmFpeXVuIFF1LCDkurrlkozplYfopb_muZbmnZEg6YKu5pS_57yW56CBOiA1MTA0NTA!3m2!1d23.298600999999998!2d113.25556999999999!5e0!3m2!1sru!2sru!4v1504084598222" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe> -->
 </div>
 
 {% endblock karta %}
@@ -71,84 +89,169 @@
 
 {% block content %}
 
-<h1 style="text-align:center; margin-top:20px ">仓库地址 / Warehouse address / Адрес склада</h1>
-<div style="margin-bottom:50px" class="col-xs-12">
-<h3 class="col-xs-4">中国: 广州市白云区人和镇西湖村西湖西街自编888-3仓库(展骥国际物流)
-    <br>
-   <!-- <button id="showHideContent_ch" type="button" class="btn btn-default">Подробнее</button>-->
- <div id="content_ch" style="display: none;">
-     高速：<ol style="margin-left:-15px">
-         <li>平沙出口往花都方向，过了江村大桥第二个红绿灯右转人和镇</li>
-         <li>G15沈海高速蚌湖出口-高翔路-267省道-西湖西街 </li></ol>
 
-         国道：广花一级公路-267省道-西湖西街 直入200米展骥仓（左边）
- </div>
-</h3>
-<h3 class="col-xs-4">English:  Guangzhou, Baiyun district, RenHeZhen West, HuCun West,Zhanji international logistics market, 888-3 warehouse
+<br>
+<!-- Jumbotron -->
+<!-- </div> -->
+    <div class="card card-image z-depth-2 rounded" style="background-image: url({% static '/images/for_contact/warehouse.jpg' %});">
+      <div class="text-white text-center rgba-stylish-strong py-5 px-4 ">
+        <div class="py-5">
 
-    <br>
- <!-- <button id="showHideContent_en" type="button" class="btn btn-default">Подробнее</button>-->
+          <!-- Content -->
+          <h5 class="h5"><i class="fas fa-warehouse"></i> Warehouse address / 仓库地址</h5>
+          <h2 class="card-title h2 my-4 py-2"><em>Recipient / 收货人: <i class="fas fa-user-alt"></i>  Svyatoslav   <span class=""> <i class="fas fa-phone"></i> 13042078364</span> </em></h2>
+          <p class="mb-4 pb-2 px-md-5 mx-md-5">Guangzhou, Baiyun district, RenHeZhen West, HuCun West,Zhanji international logistics market, 888-3 warehouse</p><hr>
+          <p class="mb-4 pb-2 px-md-5 mx-md-5">广州市白云区人和镇西湖村西湖西街自编888-3仓库(展骥国际物流)</p>
+          <!-- <a class="btn peach-gradient"><i class="fas fa-clone left"></i> View project</a> -->
 
- <div id="content_en" style="display: none;">
-  From highway: <ol style="margin-left:-15px">
-    <li>At Pinsha exit head towards Huadu district, cross the Jiangcun bridge and turn right to Ren He Zhen on the second traffic lights</li>
-   <li>G15 Shenhai Expressway's Benghu exit – Gaoxiang str.- 267 Province Highway – Xihu West str.</li></ol>
-    State road:<br>
-     Guanzhou-Huadu First Class Highway– 267 Province Highway – Xihu West str. then 200m to Zhanji warehouses (on the left)</div>
+          <cite title="Source Title "> Working time /  时间 时间 : 09: 00-18: 00</cite>
 
-</h3>
-<h3 class="col-xs-4">Русский: Гуанчжоу, р-н Байюнь, Жен Хэ Дженг Си, Сиху западная ул., рынок международной логистики Джандзи, склад 888-3
-    <br>
+        </div>
+        
+        
+                <div class="row">
+                    <div class="col-6">
+                        <!-- Card -->
+                        <div class="card z-depth-5-half">
 
- <div id="content_ru" style="display: none;">
-     Со скоростной: <ol>
- <li>На выходе Пинша направляйтесь в сторону р-г Хуаду, проезжайте мост Дзянгчун и на втором светофоре поворачивайте направо на ул. Женхэ</li>
- <li>С Шенхай G15 съезд Бэнгху - ул. Гаосиянг - 267-ое шоссе - Сиху Западная ул.</li></ol>
- Автобан:
-Гуанчжоу-Хуанду - 267-ое шоссе - Сиху Западная ул. потом 200м внутрь Джандзи рынка (слева)
- </div>
-<br style="margin-bottom:3%">
-    <a style="text-decoration: none" id="showHideContent_ru" href="#"><img src="{% static '/images/social/info000.png' %}" width="10%" height="10%" /><span style="color:#fff; font-size:1.8vw">Подробнее</span></a>
-    <!--<button id="showHideContent_ru" type="button" class="btn btn-default">Подробнее</button>-->
-</h3>
+                          <!-- Card image -->
+                          <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap"> -->
+
+                          <!-- Card content -->
+                          <div class="card-body text-primary">
+
+                            <!-- Title -->
+                            <!-- <h4 class="card-title"><a>Card title</a></h4> -->
+                            <!-- Text -->
+                            <em class="card-text ">
+                                <h4>高速：</h4>
+                                <h5> 1.平沙出口往花都方向，过了江村大桥第二个红绿灯右转人和镇 </h5>
+                                <h5> 2. G15沈海高速蚌湖出口-高翔路-267省道-西湖西街 </h5>
+                    
+                                <br>
+                                <h4>From highway:</h4>  
+                                <h5>1.At Pinsha exit head towards Huadu district, cross the Jiangcun bridge and turn right to Ren He Zhen on the second traffic lights </h5>
+                                <h5>2.G15 Shenhai Expressway's Benghu exit – Gaoxiang str.- 267 Province Highway – Xihu West str.</h5> 
+                            </em>
+                            <!-- Button -->
+                            <!-- <a href="#" class="btn btn-primary">Button</a> -->
+
+                          </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-6">
+                        <!-- Card -->
+                        <div class="card z-depth-1-half">
+
+
+                          <!-- Card content -->
+                          <div class="card-body text-primary">
+
+                            <!-- Title -->
+                            <!-- <h4 class="card-title">Card title</h4> -->
+                            <!-- Text -->
+                            <em class="card-text">
+                               <h4 > 国道： </h4>
+                               <h5 > 广花一级公路-267省道-西湖西街 直入200米展骥仓（左边） </h5>
+
+                               <br>
+                                <h4 >State road: </h4>  
+                                <h5 >Guanzhou-Huadu First Class Highway– 267 Province Highway – Xihu West str. then 200m to Zhanji warehouses (on the left) </h5>
+                                <br>
+                                <!-- <h5 class="blue-text">2.G15 Shenhai Expressway's Benghu exit – Gaoxiang str.- 267 Province Highway – Xihu West str.</h5>  -->
+                            </em>
+                            <!-- Button -->
+                            <!-- <a href="#" class="btn btn-primary">Button</a> -->
+
+
+                          </div>
+
+                        </div>
+                    </div>
+                </div>
+      </div>
+    </div>
+
+<!-- Jumbotron -->
+<br>
+
+
+<div class="col-md-12">
+<p class="h3">Пример заполнения адреса доставки посылки из китайских интернет-площадок</p>
+  <table style="font-size: 50px" class="table h1-responsive table-bordered">
+    <thead>
+      <tr>
+        <th scope="col"  style="font-size: 30px">所在地区：</th>
+        <th scope="col"  style="font-size: 30px">Расположение:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-size: 30px">中国大陆</td>
+        <td style="font-size: 30px">Материковый Китай</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">新增收货地址：</td>
+        <td style="font-size: 30px">Почтовый адрес:</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">广东省</td>
+        <td style="font-size: 30px">провинция Гуандун</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">广州市</td>
+        <td style="font-size: 30px">Город Гуанчжоу</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">白云区</td>
+        <td style="font-size: 30px">Район Байюн</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">邮政编码：510470</td>
+        <td style="font-size: 30px">Почтовый индекс 510470</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">街道地址：</td>
+        <td style="font-size: 30px">Улица:</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">西湖村</td>
+        <td style="font-size: 30px">Си Ху</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">西湖西街28号</td>
+        <td style="font-size: 30px">Си Ху западная ул. 28</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">自编888-3仓库(展骥国际物流)</td>
+        <td style="font-size: 30px">Склад 888-3</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">收货人姓名:</td>
+        <td style="font-size: 30px">Грузополучатель:</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">Slava</td>
+        <td style="font-size: 30px">Слава</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">联系电话：</td>
+        <td style="font-size: 30px">Номер мобильного телефона:</td>
+      </tr>
+      <tr>
+        <td style="font-size: 30px">13042078364 （俄语，中文）</td>
+        <td style="font-size: 30px">13042078364 （Русский, Китайский）</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-<hr style="color:#fff;">
-
-<br>
-
-<h3 style="margin-top:100px">Получатель / Recipient / 收货人: Slava 130 4207 8364; Igor 13802426344 </h3>
-<br>
-<h3>Время работы / Working time /  时间 时间 : 09:00-18:00</h3>
-<br>
-
-
-
-<!--
-<form style="color:black" role="form" action="" method="post">{% csrf_token %}
-    {% csrf_token %}
-    {{ form.as_p }}
-    <table>
-        <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </tr>
-        </table>
-    <button type="submit">Submit</button>
-</form>
-
--->
-
-
-
 
     <hr style="color:#fff;">
 <div class="col-xs-12">
-    <div class="col-xs-6"><h2>Написать нам:</h2>
+<!--     <div class="col-xs-6"><h2>Написать нам:</h2>
 
         <form method="POST" class="col-xs-12" style="color:black;" action="">{% csrf_token %}
             <table>
@@ -168,24 +271,38 @@
 
         <input style="margin-top:2%;padding:5px;" class="button btn-primary" type="submit" value="Отправить">
         </form>
-   </div>
+   </div> -->
 
-
-    <div class="col-xs-6"><h2 style="text-align:center;">Свяжитесь с нами:</h2><br>
-      <h4 id="contact_anna" style="text-align:right;">Вы можете задать нам любой вопрос (с 10:00 до 18:00)</h4>
+<br>
+   <h2 style="text-align:center;">Свяжитесь с нами:</h2><br>
+      <h4 class="text-center" id="contact_anna" >Вы можете задать нам любой вопрос (с 10:00 до 18:00)</h4>
         <ul>
-            <a href="tel:+380676542381"><li><img src="{% static 'images/for_contact/telephone.png'%}">+38 (067) 654-23-81</li></a>
-            <a href="viber://add?number=3806542381"><li><img src="{% static 'images/for_contact/viber.png'%}">Viber: +38 (067) 654-23-81</li></a>
-            <a href="tg://resolve?domain=<USERNAME>"><li><img src="{% static 'images/for_contact/Telegram.png'%}">Telegram: +38 (067) 654-23-81</li></a>
-            <a title="WhatsApp" href="whatsapp://send?phone=+380675387986"><li><img src="{% static 'images/for_contact/whatsapp.png'%}">WhatsApp: +38 (067) 538 79 86</li></a>
+            <a href="tel:+380673274158"><li><img src="{% static 'images/for_contact/telephone.png'%}">+38 (067) 327-41-58</li></a>
+            <a href="viber://add?number=380673274158"><li><img src="{% static 'images/for_contact/viber.png'%}">Viber: +38 (067) 327-41-58</li></a>
+            <a href="tg://resolve?domain=<USERNAME>"><li><img src="{% static 'images/for_contact/Telegram.png'%}">Telegram: +38 (067) 327-41-58</li></a>
+            <a title="WhatsApp" href="whatsapp://send?phone=+380673274158"><li><img src="{% static 'images/for_contact/whatsapp.png'%}">WhatsApp: +38 (067) 327-41-58</li></a>
 
-            <a href="weixin://dl/chat?annaaviaodessa"><li><img src="{% static 'images/for_contact/wechat.png'%}">WeChat ID: annaaviaodessa</li></a>
+            <a href="weixin://dl/chat?Lyudmila_av"><li><img src="{% static 'images/for_contact/wechat.png'%}">WeChat ID: Lyudmila_av</li></a>
 
-            <a href="skype:live:logistic24company?chat"><li><img src="{% static 'images/for_contact/skype.png'%}">Skype: live:logistic24company</li></a>
+            <a href="skype:live:206c11f80e4ea2dc?chat"><li><img src="{% static 'images/for_contact/skype.png'%}">Skype: live:206c11f80e4ea2dc</li></a>
         </ul>    
 
-    </div>
 
 </div>
+
+
+<!-- MDBootstrap -->
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="{% static 'js/MDBootstrap/jquery-3.3.1.min.js' %}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{% static 'js/MDBootstrap/popper.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{% static 'js/MDBootstrap/bootstrap.min.js' %}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{% static 'js/MDBootstrap/mdb.min.js' %}"></script>
+
+<!-- MDBootstrap -->
 
 {% endblock content %}

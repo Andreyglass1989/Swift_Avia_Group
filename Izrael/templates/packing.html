@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            @font-face { font-family: Arial; src: url(/root/django/swift_avia_group/static/font/arial.ttf); }
+            @font-face { font-family: Tahoma; src: url("{% static 'font/Tahoma.ttf' %}"); }
+            @font-face { font-family: Tahoma; src: url(/static/font/Tahoma.ttf); }
+
+            body {
+                font-size: 14px;
+                font-family: Tahoma, Arial, 'sans-serif';
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+
+            span {
+                font-size:10px;
+            }
+    
+/*            table tr:first-child td:before {
+                min-height: 400px;
+                display: block;
+                content: ""
+            }*/
+
+table {
+    width: 200%;
+}
+.set-height td {
+    position: relative;
+    overflow: hidden;
+    height: 2em;
+}
+.set-height p {
+    position: absolute;
+    margin: .1em;
+    left: 0;
+    top: 0;
+}
+        </style>
+
+                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+ 
+{% for car in cargo %}
+<body>
+
+<table class="table table-bordered" cellpadding="0">
+  <thead>
+    <tr>
+      <th scope="col"><h1>BILL OF LADING</h1></th>
+      <th scope="col" style="font-size: 7.8px">FOR MULTIMODAL TRANSPORT OR PORT TO PORT SHIPMENT</th>
+      <th scope="col"><h1>NEGOTIABLE ORIGINAL</h1></th>
+<!--       <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+</table>
+
+
+
+         <table border="1" cellpadding="3">
+           <tr>
+            <th align="left" >
+                <span style="font-weight: 10px;">Shipper</span><br>
+                <span style="font-size: 14px">FAMILIA IPS LTD</span><br>
+                <span style="font-size: 14px">ANNA FRANK 2</span><br>
+                <span style="font-size: 14px">KFAR SABA 4425102 ISRAEL</span><br>
+                <span style="font-size: 14px">ATTN: ILANA TEL:0505818303</span><br>
+                <br>
+            
+            </th>
+            <th><img align='left' left" src='data:image/jpeg;base64,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'></th>
+           </tr>
+           </table> 
+
+
+           <table border="1" cellpadding="3" style='height: 60px;'>
+            <tr>
+                <td rowspan="2"><span>Consignee</span><br>
+                    <span style="font-size: 14px">Logistic Delivery Express </span><br>
+                    <span style="font-size: 14px">Podilsk,Odesska obl,Soborna 216a</span><br>
+                    <p>{{ car.full_customer_name }} {{ car.telephone_number }} {{ car.oblast }} {{ car.city }} {{ car.post_number }} {{ car.street_home }}</p>
+                </td>
+                <td valign="top">
+                    <span>FLB vnmber: <span style="font-size: 14px">{{ car.box_number }}</span></span>
+                    
+                </td>    
+            </tr>
+            <tr>
+                <td valign="top">
+                    <span>Name of carrier</span>
+                </td>    
+            </tr>
+
+
+           </table>
+
+           <table border="1" cellpadding="3" > 
+
+            <tr ><td width="50" colspan="2" rowspan="3" valign="top" >
+                <span>Notify address</span>
+                <p>{{ car.full_customer_name }} {{ car.telephone_number }} {{ car.oblast }} {{ car.city }} {{ car.post_number }} {{ car.street_home }}</p>
+
+            </td>
+                <td width="570"><span>Export references</span></td></tr>
+            <tr ><td width="570"><span>Booking no.</span></td></tr>
+            <tr ><td width="570" ><span>Notes</span></td></tr>
+
+            
+            <tr><td width="140">
+                <span>Pre-carriage by</span><br/>
+                <span>&nbsp;</span>
+
+            </td>
+                <td width="130">
+                <span>Place of receipt by pre-carrier</span><br/>
+                <span>&nbsp;</span>
+            </td>
+                <td width="270" rowspan="3">
+                    <p style="font-weight: bold; text-align: center;">*************************************************************</p>
+                    <p style="font-weight: bold; text-align: center;">For US ShipmentsOnly:ICLSCAC:ICLG</p>
+                    <p style="font-weight: bold; text-align: center;">*************************************************************</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="140">
+                    <span>Vessel</span><br/>
+                    <span style="font-size: 14px;  font-weight: bold">ZIM/ONTARIO/46W</span>
+
+                </td>
+                <td width="130">
+                    <span>Port of loading</span><br/>
+                    <span style="font-size: 14px;  font-weight: bold">HAIFA</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="140">
+                    <span>Port of discharge</span><br/>
+                    <span style="font-size: 14px;  font-weight: bold">ODESSA</span>
+                </td>
+                <td width="130">
+                    <span>Place of delivery by on-carrier</span><br/>
+                    <span>&nbsp;</span>    
+                </td></tr>
+
+          </table>
+
+          <table border="1" cellpadding="3" style='height: 130px;'>
+           <tr > 
+            <td align="left" width="142" valign="top" >
+                    <span>Marks and nos; Container no.</span>
+                    <p>1</p>
+            </td>
+            <td width="280" valign="top">
+                <span>Number and kind of packages; Description of goods</span><br>
+                <p>{{ car.description }}</p>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+
+            </td>    
+            <td width="70" valign="top" >
+                <span>Gross weight</span>
+                <p>{{ car.height }}</p>
+            </td>   
+            <td width="55" valign="top" >
+                <span>Measurement</span><br/>
+                <span>&nbsp;</span>
+            </td> 
+
+            </tr>
+          </table>
+
+
+          <table border="1" cellpadding="3">
+           <tr>
+            <td align="left" width="140" rowspan="4" valign="top">
+                <span>Freight details</span>
+            </td>
+            <td width="50" rowspan="3" valign="top">
+                <span>Charges</span>
+            </td>    
+            <td width="60" >
+                <span>Currency</span>
+            </td>   
+            <td width="80">
+                <span>Declared value</span>
+            </td> 
+             <td width="210" style="border-bottom:solid 0px #000;">
+                <span>particulars furnished by shipper</span>
+            </td> 
+            </tr>
+
+            <tr>
+                <td colspan="3"><span>RECEIVED the goods in apparent good order and condition and, as far as ascertained by reasonable means of checking, as specified above unless otherwise stated.
+The Carrier, in accordance with and to the extent of the provisions contained in this Bill of Lading, and with liberty to sub-contract, undertakes to perform and/or in his own name to procure performance of the combined transport and the delivery of the goods, including all services related thereto, from the place and time of taking the goods in charge to the place and time of delivery and accepts responsibility for such transport and such services.<br>
+One of the Bills of Lading must be surrendered duly endorsed in exchange for the goods or delivery order.<br>
+IN WITNESS whereof Bill(s) of Lading has/have been signed in the number indicated below, one of which being <br>
+accomplished the other(s) to be void.</span></td>                
+            </tr>
+            <tr>
+                <td colspan="2"><span>Freight payable at</span><span>&nbsp;</span></td>
+                <td><span>Place and date of issue</span><span>&nbsp;</span></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+          </table><br>
+
+    </body>
+{% endfor %}
+</html>

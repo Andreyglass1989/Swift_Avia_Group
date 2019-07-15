@@ -1,0 +1,174 @@
+{% extends 'base_for_add_and_edit_cargo.html' %}
+
+
+
+{% block CSS0 %}
+<style>
+	.form-row{
+		border-bottom: 1px solid #333;
+		margin:20px 0px;
+		padding: 20px 10px;
+	}
+
+</style>
+
+{% endblock CSS0 %}
+
+
+
+{% block content %}
+
+<h1 align="center">{{ user_name }}, добавьте нужный Вам товар для выкупа из Китая</h1>
+<br>
+
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{ formset.management_form }}
+    <table  class="table table-hover small-text" id="tb">
+			<tr class="tr-header">
+			<th><span class='glyphicon glyphicon-trash'></th>    
+			<th>ссылка</th>
+			<th>Наименование*</th>
+			<th>К-во*</th>
+			<th>Цена, Юань</th>
+			<th>Размер</th>
+			<th>Цвет</th>
+			<th>Комментарий</th>
+            <th>Картинка</th>
+            <!-- <th>Итого,¥</th> -->
+			<!-- <th>Покупатель</th> -->
+			<!-- <th>Статус</th> -->
+			<!-- <th><a href="javascript:void(0);" style="font-size:18px;"  title="Добавить еще товар"><span class="glyphicon glyphicon-plus add-new-form"></span></a></th> -->
+
+        	<tr class=" {% cycle 'row1' 'row2' %} form-row" id="empty-row" style="visibility: hidden;">
+    <td><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
+
+                        {% for field in formset.empty_form %}
+                            <td>
+                            {% if forloop.first %}
+                                {% for hidden in form0.empty_form %}
+                                    {{ hidden }}
+                                {% endfor %}
+                            {% endif %}
+                            {{ field.errors.as_ul }}
+                            {{ field }}</td>
+                        {% endfor %}           
+                        
+                    </tr>
+
+
+	{% for form in formset %}
+			<tr>
+			    <td><a href='javascript:void(0);'  class='remove'><span class='glyphicon glyphicon-remove'></span></a></td>
+            	<td>{{ form.url }}</td>
+            	<td>{{ form.name }}</td>
+            	<td>{{ form.quantity }}</td>
+            	<td>{{ form.price }}</td>
+            	<td>{{ form.size }}</td>
+            	<td>{{ form.color }}</td>
+            	<td>{{ form.comment }}</td>
+                <td>{{ form.image }}</td>
+            	<td style="visibility: hidden;">{{ form.customer }}</td>
+
+        	</tr>
+    {% endfor %}
+</table>
+
+
+	<div class="btn-group">
+		<input class="btn btn-primary" type="submit" value="Сохранить" />
+		<a class="btn btn-default" href="/LK/buyout/">Отмена</a>
+		<a class="btn btn-link add-new-form" href="#">+ Добавить еще товар</a>
+	</div>
+</form>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+<script>
+$(function(){
+
+    function updateEmptyFormIDs(element, totalForms){
+    var thisInput = element
+    // get current form input name
+    var currentName = element.attr('name')
+    // replace "prefix" with actual number
+    var newName = currentName.replace(/__prefix__/g, totalForms)
+    
+    // update input with new name
+    thisInput.attr('name', newName)
+    thisInput.attr('id', "id_" + newName)
+
+    // create a new form row id
+    var newFormRow = element.closest(".form-row");
+    var newRowId =  "row_id_" + newName
+    newFormRow.attr("id", newRowId)
+    // add new class for basic graphic animation
+    newFormRow.addClass("new-parent-row")
+
+    // update form group id
+    var parentDiv = element.parent();
+    parentDiv.attr("id", "parent_id_" + newName)
+    // update label id
+    var inputLabel = parentDiv.find("label")
+    inputLabel.attr("for", "id_" + newName)
+    
+    // return created row
+    return newFormRow
+}
+
+
+    $('.add-new-form').click(function(e) {
+    e.preventDefault()
+    // form id like #id_form-TOTAL_FORMS
+    var formId = "id_form-TOTAL_FORMS"
+    // copy empty form
+    var emptyRow = $("#empty-row").clone();
+    // remove id from new form
+    emptyRow.attr("id", null)
+    // Insert row after last row
+    
+    // get starting form count for formset
+    var totalForms = parseInt($('#' + formId).val());
+    
+    // create new form row from empty form row
+    var newFormRow;
+    emptyRow.find("input, select, textarea").each(function(){
+        newFormRow = updateEmptyFormIDs($(this), totalForms)
+    })
+    // insert new form at the end of the last form row
+    $(".form-row:last").after(newFormRow)
+    // update total form count (to include new row)
+    $('#'+ formId).val(totalForms + 1);
+    $("select").val({{ client_id }})
+    $("select").css('visibility', 'hidden');
+
+   // $("#empty-row").css("visibility","hidden")
+   	$(".new-parent-row").css('visibility', 'visible');
+    // scroll page to new row
+    $('html, body').animate({
+        scrollTop: newFormRow.offset().top - 100
+    }, 500, function(){
+        // animate background color
+        // requires: jQuery Color: https://code.jquery.com/color/jquery.color-2.1.2.min.js
+        newFormRow.animate({
+            backgroundColor: "#fff"
+        }, 1500)
+    });
+});
+
+
+     $(document).on('click', '.remove', function() {
+         var trIndex = $(this).closest("tr").index();
+            if(trIndex>1) {
+             $(this).closest("tr").remove();
+           } else {
+             alert("Извините!! Не могу удалить первую строку!");
+           }
+      });
+});      
+</script> 
+
+
+{% endblock content %}

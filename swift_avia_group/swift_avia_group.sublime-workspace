@@ -1,0 +1,823 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"по",
+				"поступил"
+			],
+			[
+				"padd",
+				"padding-right"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"pa",
+				"padding-right"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"c",
+				"color"
+			],
+			[
+				"ma",
+				"margin-left"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"col-xs",
+				"col-xs-5"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"se",
+				"search"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"a",
+				"args"
+			],
+			[
+				"get",
+				"get_context_data"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"s",
+				"slug"
+			],
+			[
+				"ur",
+				"urls"
+			],
+			[
+				"uni",
+				"unique_slug_generator"
+			],
+			[
+				"ran",
+				"random"
+			],
+			[
+				"ra",
+				"random_string_generator"
+			],
+			[
+				"sl",
+				"slug"
+			],
+			[
+				"slu",
+				"slugify"
+			],
+			[
+				"ex",
+				"except"
+			],
+			[
+				"Pro",
+				"ProductAdmin"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"P",
+				"ProductManager"
+			],
+			[
+				"i",
+				"import"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"base",
+				"base_name"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"pro",
+				"product_list"
+			],
+			[
+				"url",
+				"urlpatterns"
+			],
+			[
+				"De",
+				"DEBUG"
+			],
+			[
+				"pass",
+				"password2"
+			],
+			[
+				"cla",
+				"cleaned_data"
+			],
+			[
+				"E",
+				"EmailField"
+			],
+			[
+				"is",
+				"is_authenticated"
+			],
+			[
+				"aut",
+				"authenticate"
+			],
+			[
+				"CO",
+				"ContactForm"
+			],
+			[
+				"co",
+				"context"
+			],
+			[
+				"cl",
+				"cleaned_data"
+			],
+			[
+				"Co",
+				"ContactForm"
+			],
+			[
+				"conte",
+				"content"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"h",
+				"html"
+			],
+			[
+				"ht",
+				"https"
+			],
+			[
+				"ho",
+				"home_page"
+			],
+			[
+				"Pa",
+				"PackList_All_APIView"
+			],
+			[
+				"fore",
+				"forecast"
+			],
+			[
+				"n",
+				"not"
+			],
+			[
+				"loca",
+				"location"
+			],
+			[
+				"add",
+				"add_widget"
+			],
+			[
+				"forec",
+				"forecast_container"
+			],
+			[
+				"te",
+				"temp_max"
+			],
+			[
+				"tem",
+				"temp"
+			],
+			[
+				"da",
+				"day"
+			],
+			[
+				"wea",
+				"weather"
+			],
+			[
+				"we",
+				"weather_retrieved"
+			],
+			[
+				"data",
+				"data_item"
+			],
+			[
+				"pac",
+				"pack_id"
+			],
+			[
+				"Li",
+				"ListProperty"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"la",
+				"last_name"
+			],
+			[
+				"cle",
+				"clear_widgets"
+			],
+			[
+				"con",
+				"conditions_description"
+			],
+			[
+				"condi",
+				"UnknownConditions"
+			],
+			[
+				"B",
+				"BoxLayout"
+			],
+			[
+				"weat",
+				"weather_url"
+			],
+			[
+				"u",
+				"u"
+			],
+			[
+				"us",
+				"username"
+			],
+			[
+				"f",
+				"format"
+			],
+			[
+				"get_",
+				"get_user"
+			],
+			[
+				"ite",
+				"item_strings"
+			],
+			[
+				"sea",
+				"search_results"
+			],
+			[
+				"wi",
+				"weight"
+			],
+			[
+				"pack",
+				"pack_number"
+			],
+			[
+				"searc",
+				"search_url"
+			],
+			[
+				"l",
+				"LoginScreen"
+			],
+			[
+				"sh",
+				"sheet"
+			],
+			[
+				"m",
+				"my_str"
+			],
+			[
+				"pali",
+				"palindr"
+			],
+			[
+				"rev",
+				"rev_str"
+			],
+			[
+				"ro",
+				"roman_numeral"
+			],
+			[
+				"at",
+				"attack"
+			],
+			[
+				"ch",
+				"change_state"
+			],
+			[
+				"he",
+				"health"
+			],
+			[
+				"att",
+				"Attack"
+			],
+			[
+				"p",
+				"player"
+			],
+			[
+				"d",
+				"damage"
+			],
+			[
+				"__",
+				"__doc__"
+			],
+			[
+				"toda",
+				"today_presence"
+			],
+			[
+				"pre",
+				"presence"
+			],
+			[
+				"st",
+				"studentCount"
+			],
+			[
+				"std",
+				"stdCount"
+			],
+			[
+				"stud",
+				"stud1"
+			],
+			[
+				"S",
+				"Student"
+			],
+			[
+				"Su",
+				"stdCount"
+			],
+			[
+				"chan",
+				"changeCadence"
+			],
+			[
+				"cha",
+				"changeGear"
+			],
+			[
+				"speed",
+				"speedUp"
+			],
+			[
+				"b",
+				"bike2"
+			],
+			[
+				"bi",
+				"bike2"
+			],
+			[
+				"pri",
+				"printStates"
+			],
+			[
+				"sp",
+				"speedUp"
+			],
+			[
+				"cat",
+				"cat"
+			],
+			[
+				"G",
+				"GET"
+			],
+			[
+				"tr",
+				"tr\tTag"
+			],
+			[
+				"t",
+				"td\tTag"
+			],
+			[
+				"ta",
+				"table\tTag"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"L",
+				"l_bicycle"
+			],
+			[
+				"int",
+				"int"
+			],
+			[
+				"ve",
+				"velik2"
+			],
+			[
+				"gear",
+				"gear"
+			],
+			[
+				"gea",
+				"gear"
+			],
+			[
+				"spee",
+				"speedUp"
+			],
+			[
+				"Good",
+				"Good"
+			],
+			[
+				"tag",
+				"tag"
+			],
+			[
+				"goo",
+				"good"
+			],
+			[
+				"good",
+				"goodlist"
+			],
+			[
+				"dat",
+				"datetime"
+			],
+			[
+				"lan",
+				"Lang"
+			],
+			[
+				"col",
+				"colspan"
+			],
+			[
+				"_",
+				"__file__"
+			],
+			[
+				"Resu",
+				"Result"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 497.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+			"import urllib2,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation') "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/root/django/swift_avia_group"
+	],
+	"file_history":
+	[
+		"/root/ecommerce/tsSetup/dist/index.html",
+		"/root/ecommerce/tsSetup/ts.config",
+		"/root/VPS/home/avia_logistic/avia_logistic/settings.py",
+		"/root/VPS/home/avia_logistic/login/templates/reg_form.html",
+		"/root/django/swift_avia_group/swift_avia_group/settings.py",
+		"/root/ecommerce/search/templates/search/view.html",
+		"/root/ecommerce/ecommerce/urls.py",
+		"/root/ecommerce/products/templates/products/detail.html",
+		"/root/ecommerce/templates/snippet/nav.html",
+		"/root/ecommerce/products/urls.py",
+		"/root/ecommerce/products/templates/products/product_list.html",
+		"/root/ecommerce/products/models.py",
+		"/root/ecommerce/products/views.py",
+		"/root/ecommerce/search/urls.py",
+		"/root/ecommerce/search/search.py",
+		"/root/ecommerce/products/templates/products/featured-detail.html",
+		"/root/ecommerce/templates/home_page.html",
+		"/root/ecommerce/templates/base.html",
+		"/root/ecommerce/ecommerce/settings.py",
+		"/root/ecommerce/products/utils.py",
+		"/root/ecommerce/products/admin.py",
+		"/root/django/swift_avia_group/advanced/scrape.py",
+		"/root/ecommerce/templates/contact/view.html",
+		"/root/ecommerce/ecommerce/forms.py",
+		"/root/ecommerce/ecommerce/views.py",
+		"/root/ecommerce/templates/auth/register.html",
+		"/root/django/swift_avia_group/LK/models.py",
+		"/root/django/swift_avia_group/LK/api/urls.py",
+		"/root/django/swift_avia_group/LK/api/pagination.py",
+		"/root/django/swift_avia_group/LK/api/views.py",
+		"/root/ecommerce/templates/auth/login.html",
+		"/root/django/ta_logistic/components/com_tracking/views/tracking/tmpl/default.php",
+		"/root/Yandex.Disk/самолеты/ГЖ/A199/Опись А199",
+		"/root/kivy/swift.py",
+		"/root/django/ta_logistic/components/com_tracking/views/tracking/index.html",
+		"/root/django/swift_avia_group/templates/snipets/search_for_TDA.html",
+		"/root/django/ta_logistic/pressthiss/moban.html",
+		"/root/django/ta_logistic/components/com_tracking/views/tracking/tmpl/index.html",
+		"/root/django/ta_logistic/modules/mod_search/index.html",
+		"/root/django/ta_logistic/modules/index.html",
+		"/root/kivy/gesture_box.py",
+		"/root/kivy/main1.py",
+		"/root/kivy/main.py",
+		"/root/kivy/weather.kv",
+		"/root/django/swift_avia_group/templates/search.html",
+		"/root/Yandex.Disk/самолеты/ГЖ/A197/Опись А197",
+		"/root/kivy/avia.kv",
+		"/root/kivy/blabla/со списком товаров(но пока строкой)/swift.py",
+		"/root/kivy/blabla/со списком товаров(но пока строкой)/avia.kv",
+		"/root/kivy/blabla/рабочие после конвертации(до получения данных о товарах)/swift.py",
+		"/root/kivy/blabla/рабочие после конвертации(до получения данных о товарах)/avia.kv",
+		"/root/kivy/old-avia.kv",
+		"/root/Рабочий стол/чай:",
+		"/root/Yandex.Disk/самолеты/ГЖ/А196/Опись А196",
+		"/root/django/Nav bar/FullWidthTabs/FullWidthTabs/index.html",
+		"/root/kivy/old-avia.py",
+		"/root/Dropbox/swift_avia_group(kivy_files)/до конвертации данних из строки по частям (до 4 глави)/avia.kv",
+		"/root/Dropbox/swift_avia_group(kivy_files)/до конвертации данних из строки по частям (до 4 глави)/swift.py",
+		"/root/VPS/home/Swift_Avia_Group/templates/snipets/nav.html",
+		"/root/kivy/first-app.py",
+		"/root/kivy/swiftaviagroup.kv",
+		"/root/Yandex.Disk/самолеты/ГЖ/A195/опись А195",
+		"/root/Yandex.Disk/самолеты/ГЖ/a193/A193:",
+		"/root/kivy/SimpleKivy.kv",
+		"/root/VPS/home/Swift_Avia_Group/swift_avia_group/settings.py",
+		"/root/VPS/home/Swift_Avia_Group/swift_avia_group/urls.py",
+		"/root/VPS/home/MS-studio2/MS_studio/MS_studio_uwsgi.ini",
+		"/root/VPS/home/MS-studio2/MS_studio/settings.py",
+		"/root/Yandex.Disk/самолеты/ГЖ/a193/опись А193",
+		"/root/django/Nav bar/index.html",
+		"/root/VPS/home/Swift_Avia_Group/LK/templates/consolidation.html",
+		"/root/VPS/home/MS-studio2/deployment/ms-studio.conf",
+		"/root/VPS/home/MS-studio2/MS_studio/MS_studio_uwsgi.ini.save",
+		"/root/VPS/home/Swift_Avia_Group/LK/urls.py",
+		"/root/VPS/home/Swift_Avia_Group/templates/main.html",
+		"/root/django/swift_avia_group/templates/contacts.html",
+		"/root/VPS/home/Swift_Avia_Group/templates/snipets/reg_auth.html",
+		"/root/VPS/home/Swift_Avia_Group/LK/templates/base_for_LK.html",
+		"/root/django/swift_avia_group/templates/main.html",
+		"/root/VPS/home/Swift_Avia_Group/LK/views.py",
+		"/root/VPS/home/Swift_Avia_Group/swift_avia_group/swift_avia_group.ini",
+		"/root/VPS/home/Swift_Avia_Group/deployment/swiftaviagroup.conf",
+		"/root/VPS/home/Swift_Avia_Group/templates/index.html",
+		"/root/VPS/home/Swift_Avia_Group/deployment/log/access.log",
+		"/root/VPS/home/MS-studio2/deployment/ms-studio.od.ua",
+		"/root/VPS/home/Swift_Avia_Group/deployment/yakovchukandreypybursa5.dp.ua",
+		"/root/Yandex.Disk/самолеты/ГЖ/A187/опись А187",
+		"/root/Документы/запуски системной службы ПЕЧАТИ и обновление flashplayer",
+		"/root/VPS/home/Swift_Avia_Group000/deployment/log/error.log",
+		"/root/VPS/home/Swift_Avia_Group000/deployment/log/access.log",
+		"/root/VPS/var/log/supervisor/supervisord.log",
+		"/root/Рабочий стол/spreadsheet.py",
+		"/root/Yandex.Disk/самолеты/ГЖ/A188/опись А188",
+		"/root/Рабочий стол/222",
+		"/root/Рабочий стол/заметки 7.08",
+		"/root/django/swift_avia_group/login/migrations/0002_reviews.py",
+		"/root/Yandex.Disk/самолеты/ГЖ/А190/опись А190",
+		"/root/Yandex.Disk/Документы/godex g500 linux driver/rastertoezpl-1.1.0/rastertoezpl-1.1.0/INSTALL",
+		"/root/Yandex.Disk/Документы/godex g500 linux driver/rastertoezpl-1.1.0/rastertoezpl-1.1.0/doc/README",
+		"/root/VPS/home/Swift_Avia_Group000/swift_avia_group/__init__.py",
+		"/root/VPS/home/Swift_Avia_Group/swift_avia_group/__init__.py",
+		"/root/VPS/home/Swift_Avia_Group000/swift_avia_group/settings.py",
+		"/root/VPS/home/Swift_Avia_Group000/swift_avia_group/settings.pyc",
+		"/root/VPS/home/Swift_Avia_Group/deployment/log/error.log",
+		"/root/Yandex.Disk/самолеты/ГЖ/А191/опись А191",
+		"/root/VPS/home/Swift_Avia_Group/deployment/swift_avia_group",
+		"/root/VPS/home/Swift_Avia_Group/deployment/swift_avia_group.conf",
+		"/root/VPS/home/Swift_Avia_Group/deployment/yakovchukandreypybursa5.conf",
+		"/root/Yandex.Disk/Документы/godex g500 linux driver/rastertoezpl-1.1.0/rastertoezpl-1.1.0/doc/beginner_readme",
+		"/root/VPS/home/Swift_Avia_Group/templates/500.html",
+		"/root/VPS/home/Swift_Avia_Group/deployment/uwsgi_params",
+		"/root/django/swift_avia_group/login/migrations/0007_auto_20170916_1606.py",
+		"/root/django/swift_avia_group/login/migrations/0007_auto_20170916_1606.pyc",
+		"/root/django/swift_avia_group/login/migrations/0008_auto_20170916_1609.py",
+		"/root/django/swift_avia_group/login/migrations/0009_reviews_recomend.py",
+		"/root/django/swift_avia_group/login/migrations/0010_auto_20170916_1612.py",
+		"/root/django/swift_avia_group/login/migrations/0010_auto_20170916_1612.pyc",
+		"/root/django/swift_avia_group/login/migrations/0011_auto_20170916_1618.py",
+		"/root/django/swift_avia_group/login/migrations/0006_auto_20170902_1232.py",
+		"/root/Рабочий стол/privat",
+		"/root/.bashrc",
+		"/root/Yandex.Disk/Документы/pyBursa/WEEK_9/lesson_deploy_django.txt",
+		"/root/VPS/home/django/gruzoperevozki/deployment/gruzoperevozki_nginx.conf",
+		"/root/Рабочий стол/spider.py",
+		"/root/VPS/home/MS-studio2/deployment/uwsgi_err.log",
+		"/root/VPS/home/MS-studio2/deployment/uwsgi.log",
+		"/root/VPS/home/MS_studio/deployment/ms-sudio.od.ua",
+		"/root/VPS/etc/nginx/sites-available/default"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 33.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 124.0
+	},
+	"pinned_build_system": "",
+	"project": "swift_avia_group.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Рабочий стол/test/django/src/index1.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 210.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

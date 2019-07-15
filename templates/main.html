@@ -1,6 +1,5 @@
 {% extends 'index.html' %}
 
-
 {% load static %}
 
 
@@ -15,19 +14,21 @@
 </style>
 {% endblock CSS0 %}
 
-<title>{% block head_title %}Swift Avia Group{% endblock head_title %}</title>
+{% block head_title %}Swift Avia Group авиадоставка посылок Китай Украина{% endblock head_title %}
+
+{% block head_discription %}"Swiftaviagroup выкуп товаров из Китая, доставка, страховка грузов. Разтаможка и оформление всех документов для таможенного прохождения."{% endblock head_discription %}
 
 {% block content %}
 
 <div style="margin-top:50px;" id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
+
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
 
-  <!-- Wrapper for slides -->
+
   <div class="carousel-inner" style="background: #4da6ff; background: radial-gradient(circle at 80px 40px, #99ccff, #b3d9ff, #4da6ff); background-image:url(/static/images/social/global000.jpg); background-size: contain; max-height:450px; min-height:150px; height:auto; border-radius:25px; position: relative; ">
 
     <div class="item active" >
@@ -35,7 +36,7 @@
             <h1 style="color:#fff; text-align:center; font-size:4.5vw;">Авиадоставка под ключ. Комплексное решение</h1>
         </div>
         <div style="float:right; margin:8vw 0vw" class="col-xs-7">
-            <img style="width:90%; height:50%;" src="{% static '/images/airplane.png' %}">
+            <img style="width:90%; height:50%;" src="{% static '/images/airplane.png' %}" alt="Swiftaviagroup-авиадоставка с Китая в Украину под ключ">
         </div>
     </div>
 
@@ -44,8 +45,8 @@
             <h1 style="color:#fff; text-align:center; font-size:4.5vw;">Мы заботимся о вашем грузе</h1>
         </div>
         <div style="float:right; margin:4.1vw 0vw" class="col-xs-7">
-            <img style="float:right; width:41%; height:40%;" src="{% static '/images/cargo0.png' %}">
-            <img style="float:right; width:41%; height:40%;" src="{% static '/images/cargo.png' %}">
+            <img style="float:right; width:41%; height:40%;" src="{% static '/images/cargo0.png' %}" alt="Swiftaviagroup доставка посылок из Китая в Украину">
+            <img style="float:right; width:41%; height:40%;" src="{% static '/images/cargo.png' %}"  alt="Swiftaviagroup доставка посылок из Китая в Украину">
         </div>
     </div>
 
@@ -54,27 +55,32 @@
             <h1 style="color:#fff; text-align:center; font-size:4.5vw;">Комманда профессионалов - ключ к Вашему успеху!</h1>
         </div>
         <div style="float:right; margin:4.66vw 0vw" class="col-xs-5">
-            <img style="float:right; width:80%; height:85%;" src="{% static '/images/our_team.png' %}">
+            <img style="float:right; width:80%; height:85%;" src="{% static '/images/our_team.png' %}" alt="Быстрая авиа доставка из Китая с профессионалами">
         </div>
     </div>
 
-
-  <!-- Left and right controls -->
- <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a> -->
 </div>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '006651373756883291318:vxi0ywveube';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
 </div>
 
 
 <div class="col-xs-12 container" style="border-radius:25px; margin-top:50px; clear:both; background-image:url(/static/images/blue000.png); background-size: cover; height:auto; border-bottom:2px solid #fff;">
     <div style="float:left" class="col-xs-6">
-        <img style="width:90%; height:40%;" src="{% static '/images/chine0.png' %}">
+        <img style="width:90%; height:40%;" src="{% static '/images/chine0.png' %}" alt="Хранение грузов в Китае">
     </div>
 
     <div style="float:right; color:#fff;" class="col-xs-6">
@@ -83,8 +89,17 @@
         </ul>
     </div>
 </div>
+<br>
 
-
+<!-- Dialogflow -->
+<div class="container">
+    <iframe
+        allow="microphone;"
+        width="350"
+        height="430"
+        src="https://console.dialogflow.com/api-client/demo/embedded/0ec614ab-4fdc-498f-9f2a-e19fdc6e79aa">
+    </iframe>
+</div>
 
 <div class="container">
     <div class="col-xs-6">
@@ -92,17 +107,23 @@
         <h3 style="color:#fff">Поиск <span style="font-size:15px; color:#fff">посылки </span></h3>
         {% csrf_token %}
         <form method="GET" action="">
-        <input type="text" placeholder="Номер посылки" name="query" value="{{ request.GET.query }}"/>
+        <label for="query">parcel number</label> 
+        <input type="text" placeholder="Номер посылки" id="query" name="query" value="{{ request.GET.query }}"/>
         <input type="submit" value="Найти"/>
 
         </form>
         </div>
+        <br>
+     <small id="defaultSearchParcelHelpBlock" class="form-text text-muted mb-2">
+          Введите трэк номер выданого поставщиком китайского перевозчика, без пробелов и каких-либо знаков. Например: 1234567890
+     </small>
 
         {% include 'search.html'%}
-
+        <br>
     </div>
+<div>
 
-
+<hr>
     <div style="color:#fff; " class="col-xs-6">
         <h2>Услуги:</h2>
             <h4>Проверка целосности, работоспособности товара</h4>
@@ -121,4 +142,29 @@
 
 <hr>
 
+
+<!-- <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://https-avia-logistic-com.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+                            
+<script id="dsq-count-scr" src="//https-avia-logistic-com.disqus.com/count.js" async></script>
+ -->
 {% endblock content%}

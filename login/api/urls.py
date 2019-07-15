@@ -19,6 +19,9 @@ from .views import (
     ReviewsDeleteAPIView,
 
     CalculatorListAPIView,
+    BuyoutAPIView,
+    AirDataUploadFrom1CAPIView,
+    AirDataUploadFrom1CUpdateAPIView
     )
 
 urlpatterns = [
@@ -41,4 +44,10 @@ urlpatterns = [
     url(r'^reviews/delete/(?P<id>\d+)/$', ReviewsDeleteAPIView.as_view(), name='reviews-delete'),
 
     url(r'^calculator/$', CalculatorListAPIView.as_view(), name='calculator '),
+    url(r'^list_buyout/$', BuyoutAPIView.as_view({'get': 'list'}), name='list_buyout'),
+    url(r'^create_buyout/$', BuyoutAPIView.as_view({'post': 'create'}), name='create_buyout'),
+
+    url(r'^list_data_1C/$', AirDataUploadFrom1CAPIView.as_view(), name='list_data_1c'),
+    url(r'^list_data_1C/edit/(?P<id>\d+)/$', AirDataUploadFrom1CUpdateAPIView.as_view(), name='data-1C-edit'),
+
 ]

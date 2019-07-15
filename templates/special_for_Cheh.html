@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+
+{% load static %}
+
+
+{% block CSS %}
+
+<style>
+    p{
+        color:#fff;
+        font-size:20px;
+    }
+    div>ul>li{
+        color:#fff;
+        font-size:20px;
+    }
+</style>
+{% endblock CSS%}
+
+
+{% block head_title %}К-во веса на запрашиваемый товар{% endblock head_title %}
+
+
+{% block content %}
+
+
+<h3>Получение ссылок по наименованию</h3>
+
+<form action="" method="GET"><!--Calculate-->
+    <div><input style="width:35%; margin-left: 5%" type="text" name="query" placeholder="Наименовани товара" name="query" value="{{ request.GET.query }}"/></div>
+    <div><input style="margin-top: 5%;" type="submit" name="send" value="Найти"/></div>
+</form>
+
+
+  {% if tovar %}
+    <p>Найдено: Всего={{all}}; С сылками={{with_link}}</p>
+                <hr>
+    {% for tov in tovar %}
+        {% if tov.url %}
+
+            <p style="color: black">{{ tov.url }}</p>
+
+        {% endif %}
+    {% endfor %}
+  {% else %}
+    <h4>Ничего не найдено</h4>
+  {% endif %}
+
+
+
+
+{% endblock content%}
