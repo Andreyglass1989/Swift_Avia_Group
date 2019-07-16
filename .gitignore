@@ -11,4 +11,6 @@ venv
 /ЛК Газпром
 /django-allauth
 /static
-db12818242-avia.sql
+*.xls
+*.xlsx
+*.mp3
